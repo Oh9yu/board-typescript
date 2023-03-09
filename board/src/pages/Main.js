@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Main = () => {
-  return <Body> hi</Body>;
+  return <Body></Body>;
 };
 
 export default Main;
