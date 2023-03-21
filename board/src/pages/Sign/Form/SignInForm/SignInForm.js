@@ -1,16 +1,45 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SignInForm = () => {
+const SignInForm = ({ inputValue, onChangeInput }) => {
   return (
     <Form>
-      <Input type="text" />
+      <Input
+        type="text"
+        placeholder="ID"
+        value={inputValue.id}
+        name="id"
+        onChange={onChangeInput}
+      />
+      <Input
+        type="password"
+        placeholder="PassWord"
+        value={inputValue.password}
+        name="password"
+        onChange={onChangeInput}
+      />
     </Form>
   );
 };
 
 export default SignInForm;
 
-const Form = styled.form``;
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
-const Input = styled.input``;
+const Input = styled.input`
+  margin-top: 3px;
+  padding: 5px;
+  width: 200px;
+  height: 30px;
+  border: 2px solid #c9d9f9;
+  border-radius: 5px;
+  &:focus {
+    outline: none;
+    border-color: #7594dd;
+  }
+`;

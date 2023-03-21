@@ -5,13 +5,13 @@ import SignInBtn from './NavBtn/NavSignIn';
 import SignUpBtn from './NavBtn/NavSignUp';
 
 const SignStatus = () => {
-  // const location = useLocation();
-  // const pathname = location.pathname;
-  // const status = pathname === '/' || pathname === '/signup' ? true : false;
+  const location = useLocation();
+  const pathname = location.pathname;
+  const status = pathname === '/' || pathname === '/signup' ? true : false;
 
   return (
     <Container>
-      <SignInBtn />
+      {status && <SignInBtn />}
       <SignUpBtn />
     </Container>
   );

@@ -6,7 +6,7 @@ const SignUpBtn = () => {
   const navigate = useNavigate();
 
   const clickHandler = () => {
-    navigate('/sign');
+    navigate('/signup');
   };
 
   return (

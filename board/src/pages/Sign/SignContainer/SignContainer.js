@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import SignInForm from '../Form/SignInForm/SignInForm';
+import SignUpForm from '../Form/SignUpForm/SignUpForm';
 
-const SignContainer = props => {
-  const sign = props;
-  const form = sign.form;
-  const onClick = sign.onClick;
+const SignContainer = ({ type, onClick, inputValue, onChangeInput }) => {
+  const location = useLocation();
+  const pathname = location.pathname;
 
   return (
     <Container>
-      <SingSection>
-        <Title>{form}</Title>
-        <Button onClick={onClick}>{form}</Button>
-      </SingSection>
+      <SignSection>
+        <Title>{type}</Title>
+        {pathname === '/signin' ? (
+          <SignInForm inputValue={inputValue} onChangeInput={onChangeInput} />
+        ) : pathname === '/signup' ? (
+          <SignUpForm inputValue={inputValue} onChangeInput={onChangeInput} />
+        ) : null}
+        <Button onClick={onClick}>{type}</Button>
+      </SignSection>
     </Container>
   );
 };
@@ -26,14 +33,16 @@ const Container = styled.div`
   background-color: #f9fbff;
 `;
 
-const SingSection = styled.div`
+const SignSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  padding: 10px 0;
   width: 400px;
   border: 2px solid #7594dd;
   border-radius: 8px;
+  box-shadow: 0 0 5px #7594dd;
 `;
 
 const Title = styled.section`
@@ -42,7 +51,7 @@ const Title = styled.section`
 `;
 
 const Button = styled.button`
-  width: 250px;
+  width: 200px;
   height: 30px;
   margin: 10px 0;
   border: 2px solid #7594dd;
