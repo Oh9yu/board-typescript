@@ -35,7 +35,9 @@ const Container = styled.button`
   background-color: transparent;
   border: 2px solid ${props => props.borderColor};
   border-radius: 5px;
+  transition: 0.2s;
   &:hover {
     background-color: ${props => props.borderColor};
+    transition: 0.2s;
   }
 `;

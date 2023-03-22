@@ -60,5 +60,6 @@ const Button = styled.button`
   &:hover {
     border: 2px solid #7594dd;
     background-color: #7594dd;
+    transition: 0.2s;
   }
 `;

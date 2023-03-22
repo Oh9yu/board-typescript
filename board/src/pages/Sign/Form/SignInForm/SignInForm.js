@@ -7,8 +7,8 @@ const SignInForm = ({ inputValue, onChangeInput }) => {
       <Input
         type="text"
         placeholder="ID"
-        value={inputValue.id}
-        name="id"
+        value={inputValue.email}
+        name="email"
         onChange={onChangeInput}
       />
       <Input

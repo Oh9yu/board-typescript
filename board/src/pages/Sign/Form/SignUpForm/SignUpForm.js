@@ -13,9 +13,9 @@ const SignUpForm = ({ inputValue, onChangeInput }) => {
       />
       <Input
         type="text"
-        placeholder="ID"
-        value={inputValue.id}
-        name="id"
+        placeholder="Email"
+        value={inputValue.email}
+        name="email"
         onChange={onChangeInput}
       />
       <Input
