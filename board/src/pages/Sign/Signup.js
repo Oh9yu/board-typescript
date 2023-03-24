@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import SignContainer from './SignContainer/SignContainer';
+import { API } from '../../config/config';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -17,22 +18,22 @@ const Signup = () => {
   };
 
   const signUpHandler = () => {
-    fetch('http://10.58.52.190:8000/auth', {
+    fetch(`${API.signup}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...inputValue }),
     })
-      .then(response => {
-        if (response.ok === true) {
-          return response.json();
-        }
-      })
+      .then(response => response.json())
       .then(data => {
         if (data.message === 'User has been created!') {
           alert('가입을 축하합니다');
           navigate('/');
-        } else {
-          alert('이미 가입한 회원입니다');
+        } else if (data.message === 'The email is already in use') {
+          alert('이미 가입된 이메일입니다');
+        } else if (data.message === "It's an invalid email address") {
+          alert('이메일을 확인해주세요');
+        } else if (data.message === "It's an invalid password") {
+          alert('비밀번호를 확인해주세요');
         }
       });
   };

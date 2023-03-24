@@ -2,16 +2,17 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBtn from './NavBtn/NavBtn';
 
-const SignInBtn = () => {
+const NavAdmin = () => {
   const navigate = useNavigate();
 
   const clickHandler = () => {
-    navigate('/signin');
+    navigate('/adminpage');
   };
+
   return (
     <NavBtn
-      btnName="Sign In"
-      width={80}
+      btnName="adminpage"
+      width={60}
       height={40}
       fontSize={16}
       borderColor="#7594dd"
@@ -21,4 +22,4 @@ const SignInBtn = () => {
   );
 };
 
-export default SignInBtn;
+export default NavAdmin;

@@ -1,18 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 import SignInBtn from './NavBtn/NavSignIn';
 import SignUpBtn from './NavBtn/NavSignUp';
+import NavSignOutBtn from './NavBtn/NavSignOut';
+import NavProfile from './NavBtn/NavProfile';
+import NavAdmin from './NavBtn/NavAdmin';
 
 const SignStatus = () => {
-  const location = useLocation();
-  const pathname = location.pathname;
-  const status = pathname === '/' || pathname === '/signup' ? true : false;
+  const token = localStorage.getItem('TOKEN');
+  const isAdmin = token ? jwt_decode(token).isAdmin : null;
 
   return (
     <Container>
-      {status && <SignInBtn />}
-      <SignUpBtn />
+      {!token ? <SignInBtn /> : isAdmin ? <NavAdmin /> : <NavProfile />}
+      {token ? <NavSignOutBtn /> : <SignUpBtn />}
     </Container>
   );
 };

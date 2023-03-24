@@ -2,15 +2,16 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBtn from './NavBtn/NavBtn';
 
-const SignInBtn = () => {
+const NavProfile = () => {
   const navigate = useNavigate();
 
   const clickHandler = () => {
-    navigate('/signin');
+    navigate('/userpage');
   };
+
   return (
     <NavBtn
-      btnName="Sign In"
+      btnName="userpage"
       width={80}
       height={40}
       fontSize={16}
@@ -21,4 +22,4 @@ const SignInBtn = () => {
   );
 };
 
-export default SignInBtn;
+export default NavProfile;

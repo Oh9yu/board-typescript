@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBtn from './NavBtn';
+import NavBtn from './NavBtn/NavBtn';
 
 const SignUpBtn = () => {
   const navigate = useNavigate();
