@@ -11,8 +11,8 @@ const NavAdmin = () => {
 
   return (
     <NavBtn
-      btnName="adminpage"
-      width={60}
+      btnName="admin"
+      width={80}
       height={40}
       fontSize={16}
       borderColor="#7594dd"
