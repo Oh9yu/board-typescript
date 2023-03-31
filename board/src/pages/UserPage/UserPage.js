@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Profile from './Profile/Profile';
+import { API } from '../../config/config';
 
 const UserPage = () => {
+  const [data, setData] = useState([]);
+
+  const token = localStorage.getItem('TOKEN');
+
+  useEffect(() => {
+    fetch(`${API.mypage}`, {
+      method: 'GET',
+      headers: { Authorization: token },
+    })
+      .then(res => res.json())
+      .then(data => setData(data));
+  }, []);
+
   return (
     <Container>
       <Section width={240}>
         <Profile />
       </Section>
+      <Section width={520}></Section>
     </Container>
   );
 };

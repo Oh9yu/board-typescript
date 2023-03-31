@@ -6,7 +6,7 @@ const ProfileImage = () => {
   const img = '';
   return (
     <Container>
-      <ImageUpdate />
+      {/* <ImageUpdate /> */}
       <Image src="images/user.png" />
     </Container>
   );

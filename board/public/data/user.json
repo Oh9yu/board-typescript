@@ -1,0 +1,34 @@
+[
+  {
+    "userPage": {
+      "_id": "6423d7f20d11d3ec0906fc5a",
+      "accountId": "6423d7f2cccf20f308fbd40a",
+      "profileImage": "https://i.stack.imgur.com/l60Hf.png",
+      "name": "shanon",
+      "email": "shanon@gmail.com",
+      "description": "",
+      "posts": [],
+      "createdAt": "2023-03-29T06:17:22.998Z",
+      "updatedAt": "2023-03-29T06:17:22.998Z",
+      "__v": 0
+    }
+  },
+  {
+    "userPage": {
+      "_id": "641ea317abf1138b7132912f",
+      "accountId": "641ea317ea29c92c95c88345",
+      "profileImage": "https://i.stack.imgur.com/l60Hf.png",
+      "name": "shawn",
+      "email": "shawn@gmail.com",
+      "posts": [],
+      "createdAt": "2023-03-25T07:30:31.742Z",
+      "updatedAt": "2023-03-25T07:30:31.742Z",
+      "__v": 0
+    }
+  },
+  {
+    "name": "Elon Musk",
+    "profileImage": "https://www.thetimes.co.uk/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2Faa5d526a-c333-11e8-a932-84839f5183a4.jpg?crop=1164%2C655%2C65%2C47",
+    "description": "Hi! I'''m Elon."
+  }
+]
