@@ -6,6 +6,7 @@ const ProfileInForm = () => {
     <UserInform>
       <Text fontsize={24}>props.name</Text>
       <Text fontsize={18}>props.email</Text>
+      <Text fontsize={16}>props.introduce</Text>
     </UserInform>
   );
 };

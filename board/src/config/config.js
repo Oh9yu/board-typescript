@@ -1,14 +1,20 @@
-const URL = 'http://10.58.52.219';
+const URL = 'http://172.20.10.6';
 
 const AUTH = 8000;
 
 const USERPAGE = 5000;
 
+const POST = 3000;
+
 const API = {
-  signin: `${URL}:${AUTH}/auth/signIn`,
+  signin: `${URL}:${AUTH}/auth/token`,
   signup: `${URL}:${AUTH}/auth/user/signUp`,
   updatePW: `${URL}:${AUTH}/auth/user/password`,
   deleteAccount: `${URL}:${AUTH}/auth/user/account`,
   mypage: `${URL}:${USERPAGE}/userPage/myPage`,
+  category: `${URL}:${POST}/nb/category`,
+  post: `${URL}:${POST}/nb/post`,
+  admin: `${URL}:${AUTH}/auth`,
+  likes: `${URL}:${POST}/nb/like`,
 };
 export { API };

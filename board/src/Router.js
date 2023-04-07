@@ -6,6 +6,8 @@ import Signin from './pages/Sign/Signin';
 import Signup from './pages/Sign/Signup';
 import UserPage from './pages/UserPage/UserPage';
 import AdminPage from './pages/AdminPage/AdminPage';
+import PostListPage from './pages/PostListPage/PostListPage';
+import PostPage from './pages/PostPage/PostPage';
 
 const Router = () => {
   return (
@@ -17,6 +19,8 @@ const Router = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/userpage" element={<UserPage />} />
         <Route path="/adminpage" element={<AdminPage />} />
+        <Route path="/postlist" element={<PostListPage />} />
+        <Route path="/postpage" element={<PostPage />} />
       </Routes>
     </BrowserRouter>
   );
