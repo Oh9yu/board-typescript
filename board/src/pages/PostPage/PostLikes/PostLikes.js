@@ -1,16 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { API } from '../../../config/config';
 import LikeBtn from './LiikeBtn/LikeBtn';
 
 const PostLikes = ({ token, postId }) => {
+  const [likeData, setLikeData] = useState([]);
+
+  //likeStatus, likeUsers
   useEffect(() => {
-    fetch(`${API.likes}`, { headers: { Authorization: `${token}` } });
+    fetch(`${API.likes}?postId=${postId}`, {
+      headers: { Authorization: `${token}` },
+    })
+      .then(res => res.json())
+      .then(data => setLikeData(data));
   }, []);
+
+  console.log('like : ', likeData);
 
   return (
     <Container>
-      <LikeBtn postId={postId} />
+      <LikeBtn
+        postId={postId}
+        likesCount={likeData.likesCount}
+        likeStatus={likeData.likeStatus}
+      />
     </Container>
   );
 };

@@ -6,8 +6,9 @@ import getToken from '../../utils/getToken';
 import PostContent from './PostContent/PostContent';
 import PostHeader from './PostHeader/PostHeader';
 import PostLikes from './PostLikes/PostLikes';
+import Comment from './Comment/Comment';
 
-const PostPage = ({ postId }) => {
+const PostPage = () => {
   const [data, setData] = useState([]);
   const location = useLocation();
   const token = getToken();
@@ -34,7 +35,8 @@ const PostPage = ({ postId }) => {
         views={data.views}
       />
       <PostContent content={data.contents} />
-      <PostLikes token={token} postId={data._id} />
+      <PostLikes token={token} postId={location.state.id} />
+      <Comment comments={data.comments} postId={location.state.id} />
     </Container>
   );
 };

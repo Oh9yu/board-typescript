@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useCreatedAt from '../../utils/hook/useCreatedAt';
 
-const PostList = ({ id, title, name, views, likes, createdAt }) => {
+const PostList = ({ id, postId, title, name, views, likes, createdAt }) => {
   const navigate = useNavigate();
   const postTime = useCreatedAt(createdAt);
 
   const titleClickHandler = () => {
-    navigate('/postpage', { state: { id: id } });
+    navigate('/postpage', { state: { id: id, postId: postId } });
   };
 
   return (
