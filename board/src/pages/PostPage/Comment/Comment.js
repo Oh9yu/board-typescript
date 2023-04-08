@@ -11,7 +11,7 @@ const Comment = ({ comments, postId }) => {
       {comments?.map(e => {
         return (
           <CommentList
-            key={e.accountId}
+            key={e._id}
             postId={postId}
             id={e._id}
             name={e.name}

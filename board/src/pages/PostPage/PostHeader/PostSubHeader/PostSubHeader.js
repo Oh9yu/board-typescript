@@ -7,7 +7,6 @@ const PostSubHeader = ({ likes, views, name }) => {
       <Text fontsize={20}>{name}</Text>
       <Section>
         <Text fontsize={14}>조회수 {views}</Text>
-        <Text fontsize={14}>추천 {likes}</Text>
       </Section>
     </Container>
   );
@@ -33,5 +32,5 @@ const Section = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 120px;
+  width: max-content;
 `;

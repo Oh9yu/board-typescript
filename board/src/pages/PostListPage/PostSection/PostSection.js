@@ -13,7 +13,6 @@ const PostSection = ({ status }) => {
       .then(data => setPostData(data));
   }, [status]);
 
-  console.log(postData);
   return (
     <Container>
       <PostHeader

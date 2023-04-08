@@ -47,7 +47,7 @@ const Text = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
+  width: max-content;
   font-size: 14px;
   cursor: pointer;
 `;

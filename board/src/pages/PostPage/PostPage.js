@@ -13,6 +13,8 @@ const PostPage = () => {
   const location = useLocation();
   const token = getToken();
 
+  console.log('locat :', location.state.id);
+
   useEffect(() => {
     fetch(`${API.post}?postId=${location.state.id}`, {
       headers: {

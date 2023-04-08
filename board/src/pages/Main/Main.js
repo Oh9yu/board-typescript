@@ -6,12 +6,6 @@ import Category from './Category/Category';
 const Main = () => {
   const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   fetch(`${API.post}/list?category=wecode`, { method: 'GET' })
-  //     .then(res => res.json())
-  //     .then(data => setData(data));
-  // }, []);
-
   return (
     <Container>
       <Section>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { API } from '../../../../config/config';
 import getToken from '../../../../utils/getToken';
@@ -7,9 +7,24 @@ const like = { color: '#5173c2', img: 'images/like.png' };
 
 const unlike = { color: '#111', img: 'images/unlike.png' };
 
-const LikeBtn = ({ postId, likeStatus, likesCount }) => {
+const LikeBtn = ({ postId }) => {
   const token = getToken();
-  const status = likeStatus ? like : unlike;
+  const [isLike, setIsLike] = useState({ likeStatus: '', likesCount: 0 });
+  const isStatus = isLike.likeStatus ? like : unlike;
+
+  useEffect(() => {
+    fetch(`${API.likes}?postId=${postId}`, {
+      headers: { Authorization: `${token}` },
+    })
+      .then(res => res.json())
+      .then(data =>
+        setIsLike({
+          ...isLike,
+          likeStatus: data.likeStatus,
+          likesCount: data.likesCount,
+        })
+      );
+  }, []);
 
   const likeHandler = () => {
     fetch(`${API.likes}`, {
@@ -19,13 +34,29 @@ const LikeBtn = ({ postId, likeStatus, likesCount }) => {
         Authorization: `${token}`,
       },
       body: JSON.stringify({ postId }),
-    });
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'Created like for the post') {
+          return setIsLike({
+            ...isLike,
+            likeStatus: true,
+            likesCount: isLike.likesCount + 1,
+          });
+        } else if (res.message === 'Deleted like for the post') {
+          return setIsLike({
+            ...isLike,
+            likeStatus: false,
+            likesCount: isLike.likesCount - 1,
+          });
+        }
+      });
   };
 
   return (
-    <LikesBtn color={status.color} onClick={likeHandler}>
-      <LikeImg src={`../${status.img}`} />
-      <Text color={status.color}>{likesCount}</Text>
+    <LikesBtn color={isStatus.color} onClick={likeHandler}>
+      <LikeImg src={`../${isStatus.img}`} />
+      <Text color={isStatus.color}>{isLike.likesCount}</Text>
     </LikesBtn>
   );
 };

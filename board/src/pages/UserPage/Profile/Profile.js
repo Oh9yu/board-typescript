@@ -4,11 +4,17 @@ import ProfileImage from './ProfileImage/ProfileImage';
 import ProfileInForm from './ProfileInForm/ProfileInForm';
 import EditProfile from './EditProfile/EditProfile';
 
-const Profile = () => {
+const Profile = ({ userdata }) => {
+  console.log('userdata: ', userdata);
+
   return (
     <Container>
-      <ProfileImage />
-      <ProfileInForm />
+      <ProfileImage img={userdata.profileImage} />
+      <ProfileInForm
+        username={userdata.name}
+        userEmail={userdata.email}
+        description={userdata.description}
+      />
       <EditProfile />
     </Container>
   );
@@ -21,4 +27,5 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  height: max-content;
 `;
