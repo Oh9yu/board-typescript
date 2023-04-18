@@ -6,10 +6,13 @@ import PostSection from './PostSection/PostSection';
 
 const PostListPage = () => {
   const location = useLocation();
-  const [status, setStatus] = useState(`${location.state.categoryName}`);
+  const [status, setStatus] = useState({
+    name: `${location.state.categoryName}`,
+    id: `${location.state.subCatId}`,
+  });
 
-  const statusHandler = e => {
-    setStatus(e);
+  const statusHandler = (name, id) => {
+    setStatus({ ...status, name: name, id: id });
   };
 
   return (
@@ -17,10 +20,10 @@ const PostListPage = () => {
       <Title>{location.state.categoryName}</Title>
       <PostCategory
         postId={location.state.postId}
-        status={status}
+        status={status.name}
         statusHandler={statusHandler}
       />
-      <PostSection status={status} />
+      <PostSection status={status.id} />
     </Container>
   );
 };

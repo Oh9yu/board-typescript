@@ -17,8 +17,9 @@ const PostCategory = ({ postId, status, statusHandler }) => {
       {category?.map(e => {
         return (
           <CategoryList
-            key={e._id}
+            key={e.subCatId}
             categoryName={e.subCatName}
+            subCatId={e.subCatId}
             status={status}
             statusHandler={statusHandler}
           />

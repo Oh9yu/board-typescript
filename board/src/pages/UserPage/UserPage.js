@@ -10,7 +10,7 @@ const UserPage = () => {
   const token = getToken();
 
   useEffect(() => {
-    fetch(`${API.mypage}`, {
+    fetch(`${API.userpage}?accountId=${''}`, {
       headers: { Authorization: token },
     })
       .then(res => res.json())

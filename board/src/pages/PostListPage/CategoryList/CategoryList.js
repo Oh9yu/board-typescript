@@ -1,16 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CategoryList = ({ categoryName, status, statusHandler }) => {
+const CategoryList = ({ categoryName, status, subCatId, statusHandler }) => {
   const bgc = status === categoryName ? '#5173c2' : 'transparent';
   const color = status === categoryName ? '#eee' : '#111';
+
+  console.log(status);
 
   return (
     <List
       bgc={bgc}
       color={color}
       onClick={() => {
-        statusHandler(categoryName);
+        statusHandler(categoryName, subCatId);
       }}
     >
       {categoryName}

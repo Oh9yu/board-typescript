@@ -6,7 +6,9 @@ const CategoryList = ({ id, name }) => {
   const navigate = useNavigate();
 
   const clickHandler = () => {
-    navigate('/postlist', { state: { postId: id, categoryName: name } });
+    navigate('/postlist', {
+      state: { postId: id, categoryName: name, sub: '' },
+    });
   };
 
   return <List onClick={clickHandler}>{name}</List>;

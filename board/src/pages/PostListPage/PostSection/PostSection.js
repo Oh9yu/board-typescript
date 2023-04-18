@@ -7,8 +7,14 @@ import PostHeader from './PostHeader/PostHeader';
 const PostSection = ({ status }) => {
   const [postData, setPostData] = useState([]);
 
+  console.log(status);
+
+  console.log(`${API.post}/list?subCatId=${status}`);
+
+  console.log(postData);
+
   useEffect(() => {
-    fetch(`${API.post}/list?subCategory=${status}`)
+    fetch(`${API.post}/list?subCatId=${status}`)
       .then(res => res.json())
       .then(data => setPostData(data));
   }, [status]);
@@ -25,7 +31,7 @@ const PostSection = ({ status }) => {
       {postData?.map(e => {
         return (
           <PostList
-            key={e._id}
+            key={e.name}
             id={e._id}
             title={e.title}
             name={e.name}

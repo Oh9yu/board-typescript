@@ -16,7 +16,11 @@ const Category = () => {
     <Container>
       {category?.map(e => {
         return (
-          <CategoryList name={e.mainCatName} id={e._id} key={e.mainCatName} />
+          <CategoryList
+            name={e.mainCatName}
+            id={e.mainCatId}
+            key={e.mainCatName}
+          />
         );
       })}
     </Container>
