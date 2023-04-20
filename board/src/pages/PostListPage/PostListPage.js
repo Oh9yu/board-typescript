@@ -1,29 +1,53 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import PostCategory from './PostCategory/PostCategory';
 import PostSection from './PostSection/PostSection';
+import Button from '../../components/Button/Button';
 
 const PostListPage = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [status, setStatus] = useState({
     name: `${location.state.categoryName}`,
-    id: `${location.state.subCatId}`,
+    subCatId: `${location.state.subCatId}`,
   });
+  const mainCat = {
+    name: location.state.categoryName,
+    mainCatId: location.state.mainCatId,
+  };
 
   const statusHandler = (name, id) => {
-    setStatus({ ...status, name: name, id: id });
+    setStatus({ ...status, name: name, subCatId: id });
   };
+
+  const listAll = () => {};
 
   return (
     <Container>
-      <Title>{location.state.categoryName}</Title>
+      <Title onClick={listAll}>{location.state.categoryName}</Title>
+      {status.name !== mainCat.name && (
+        <SubCat>
+          {status.name}
+          <Button
+            name="글쓰기"
+            onClick={() => {
+              navigate('/editor', {
+                state: {
+                  mainCatId: mainCat.mainCatId,
+                  subCatId: status.subCatId,
+                },
+              });
+            }}
+          />
+        </SubCat>
+      )}
       <PostCategory
-        postId={location.state.postId}
-        status={status.name}
+        mainCatId={mainCat.mainCatId}
+        name={status.name}
         statusHandler={statusHandler}
       />
-      <PostSection status={status.id} />
+      <PostSection status={status.subCatId} mainCatId={mainCat.mainCatId} />
     </Container>
   );
 };
@@ -31,6 +55,7 @@ const PostListPage = () => {
 export default PostListPage;
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   margin: auto;
@@ -46,4 +71,16 @@ const Title = styled.div`
   height: 100px;
   font-size: 36px;
   color: #333;
+`;
+
+const SubCat = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  right: 0;
+  top: 40px;
+  width: 180px;
+  height: 50px;
+  font-size: 18px;
 `;

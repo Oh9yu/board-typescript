@@ -1,25 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { API } from '../../../config/config';
 import CommentList from './CommentList/CommentList';
+import CommentEditor from './CommentEditor/CommentEditor';
 
-const Comment = ({ comments, postId }) => {
-  console.log(comments);
+const Comment = ({ postId }) => {
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API.comment}?postId=${postId}`)
+      .then(res => res.json())
+      .then(data => setComments(data));
+  }, [comments]);
+
   return (
     <Container>
       <CommentHeader>댓글</CommentHeader>
       {comments?.map(e => {
         return (
           <CommentList
-            key={e._id}
+            key={e.comment?.commentId}
             postId={postId}
-            id={e._id}
-            name={e.name}
-            createdAt={e.createdAt}
-            contents={e.contents}
+            id={e.comment?.commentId}
+            name={e.author?.name}
+            createdAt={e.comment?.createdAt}
+            contents={e.comment?.contents}
           />
         );
       })}
+      <CommentEditor postId={postId} />
     </Container>
   );
 };

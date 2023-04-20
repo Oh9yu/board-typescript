@@ -3,24 +3,26 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useCreatedAt from '../../utils/hook/useCreatedAt';
 
-const PostList = ({ id, postId, title, name, views, likes, createdAt }) => {
+const PostList = ({ postId, title, name, views, likes, createdAt }) => {
   const navigate = useNavigate();
   const postTime = useCreatedAt(createdAt);
 
   const titleClickHandler = () => {
-    navigate('/postpage', { state: { id: id, postId: postId } });
+    navigate('/postpage', { state: { postId: postId } });
   };
 
   return (
     <List>
       <Section>
-        <Text onClick={titleClickHandler}>{title}</Text>
+        <Text width={400} onClick={titleClickHandler}>
+          {title}
+        </Text>
       </Section>
       <Section>
-        <Text>{name}</Text>
-        <Text>{postTime}</Text>
-        <Text>{views}</Text>
-        <Text>{likes}</Text>
+        <Text width={100}>{name}</Text>
+        <Text width={150}>{postTime}</Text>
+        <Text width={50}>{views}</Text>
+        <Text width={50}>{likes}</Text>
       </Section>
     </List>
   );
@@ -47,7 +49,7 @@ const Text = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: max-content;
+  width: ${props => props.width}px;
   font-size: 14px;
   cursor: pointer;
 `;

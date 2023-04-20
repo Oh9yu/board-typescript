@@ -3,14 +3,16 @@ import styled from 'styled-components';
 import { API } from '../../../config/config';
 import CategoryList from '../CategoryList/CategoryList';
 
-const PostCategory = ({ postId, status, statusHandler }) => {
+const PostCategory = ({ mainCatId, name, statusHandler }) => {
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
-    fetch(`${API.category}/sub?mainCatId=${postId}`)
+    fetch(`${API.category}/sub?mainCatId=${mainCatId}`)
       .then(res => res.json())
       .then(data => setCategory(data));
   }, []);
+
+  console.log('??', category.subCatId);
 
   return (
     <ListSection>
@@ -20,7 +22,7 @@ const PostCategory = ({ postId, status, statusHandler }) => {
             key={e.subCatId}
             categoryName={e.subCatName}
             subCatId={e.subCatId}
-            status={status}
+            name={name}
             statusHandler={statusHandler}
           />
         );

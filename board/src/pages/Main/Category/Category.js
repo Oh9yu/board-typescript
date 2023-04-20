@@ -18,7 +18,7 @@ const Category = () => {
         return (
           <CategoryList
             name={e.mainCatName}
-            id={e.mainCatId}
+            mainCatId={e.mainCatId}
             key={e.mainCatName}
           />
         );

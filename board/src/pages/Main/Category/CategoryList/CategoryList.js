@@ -2,12 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const CategoryList = ({ id, name }) => {
+const CategoryList = ({ mainCatId, name }) => {
   const navigate = useNavigate();
 
   const clickHandler = () => {
     navigate('/postlist', {
-      state: { postId: id, categoryName: name, sub: '' },
+      state: { mainCatId: mainCatId, categoryName: name },
     });
   };
 

@@ -13,10 +13,8 @@ const PostPage = () => {
   const location = useLocation();
   const token = getToken();
 
-  console.log('locat :', location.state.id);
-
   useEffect(() => {
-    fetch(`${API.post}?postId=${location.state.id}`, {
+    fetch(`${API.post}?postId=${location.state.postId}`, {
       headers: {
         Authorization: `${token}`,
       },
@@ -25,20 +23,23 @@ const PostPage = () => {
       .then(data => setData(data));
   }, []);
 
-  console.log(data);
-
   return (
     <Container>
       <PostHeader
-        title={data.title}
-        createdAt={data.createdAt}
-        likes={data.likes}
-        name={data.name}
-        views={data.views}
+        title={data.post?.title}
+        createdAt={data.post?.createdAt}
+        name={data.author?.name}
+        views={data.post?.views}
       />
-      <PostContent content={data.contents} />
-      <PostLikes token={token} postId={location.state.id} />
-      <Comment comments={data.comments} postId={location.state.id} />
+      <PostContent content={data.post?.contents} />
+      <PostLikes
+        token={token}
+        postId={location.state.postId}
+        likes={data.post?.likes}
+        likeStatus={data.user?.likeStatus}
+        usersWhoLiked={data.post?.usersWhoLiked}
+      />
+      <Comment comments={data.comments} postId={location.state.postId} />
     </Container>
   );
 };

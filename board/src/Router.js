@@ -8,6 +8,7 @@ import UserPage from './pages/UserPage/UserPage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import PostListPage from './pages/PostListPage/PostListPage';
 import PostPage from './pages/PostPage/PostPage';
+import Editor from './pages/Editor/Editor';
 
 const Router = () => {
   return (
@@ -21,6 +22,7 @@ const Router = () => {
         <Route path="/adminpage" element={<AdminPage />} />
         <Route path="/postlist" element={<PostListPage />} />
         <Route path="/postpage" element={<PostPage />} />
+        <Route path="/editor" element={<Editor />} />
       </Routes>
     </BrowserRouter>
   );

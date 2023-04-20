@@ -5,13 +5,13 @@ const PostHeader = ({ title, name, views, likes, createdAt }) => {
   return (
     <List>
       <Section>
-        <Text>{title}</Text>
+        <Text width={400}>{title}</Text>
       </Section>
       <Section>
-        <Text>{name}</Text>
-        <Text>{createdAt}</Text>
-        <Text>{views}</Text>
-        <Text>{likes}</Text>
+        <Text width={100}>{name}</Text>
+        <Text width={150}>{createdAt}</Text>
+        <Text width={50}>{views}</Text>
+        <Text width={50}>{likes}</Text>
       </Section>
     </List>
   );
@@ -39,6 +39,6 @@ const Text = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
+  width: ${props => props.width}px;
   font-size: 16px;
 `;

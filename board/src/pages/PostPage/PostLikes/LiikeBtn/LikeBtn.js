@@ -7,24 +7,14 @@ const like = { color: '#5173c2', img: 'images/like.png' };
 
 const unlike = { color: '#111', img: 'images/unlike.png' };
 
-const LikeBtn = ({ postId }) => {
+const LikeBtn = ({ likes, likeStatus, postId }) => {
   const token = getToken();
   const [isLike, setIsLike] = useState({ likeStatus: '', likesCount: 0 });
   const isStatus = isLike.likeStatus ? like : unlike;
 
   useEffect(() => {
-    fetch(`${API.likes}?postId=${postId}`, {
-      headers: { Authorization: `${token}` },
-    })
-      .then(res => res.json())
-      .then(data =>
-        setIsLike({
-          ...isLike,
-          likeStatus: data.likeStatus,
-          likesCount: data.likesCount,
-        })
-      );
-  }, []);
+    setIsLike({ ...isLike, likeStatus: likeStatus, likesCount: likes });
+  }, [likes]);
 
   const likeHandler = () => {
     fetch(`${API.likes}`, {
@@ -37,13 +27,13 @@ const LikeBtn = ({ postId }) => {
     })
       .then(res => res.json())
       .then(res => {
-        if (res.message === 'Created like for the post') {
+        if (res.message === 'Created like') {
           return setIsLike({
             ...isLike,
             likeStatus: true,
             likesCount: isLike.likesCount + 1,
           });
-        } else if (res.message === 'Deleted like for the post') {
+        } else if (res.message === 'Deleted like') {
           return setIsLike({
             ...isLike,
             likeStatus: false,

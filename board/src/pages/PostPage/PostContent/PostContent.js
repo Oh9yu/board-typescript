@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import 'react-quill/dist/quill.snow.css';
 
 const PostContent = ({ content }) => {
   return (
     <Container>
-      <Content>{content}</Content>
+      <Content dangerouslySetInnerHTML={{ __html: content }} />
     </Container>
   );
 };
@@ -17,4 +18,4 @@ const Container = styled.div`
   min-height: 300px;
 `;
 
-const Content = styled.p``;
+const Content = styled.div``;
