@@ -7,6 +7,7 @@ import PostContent from './PostContent/PostContent';
 import PostHeader from './PostHeader/PostHeader';
 import PostLikes from './PostLikes/PostLikes';
 import Comment from './Comment/Comment';
+import PostEdit from './PostEdit/PostEdit';
 
 const PostPage = () => {
   const [data, setData] = useState([]);
@@ -23,6 +24,8 @@ const PostPage = () => {
       .then(data => setData(data));
   }, []);
 
+  console.log('postpage ', data);
+
   return (
     <Container>
       <PostHeader
@@ -31,6 +34,13 @@ const PostPage = () => {
         name={data.author?.name}
         views={data.post?.views}
       />
+      {data.user?.modifyAllowed && (
+        <PostEdit
+          title={data.post?.title}
+          contents={data.post?.contents}
+          postId={location.state.postId}
+        />
+      )}{' '}
       <PostContent content={data.post?.contents} />
       <PostLikes
         token={token}
@@ -47,6 +57,7 @@ const PostPage = () => {
 export default PostPage;
 
 const Container = styled.div`
+  position: relative;
   width: 1024px;
   height: 100vh;
   margin: auto;

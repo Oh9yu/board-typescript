@@ -7,29 +7,34 @@ import getToken from '../../utils/getToken';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { API } from '../../config/config';
 
+const toolbarModule = [
+  ['bold', 'italic', 'underline'],
+  ['blockquote', 'code-block'],
+  [{ header: 1 }, { header: 2 }],
+  [{ list: 'ordered' }, { list: 'bullet' }],
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+  [{ color: [] }],
+  [{ font: [] }],
+  [{ align: [] }],
+  ['clean'],
+];
+
 const Editor = () => {
   const token = getToken();
   const navigate = useNavigate('');
   const location = useLocation();
-  const [title, setTitle] = useState('');
-  const [contents, setContents] = useState('');
+  const isEditMode = {
+    title: location.state.title ? location.state.title : '',
+    contents: location.state.contents ? location.state.contents : '',
+    type: location.state.title ? 'Edit Post' : 'Posting',
+  };
+  const [title, setTitle] = useState(isEditMode.title);
+  const [contents, setContents] = useState(isEditMode.contents);
 
   const catId = {
     mainCatId: location.state.mainCatId,
     subCatId: location.state.subCatId,
   };
-
-  const toolbarModule = [
-    ['bold', 'italic', 'underline'],
-    ['blockquote', 'code-block'],
-    [{ header: 1 }, { header: 2 }],
-    [{ list: 'ordered' }, { list: 'bullet' }],
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
-    [{ color: [] }],
-    [{ font: [] }],
-    [{ align: [] }],
-    ['clean'],
-  ];
 
   const titleHandler = e => {
     setTitle(e.target.value);
@@ -39,7 +44,7 @@ const Editor = () => {
     setContents(e);
   };
 
-  const submitHandler = () => {
+  const postHandler = () => {
     fetch(`${API.post}`, {
       method: 'POST',
       headers: {
@@ -58,11 +63,27 @@ const Editor = () => {
     navigate('/');
   };
 
-  console.log();
+  const editHandler = () => {
+    fetch(`${API.post}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        postId: location.state.postId,
+        newTitle: title,
+        newContents: contents,
+      }),
+    })
+      .then(response => response.json())
+      .then(res => alert(res.message));
+    navigate('/');
+  };
 
   return (
     <Container>
-      <Title>Posting</Title>
+      <Title>{isEditMode.type}</Title>
       <Section>
         <Input
           type="text"
@@ -70,7 +91,11 @@ const Editor = () => {
           onChange={titleHandler}
           placeholder="제목을 입력하세요"
         />
-        <Button name="Submit" onClick={submitHandler} />
+        {isEditMode.title ? (
+          <Button name="Edit" onClick={editHandler} />
+        ) : (
+          <Button name="Submit" onClick={postHandler} />
+        )}
       </Section>
       <StyledQuill
         modules={{ toolbar: toolbarModule }}

@@ -5,18 +5,18 @@ import CommentList from './CommentList/CommentList';
 import CommentEditor from './CommentEditor/CommentEditor';
 
 const Comment = ({ postId }) => {
-  const [comments, setComments] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     fetch(`${API.comment}?postId=${postId}`)
       .then(res => res.json())
-      .then(data => setComments(data));
-  }, [comments]);
+      .then(data => setData(data));
+  }, []);
 
   return (
     <Container>
       <CommentHeader>댓글</CommentHeader>
-      {comments?.map(e => {
+      {data?.map(e => {
         return (
           <CommentList
             key={e.comment?.commentId}
@@ -25,6 +25,7 @@ const Comment = ({ postId }) => {
             name={e.author?.name}
             createdAt={e.comment?.createdAt}
             contents={e.comment?.contents}
+            likes={e.comment?.likes}
           />
         );
       })}

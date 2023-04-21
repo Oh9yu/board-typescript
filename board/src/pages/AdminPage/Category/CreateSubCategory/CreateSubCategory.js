@@ -23,6 +23,10 @@ const CreateSubCategory = ({ data }) => {
     setInputValue('');
   };
 
+  useEffect(() => {
+    setOptions(data[0]?.mainCatId);
+  }, [data]);
+
   return (
     <Container>
       <Title>Create Sub Category</Title>

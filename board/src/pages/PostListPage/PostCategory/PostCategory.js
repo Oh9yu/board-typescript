@@ -6,13 +6,13 @@ import CategoryList from '../CategoryList/CategoryList';
 const PostCategory = ({ mainCatId, name, statusHandler }) => {
   const [category, setCategory] = useState([]);
 
+  console.log('??', mainCatId);
+
   useEffect(() => {
     fetch(`${API.category}/sub?mainCatId=${mainCatId}`)
       .then(res => res.json())
       .then(data => setCategory(data));
   }, []);
-
-  console.log('??', category.subCatId);
 
   return (
     <ListSection>

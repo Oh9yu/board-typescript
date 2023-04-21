@@ -3,19 +3,9 @@ import styled from 'styled-components';
 import { API } from '../../../../../config/config';
 import getToken from '../../../../../utils/getToken';
 
-const CommentLike = ({ id, postId }) => {
-  const [likeCount, setLikeCount] = useState(0);
+const CommentLike = ({ id, postId, likes }) => {
+  const [likeCount, setLikeCount] = useState(likes);
   const token = getToken();
-
-  useEffect(() => {
-    fetch(`${API.likes}/comment`, {
-      headers: { Authorization: `${token}` },
-    })
-      .then(res => res.json())
-      .then(data => {
-        setLikeCount(data.likesCount);
-      });
-  }, []);
 
   const likeHandler = () => {
     fetch(`${API.likes}/comment`, {
@@ -27,7 +17,13 @@ const CommentLike = ({ id, postId }) => {
       body: JSON.stringify({ postId: postId, commentId: id }),
     })
       .then(res => res.json())
-      .then(res => console.log(res.message));
+      .then(res => {
+        if (res.message === 'Created like') {
+          setLikeCount(likeCount + 1);
+        } else if (res.message === 'Deleted like') {
+          setLikeCount(likeCount - 1);
+        }
+      });
   };
 
   return (

@@ -1,10 +1,10 @@
-// const URL = 'http://172.20.10.6';
-// const AUTH = 8000;
-// const POST = 3000;
+const URL = 'http://172.20.10.6';
+const AUTH = 8000;
+const POST = 3000;
 
-const URL = process.env.REACT_APP_URL;
-const AUTH = 81;
-const POST = 80;
+// const URL = process.env.REACT_APP_URL;
+// const AUTH = 81;
+// const POST = 80;
 
 const USERPAGE = 5000;
 

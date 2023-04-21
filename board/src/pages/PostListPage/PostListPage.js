@@ -9,8 +9,9 @@ const PostListPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [status, setStatus] = useState({
-    name: `${location.state.categoryName}`,
-    subCatId: `${location.state.subCatId}`,
+    name: location.state.categoryName,
+    queryType: location.state.queryType,
+    subCatId: location.state.subCatId,
   });
   const mainCat = {
     name: location.state.categoryName,
@@ -18,15 +19,22 @@ const PostListPage = () => {
   };
 
   const statusHandler = (name, id) => {
-    setStatus({ ...status, name: name, subCatId: id });
+    setStatus({ ...status, name: name, queryType: 'subCatId', subCatId: id });
   };
 
-  const listAll = () => {};
+  const listAll = () => {
+    setStatus({
+      ...status,
+      name: '',
+      queryType: 'mainCatId',
+      subCatId: mainCat.mainCatId,
+    });
+  };
 
   return (
     <Container>
       <Title onClick={listAll}>{location.state.categoryName}</Title>
-      {status.name !== mainCat.name && (
+      {status.name.length > 0 && status.name !== mainCat.name && (
         <SubCat>
           {status.name}
           <Button
@@ -47,7 +55,11 @@ const PostListPage = () => {
         name={status.name}
         statusHandler={statusHandler}
       />
-      <PostSection status={status.subCatId} mainCatId={mainCat.mainCatId} />
+      <PostSection
+        status={status.subCatId}
+        queryType={status.queryType}
+        mainCatId={mainCat.mainCatId}
+      />
     </Container>
   );
 };
@@ -71,6 +83,7 @@ const Title = styled.div`
   height: 100px;
   font-size: 36px;
   color: #333;
+  cursor: pointer;
 `;
 
 const SubCat = styled.div`

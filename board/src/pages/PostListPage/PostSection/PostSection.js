@@ -4,11 +4,12 @@ import { API } from '../../../config/config';
 import PostList from '../../../components/PostList/PostList';
 import PostHeader from './PostHeader/PostHeader';
 
-const PostSection = ({ status, mainCatId }) => {
+const PostSection = ({ status, mainCatId, queryType }) => {
   const [postData, setPostData] = useState([]);
 
   useEffect(() => {
-    fetch(`${API.post}/list?subCatId=${status}`)
+    if (!queryType || queryType === undefined) return;
+    fetch(`${API.post}/list?${queryType}=${status}`)
       .then(res => res.json())
       .then(data => setPostData(data));
   }, [status]);
@@ -18,10 +19,6 @@ const PostSection = ({ status, mainCatId }) => {
       .then(res => res.json())
       .then(data => setPostData(data));
   }, []);
-
-  console.log('status', status);
-
-  console.log(postData);
 
   return (
     <Container>

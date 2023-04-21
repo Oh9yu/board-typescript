@@ -4,7 +4,7 @@ import useCreatedAt from '../../../../utils/hook/useCreatedAt';
 import CommentUser from './CommentUser/CommentUser';
 import CommentLike from './CommentLike/CommentLike';
 
-const CommentList = ({ name, id, postId, createdAt, contents }) => {
+const CommentList = ({ name, id, postId, createdAt, contents, likes }) => {
   const commentTime = useCreatedAt(createdAt);
 
   return (
@@ -13,7 +13,7 @@ const CommentList = ({ name, id, postId, createdAt, contents }) => {
         <CommentUser name={name} />
         <Section width="150px" fontsize={12}>
           {commentTime}
-          <CommentLike id={id} postId={postId} />
+          <CommentLike id={id} postId={postId} likes={likes} />
         </Section>
       </Section>
       <Section width="100%" fontsize={16}>
