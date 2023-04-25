@@ -1,4 +1,4 @@
-const URL = 'http://172.20.10.6';
+const URL = 'http://10.58.52.103';
 const AUTH = 8000;
 const POST = 3000;
 
@@ -19,5 +19,6 @@ const API = {
   comment: `${URL}:${POST}/nb/comment`,
   admin: `${URL}:${AUTH}/auth/admin`,
   likes: `${URL}:${POST}/nb/like`,
+  alert: `${URL}:${POST}/nb/alert`,
 };
 export { API };

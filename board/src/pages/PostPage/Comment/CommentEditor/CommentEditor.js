@@ -8,6 +8,7 @@ const CommentEditor = ({ postId }) => {
   const [inputValue, setInputValue] = useState('');
 
   const clickHandler = () => {
+    if (!inputValue) return;
     fetch(`${API.comment}`, {
       method: 'POST',
       headers: {

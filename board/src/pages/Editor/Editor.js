@@ -30,6 +30,7 @@ const Editor = () => {
   };
   const [title, setTitle] = useState(isEditMode.title);
   const [contents, setContents] = useState(isEditMode.contents);
+  const isInput = title && contents ? true : false;
 
   const catId = {
     mainCatId: location.state.mainCatId,

@@ -23,9 +23,6 @@ const PostPage = () => {
       .then(res => res.json())
       .then(data => setData(data));
   }, []);
-
-  console.log('postpage ', data);
-
   return (
     <Container>
       <PostHeader
@@ -40,7 +37,7 @@ const PostPage = () => {
           contents={data.post?.contents}
           postId={location.state.postId}
         />
-      )}{' '}
+      )}
       <PostContent content={data.post?.contents} />
       <PostLikes
         token={token}

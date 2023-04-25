@@ -6,6 +6,7 @@ import SignUpBtn from './NavBtn/NavSignUp';
 import NavSignOutBtn from './NavBtn/NavSignOut';
 import NavProfile from './NavBtn/NavProfile';
 import NavAdmin from './NavBtn/NavAdmin';
+import Alert from './Alert/Alert';
 
 const SignStatus = () => {
   const token = localStorage.getItem('TOKEN');
@@ -13,6 +14,7 @@ const SignStatus = () => {
 
   return (
     <Container>
+      {token && <Alert />}
       {!token ? <SignInBtn /> : isAdmin ? <NavAdmin /> : <NavProfile />}
       {token ? <NavSignOutBtn /> : <SignUpBtn />}
     </Container>

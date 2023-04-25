@@ -23,7 +23,9 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   margin: auto;
+  height: 100vh;
   background-color: #f9fbff;
+  background-attachment: fixed;
 `;
 
 const Section = styled.section`

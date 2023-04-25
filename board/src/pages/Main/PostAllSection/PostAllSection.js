@@ -5,6 +5,7 @@ import MainPostList from './MainPostList/MainPostList';
 
 const PostAllSection = () => {
   const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     fetch(`${API.post}/list`)
@@ -17,7 +18,7 @@ const PostAllSection = () => {
   return (
     <Container>
       <ListHeader>전체글 보기</ListHeader>
-      {data?.map(data => {
+      {data.data?.map(data => {
         return <MainPostList key={data.postId} data={data} />;
       })}
     </Container>

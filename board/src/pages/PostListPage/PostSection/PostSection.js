@@ -29,7 +29,7 @@ const PostSection = ({ status, mainCatId, queryType }) => {
         likes="좋아요"
         createdAt="날짜"
       />
-      {postData?.map(e => {
+      {postData.data?.map(e => {
         return (
           <PostList
             key={e.postId}
