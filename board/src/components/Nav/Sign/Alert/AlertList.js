@@ -2,18 +2,33 @@ import React from 'react';
 import styled from 'styled-components';
 import getAlertText from '../../../../utils/getAlertText';
 import { useNavigate } from 'react-router-dom';
+import getAlertBodyData from '../../../../utils/getAlertBodyData';
+import { API } from '../../../../config/config';
+import getToken from '../../../../utils/getToken';
 
 const AlertList = ({ data }) => {
   const navigate = useNavigate('');
   const status = data._id.readStatus ? false : true;
   const text = getAlertText(data);
+  const token = getToken();
+
+  const clickHandler = () => {
+    fetch(`${API.alert}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        accountIds: getAlertBodyData(data),
+        postId: data._id.postId,
+      }),
+    });
+    navigate(`/postpage/${data._id.postId}`);
+  };
 
   return (
-    <Container
-      onClick={() => {
-        navigate(`/postpage/${data._id.postId}`);
-      }}
-    >
+    <Container onClick={clickHandler}>
       {status && <AlertDot />}
       {text}
     </Container>
