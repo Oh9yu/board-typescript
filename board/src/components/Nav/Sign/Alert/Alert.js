@@ -1,29 +1,47 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import useOutSideClick from '../../../../utils/hook/useOutSideClick';
+import { API } from '../../../../config/config';
+import getToken from '../../../../utils/getToken';
+import getAlertCount from '../../../../utils/getAlertCount';
+import AlertList from './AlertList';
 
 const Alert = () => {
-  const alertCounts = 19;
+  const token = getToken();
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef();
+  const [data, setData] = useState([]);
+  const alertCounts = getAlertCount(data);
 
+  useEffect(() => {
+    fetch(`${API.alert}`, { headers: { Authorization: token } })
+      .then(res => res.json())
+      .then(data => setData(data));
+  }, []);
   useOutSideClick(ref, () => {
     setIsVisible(false);
   });
 
   return (
     <Container>
-      <AlertCount>{alertCounts}</AlertCount>
+      {alertCounts > 0 && <AlertCount>{alertCounts}</AlertCount>}
       <Img
         src="images/bell.png"
         onClick={() => {
-          if (isVisible === true) return;
-          setIsVisible(true);
+          if (isVisible === false) {
+            setIsVisible(true);
+          } else setIsVisible(false);
         }}
       />
       {isVisible && (
         <AlertSection isVisible={isVisible} ref={ref}>
-          zz
+          {data.length === 0 ? (
+            <AlertText>알림이 없습니다</AlertText>
+          ) : (
+            data?.map(data => {
+              return <AlertList data={data} key={data._id.postId} />;
+            })
+          )}
         </AlertSection>
       )}
     </Container>
@@ -40,8 +58,8 @@ const Container = styled.div`
 `;
 
 const Img = styled.img`
-  width: 45px;
-  padding: 5px;
+  width: 36px;
+  /* padding: 5px; */
   border-radius: 10px;
   cursor: pointer;
   &:hover {
@@ -56,20 +74,28 @@ const AlertCount = styled.div`
   justify-content: center;
   align-items: center;
   top: 3px;
-  right: 3px;
+  right: 0;
   min-width: 18px;
-  padding: 2px;
+  padding: 1px;
   border-radius: 5px;
   color: #fff;
   font-size: 12px;
   background-color: red;
 `;
 
+const AlertText = styled.p`
+  font-size: 14px;
+  color: #aaa;
+`;
+
 const AlertSection = styled.section`
   position: absolute;
   width: 300px;
-  height: 300px;
-  top: 50px;
+  padding: 10px;
+  top: 55px;
   left: 0px;
+  z-index: 1;
+  border: 2px solid #afc9ff;
+  border-radius: 5px;
   background-color: #f9fbff;
 `;

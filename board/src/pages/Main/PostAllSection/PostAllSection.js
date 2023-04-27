@@ -13,8 +13,6 @@ const PostAllSection = () => {
       .then(data => setData(data));
   }, []);
 
-  console.log(data);
-
   return (
     <Container>
       <ListHeader>전체글 보기</ListHeader>

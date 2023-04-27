@@ -3,33 +3,35 @@ import styled from 'styled-components';
 import { API } from '../../../config/config';
 import CommentList from './CommentList/CommentList';
 import CommentEditor from './CommentEditor/CommentEditor';
+import { useParams } from 'react-router-dom';
 
-const Comment = ({ postId }) => {
+const Comment = () => {
   const [data, setData] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
-    fetch(`${API.comment}?postId=${postId}`)
+    fetch(`${API.comment}?postId=${id}`)
       .then(res => res.json())
       .then(data => setData(data));
-  }, []);
+  }, [id, data]);
 
   return (
     <Container>
       <CommentHeader>댓글</CommentHeader>
-      {data?.map(e => {
+      {data?.map(({ comment, author }) => {
         return (
           <CommentList
-            key={e.comment?.commentId}
-            postId={postId}
-            id={e.comment?.commentId}
-            name={e.author?.name}
-            createdAt={e.comment?.createdAt}
-            contents={e.comment?.contents}
-            likes={e.comment?.likes}
+            key={comment?.commentId}
+            postId={id}
+            id={comment?.commentId}
+            name={author?.name}
+            createdAt={comment?.createdAt}
+            contents={comment?.contents}
+            likes={comment?.likes}
           />
         );
       })}
-      <CommentEditor postId={postId} />
+      <CommentEditor postId={id} />
     </Container>
   );
 };

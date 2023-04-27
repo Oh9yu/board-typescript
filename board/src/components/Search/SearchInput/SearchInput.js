@@ -13,7 +13,7 @@ export default SearchInput;
 
 const Input = styled.input`
   padding-left: 5px;
-  height: 40px;
+  height: 36px;
   font-size: 16px;
   border: 2px solid #7594dd;
   border-top-left-radius: 5px;

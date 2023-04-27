@@ -19,7 +19,7 @@ const CommentEditor = ({ postId }) => {
         postId: postId,
         contents: inputValue,
       }),
-    });
+    }).then(res => res.json());
     setInputValue('');
   };
 

@@ -31,8 +31,9 @@ export default Category;
 
 const Container = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  padding: 10px 20px;
+  padding: 8px 10px;
   width: 100%;
   height: max-content;
   background-color: #9ab2eb;

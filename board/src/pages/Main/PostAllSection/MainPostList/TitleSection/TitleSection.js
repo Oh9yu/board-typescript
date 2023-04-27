@@ -7,7 +7,7 @@ const TitleSection = ({ data }) => {
   const navigate = useNavigate();
 
   const titleHandler = () => {
-    navigate('/postpage', { state: { postId: data.postId } });
+    navigate(`/postpage/${data.postId}`);
   };
 
   const mainHandler = () => {

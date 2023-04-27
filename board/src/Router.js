@@ -21,7 +21,8 @@ const Router = () => {
         <Route path="/userpage" element={<UserPage />} />
         <Route path="/adminpage" element={<AdminPage />} />
         <Route path="/postlist" element={<PostListPage />} />
-        <Route path="/postpage" element={<PostPage />} />
+        {/* <Route path="/postpage" element={<PostPage />} /> */}
+        <Route path="/postpage/:id" element={<PostPage />} />
         <Route path="/editor" element={<Editor />} />
       </Routes>
     </BrowserRouter>

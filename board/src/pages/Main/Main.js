@@ -22,10 +22,9 @@ export default Main;
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin: auto;
+  min-width: 1024px;
   height: 100vh;
   background-color: #f9fbff;
-  background-attachment: fixed;
 `;
 
 const Section = styled.section`

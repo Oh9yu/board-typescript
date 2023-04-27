@@ -27,7 +27,8 @@ export default Nav;
 
 const Container = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: center;
+  min-width: 1024px;
   justify-content: center;
   background-color: #c9d9f9;
   padding: 0px 100px;
@@ -38,8 +39,8 @@ const Section = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1024px;
-  height: 80px;
+  min-width: 1024px;
+  height: 50px;
 `;
 
 const Logo = styled.div`
@@ -48,7 +49,7 @@ const Logo = styled.div`
 `;
 
 const MainLogo = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   cursor: pointer;
 `;

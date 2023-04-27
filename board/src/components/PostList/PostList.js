@@ -8,7 +8,7 @@ const PostList = ({ postId, title, name, views, likes, createdAt }) => {
   const postTime = useCreatedAt(createdAt);
 
   const titleClickHandler = () => {
-    navigate('/postpage', { state: { postId: postId } });
+    navigate(`/postpage/${postId}`);
   };
 
   return (
