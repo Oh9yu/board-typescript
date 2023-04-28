@@ -4,9 +4,11 @@ import PageNumBtn from './PageNumBtn/PageNumBtn';
 import getPagenationList from '../../utils/getPagenationList';
 
 const Pagenation = ({ page, setPage, pageLength, totalCount }) => {
-  const pagenationArray = getPagenationList(totalCount);
+  const pagenationArray = getPagenationList(pageLength);
 
+  console.log(Math.ceil(page / 5));
   console.log(pagenationArray);
+  console.log(pageLength);
 
   return (
     <Container>
@@ -32,8 +34,8 @@ const Pagenation = ({ page, setPage, pageLength, totalCount }) => {
           이전으로
         </MovePageBtn>
         {/* Number 페이지네이션 */}
-        {pagenationArray[0]?.map(value => {
-          return <PageNumBtn key={value} />;
+        {pagenationArray[Math.ceil(page / 5) - 1]?.map(value => {
+          return <PageNumBtn key={value} value={value} />;
         })}
         {/* 다음으로 */}
         <MovePageBtn

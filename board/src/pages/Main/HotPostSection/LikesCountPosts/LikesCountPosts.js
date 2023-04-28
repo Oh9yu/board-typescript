@@ -8,7 +8,7 @@ const LikesCountPosts = () => {
 export default LikesCountPosts;
 
 const Container = styled.div`
-  width: 460px;
+  width: 100%;
   padding: 10px;
   border: 2px solid #7594dd;
   border-radius: 5px;

@@ -28,7 +28,7 @@ export default Nav;
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  min-width: 1024px;
+  width: 100%;
   justify-content: center;
   background-color: #c9d9f9;
   padding: 0px 100px;
@@ -39,7 +39,7 @@ const Section = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 1024px;
+  width: 100%;
   height: 50px;
 `;
 

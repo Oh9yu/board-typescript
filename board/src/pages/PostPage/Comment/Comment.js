@@ -13,7 +13,7 @@ const Comment = () => {
     fetch(`${API.comment}?postId=${id}`)
       .then(res => res.json())
       .then(data => setData(data));
-  }, [id, data]);
+  }, [id]);
 
   return (
     <Container>

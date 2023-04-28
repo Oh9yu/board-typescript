@@ -25,7 +25,7 @@ export default MainPostList;
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 1024px;
+  /* width: 1024px; */
   margin-top: 8px;
   border-bottom: 2px solid #ddd;
 `;

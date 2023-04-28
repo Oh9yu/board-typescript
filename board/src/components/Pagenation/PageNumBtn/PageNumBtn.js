@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const PageNumBtn = ({ value }) => {
-  return <Cutton>1</Cutton>;
+  return <Cutton>{value}</Cutton>;
 };
 
 export default PageNumBtn;

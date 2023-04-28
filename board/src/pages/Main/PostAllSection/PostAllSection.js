@@ -5,7 +5,7 @@ import MainPostList from './MainPostList/MainPostList';
 import Pagenation from '../../../components/Pagenation/Pagenation';
 
 const PostAllSection = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -14,9 +14,7 @@ const PostAllSection = () => {
       .then(data => setData(data));
   }, [page]);
 
-  console.log(data);
-
-  console.log(page);
+  if (!data) return <div>로딩</div>;
 
   return (
     <Container>
@@ -30,7 +28,7 @@ const PostAllSection = () => {
         }}
         page={page}
         totalCount={data.totalCount}
-        pageLength={Math.ceil(data?.totalCount / 5)}
+        pageLength={Math.ceil(data.totalCount / 5)}
       />
     </Container>
   );
@@ -38,7 +36,9 @@ const PostAllSection = () => {
 
 export default PostAllSection;
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+`;
 
 const ListHeader = styled.div`
   display: flex;

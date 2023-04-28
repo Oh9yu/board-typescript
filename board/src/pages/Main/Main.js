@@ -22,8 +22,9 @@ export default Main;
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  min-width: 1024px;
-  height: 100vh;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 10px;
   background-color: #f9fbff;
 `;
 
@@ -31,6 +32,6 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 1024px;
+  width: 100%;
   padding-top: 30px;
 `;

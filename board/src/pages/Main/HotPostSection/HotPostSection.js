@@ -16,8 +16,9 @@ export default HotPostSection;
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  width: 1024px;
-  height: 200px;
+  /* justify-content: space-evenly; */
+  width: 100%;
+  gap: 20px;
+  height: 280px;
   margin-top: 20px;
 `;

@@ -72,7 +72,7 @@ const Container = styled.div`
   justify-content: space-between;
   margin: auto;
   flex-wrap: wrap;
-  width: 1024px;
+  width: 100%;
 `;
 
 const Title = styled.div`
