@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { API } from '../../../../../config/config';
-import getToken from '../../../../../utils/getToken';
+import { API } from '../../../../config/config';
+import getToken from '../../../../utils/getToken';
 
 const CommentLike = ({ id, postId, likes }) => {
   const [likeCount, setLikeCount] = useState(likes);

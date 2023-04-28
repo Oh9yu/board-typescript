@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import useCreatedAt from '../../../../utils/hook/useCreatedAt';
-import TitleSection from './TitleSection/TitleSection';
+import TitleSection from './TitleSection';
 
 const MainPostList = ({ data }) => {
   const createdAt = useCreatedAt(data.createdAt);

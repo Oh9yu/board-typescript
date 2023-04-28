@@ -19,10 +19,10 @@ const PostList = ({ postId, title, name, views, likes, createdAt }) => {
         </Text>
       </Section>
       <Section>
-        <Text width={100}>{name}</Text>
-        <Text width={150}>{postTime}</Text>
-        <Text width={50}>{views}</Text>
-        <Text width={50}>{likes}</Text>
+        <Text width={20}>{name}</Text>
+        <Text width={40}>{postTime}</Text>
+        <Text width={15}>{views}</Text>
+        <Text width={15}>{likes}</Text>
       </Section>
     </List>
   );
@@ -42,14 +42,14 @@ const Section = styled.section`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 400px;
+  width: 50%;
 `;
 
 const Text = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${props => props.width}px;
+  width: ${props => props.width}%;
   font-size: 14px;
   cursor: pointer;
 `;

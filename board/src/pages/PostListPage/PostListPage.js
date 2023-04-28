@@ -34,32 +34,34 @@ const PostListPage = () => {
   return (
     <Container>
       <Title onClick={listAll}>{location.state.categoryName}</Title>
-      {status.name.length > 0 && status.name !== mainCat.name && (
-        <SubCat>
-          {status.name}
-          <Button
-            name="글쓰기"
-            onClick={() => {
-              navigate('/editor', {
-                state: {
-                  mainCatId: mainCat.mainCatId,
-                  subCatId: status.subCatId,
-                },
-              });
-            }}
-          />
-        </SubCat>
-      )}
-      <PostCategory
-        mainCatId={mainCat.mainCatId}
-        name={status.name}
-        statusHandler={statusHandler}
-      />
-      <PostSection
-        status={status.subCatId}
-        queryType={status.queryType}
-        mainCatId={mainCat.mainCatId}
-      />
+      <Section>
+        {status.name.length > 0 && status.name !== mainCat.name && (
+          <SubCat>
+            {status.name}
+            <Button
+              name="글쓰기"
+              onClick={() => {
+                navigate('/editor', {
+                  state: {
+                    mainCatId: mainCat.mainCatId,
+                    subCatId: status.subCatId,
+                  },
+                });
+              }}
+            />
+          </SubCat>
+        )}
+        <PostCategory
+          mainCatId={mainCat.mainCatId}
+          name={status.name}
+          statusHandler={statusHandler}
+        />
+        <PostSection
+          status={status.subCatId}
+          queryType={status.queryType}
+          mainCatId={mainCat.mainCatId}
+        />
+      </Section>
     </Container>
   );
 };
@@ -72,7 +74,14 @@ const Container = styled.div`
   justify-content: space-between;
   margin: auto;
   flex-wrap: wrap;
-  width: 100%;
+  max-width: 1024px;
+`;
+
+const Section = styled.section`
+  margin: auto;
+  width: 1024px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Title = styled.div`

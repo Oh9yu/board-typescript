@@ -49,6 +49,6 @@ const PostSection = ({ status, mainCatId, queryType }) => {
 export default PostSection;
 
 const Container = styled.div`
-  width: 800px;
+  width: 80%;
   height: 600px;
 `;

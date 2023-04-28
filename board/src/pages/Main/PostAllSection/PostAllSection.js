@@ -19,12 +19,12 @@ const PostAllSection = () => {
   return (
     <Container>
       <ListHeader>전체글 보기</ListHeader>
-      {data.data?.map(data => {
+      {data.data.map(data => {
         return <MainPostList key={data.postId} data={data} />;
       })}
       <Pagenation
-        setPage={pageNum => {
-          setPage(pageNum);
+        setPage={page => {
+          setPage(page);
         }}
         page={page}
         totalCount={data.totalCount}

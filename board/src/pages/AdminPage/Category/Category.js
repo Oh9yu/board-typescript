@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import CreateMainCategory from './CreateMainCategory/CreateMainCategory';
-import CreateSubCategory from './CreateSubCategory/CreateSubCategory';
-import EditMainCategory from './EditMainCategory/EditMainCategory';
+import CreateMainCategory from './CategoryFuctions/CreateMainCategory';
+import CreateSubCategory from './CategoryFuctions/CreateSubCategory';
+import EditMainCategory from './CategoryFuctions/EditMainCategory';
 import { API } from '../../../config/config';
-import DeleteMainCategory from './DeleteMainCategory/DeleteMainCategory';
-import EditSubCategory from './EditSubCategory/EditSubCategory';
-import DeleteSubCategory from './DeleteSubCategory/DeleteSubCategory';
+import DeleteMainCategory from './CategoryFuctions/DeleteMainCategory';
+import EditSubCategory from './CategoryFuctions/EditSubCategory';
+import DeleteSubCategory from './CategoryFuctions/DeleteSubCategory';
 
 const Category = () => {
   const [data, setData] = useState([]);

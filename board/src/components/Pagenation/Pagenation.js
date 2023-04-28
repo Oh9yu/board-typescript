@@ -2,61 +2,62 @@ import React from 'react';
 import styled from 'styled-components';
 import PageNumBtn from './PageNumBtn/PageNumBtn';
 import getPagenationList from '../../utils/getPagenationList';
+import { AiOutlineLeft } from 'react-icons/ai';
+import { AiOutlineDoubleLeft } from 'react-icons/ai';
+import { AiOutlineRight } from 'react-icons/ai';
+import { AiOutlineDoubleRight } from 'react-icons/ai';
 
 const Pagenation = ({ page, setPage, pageLength, totalCount }) => {
   const pagenationArray = getPagenationList(pageLength);
-
-  console.log(Math.ceil(page / 5));
-  console.log(pagenationArray);
-  console.log(pageLength);
 
   return (
     <Container>
       <PageSection>
         {/* 처음으로 */}
-        <MovePageBtn
+        <AiOutlineDoubleLeft
+          size="25px"
           onClick={() => {
-            if (page <= 1) return console.log('안됨 ㅋ');
+            if (page <= 1) return;
             setPage(1);
-            console.log('됨 ㅋ');
           }}
-        >
-          처음으로
-        </MovePageBtn>
+        />
+
         {/* 이전으로 */}
-        <MovePageBtn
+        <AiOutlineLeft
+          size="25px"
           onClick={() => {
-            if (page <= 1) return console.log('안됨 ㅋ');
+            if (page <= 1) return;
             setPage(page - 1);
-            console.log('됨ㅋ');
           }}
-        >
-          이전으로
-        </MovePageBtn>
+          width="30px"
+        />
         {/* Number 페이지네이션 */}
         {pagenationArray[Math.ceil(page / 5) - 1]?.map(value => {
-          return <PageNumBtn key={value} value={value} />;
+          return (
+            <PageNumBtn
+              key={value}
+              value={value}
+              setPage={setPage}
+              page={page}
+            />
+          );
         })}
         {/* 다음으로 */}
-        <MovePageBtn
+        <AiOutlineRight
+          size="25px"
           onClick={() => {
-            if (page >= pageLength) return console.log('안됨 ㅋ');
+            if (page >= pageLength) return;
             setPage(page + 1);
-            console.log('됨 ㅋ');
           }}
-        >
-          다음으로
-        </MovePageBtn>
+        />
         {/* 마지막으로 */}
-        <MovePageBtn
+        <AiOutlineDoubleRight
+          className="my-icon"
           onClick={() => {
-            if (page >= pageLength) return console.log('안됨 ㅋ');
+            if (page >= pageLength) return;
             setPage(pageLength);
-            console.log('됨 ㅋ');
           }}
-        >
-          마지막
-        </MovePageBtn>
+        />
       </PageSection>
     </Container>
   );
@@ -68,14 +69,25 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ddd;
 `;
 
 const PageSection = styled.section`
   width: 500px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
-  background-color: #ccc;
 `;
 
-const MovePageBtn = styled.button``;
+const MovePageBtn = styled.button`
+  border: none;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 15px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  &:hover {
+    background-color: #eee;
+  }
+`;

@@ -37,7 +37,7 @@ const ListSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 200px;
+  min-width: 180px;
   height: 600px;
   background-color: #c9d9f9;
 `;

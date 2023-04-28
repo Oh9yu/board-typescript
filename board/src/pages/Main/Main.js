@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { API } from '../../config/config';
+// import { API } from '../../config/config';
 import Category from './Category/Category';
 import HotPostSection from './HotPostSection/HotPostSection';
 import PostAllSection from './PostAllSection/PostAllSection';
+// import { useParams } from 'react-router-dom';
 
 const Main = () => {
   return (

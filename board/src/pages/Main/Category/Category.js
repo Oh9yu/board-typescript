@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { API } from '../../../config/config';
-import CategoryList from './CategoryList/CategoryList';
+import CategoryList from './CategoryList';
 
 const Category = () => {
   const [category, setCategory] = useState([]);
