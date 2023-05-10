@@ -6,11 +6,11 @@ import getAlertBodyData from '../../../../utils/getAlertBodyData';
 import { API } from '../../../../config/config';
 import getToken from '../../../../utils/getToken';
 
-const AlertList = ({ data }) => {
-  const navigate = useNavigate('');
-  const status = data._id.readStatus ? false : true;
+const AlertList = ({ data }: any) => {
+  const navigate = useNavigate();
+  const status: boolean = data._id.readStatus ? false : true;
   const text = getAlertText(data);
-  const token = getToken();
+  const token: string = getToken('TOKEN') || 'null';
 
   const clickHandler = () => {
     fetch(`${API.alert}`, {

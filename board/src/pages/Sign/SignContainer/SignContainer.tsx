@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import SignInForm from '../Form/SignInForm/SignInForm';
-import SignUpForm from '../Form/SignUpForm/SignUpForm';
+import SignUpForm from '../Form/SignUpForm/SignUpForm.jtsx';
 
 const SignContainer = ({ type, onClick, inputValue, onChangeInput }) => {
   const location = useLocation();

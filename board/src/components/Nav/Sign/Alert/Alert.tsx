@@ -6,21 +6,39 @@ import getToken from '../../../../utils/getToken';
 import getAlertCount from '../../../../utils/getAlertCount';
 import AlertList from './AlertList';
 
+interface PostData {
+  accountId: string;
+  name: string;
+  title: string;
+}
+
+interface Post {
+  _id: {
+    postId: string;
+    readStatus: boolean;
+  };
+  data: PostData[];
+}
+
 const Alert = () => {
-  const token = getToken();
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef();
-  const [data, setData] = useState([]);
+  //fetch headerr type 이 string
+  const token = getToken('TOKEN') || 'null';
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const ref = useRef<HTMLElement>(null);
+  const [data, setData] = useState<Post[]>([]);
   const alertCounts = getAlertCount(data);
 
-  useEffect(() => {
-    fetch(`${API.alert}`, { headers: { Authorization: token } })
-      .then(res => res.json())
-      .then(data => setData(data));
-  }, []);
   useOutSideClick(ref, () => {
     setIsVisible(false);
   });
+
+  useEffect(() => {
+    fetch(`${API.alert}`, {
+      headers: { Authorization: token },
+    })
+      .then(res => res.json())
+      .then(data => setData(data));
+  }, []);
 
   return (
     <Container>
@@ -34,7 +52,7 @@ const Alert = () => {
         }}
       />
       {isVisible && (
-        <AlertSection isVisible={isVisible} ref={ref}>
+        <AlertSection ref={ref}>
           {data.length === 0 ? (
             <AlertText>알림이 없습니다</AlertText>
           ) : (

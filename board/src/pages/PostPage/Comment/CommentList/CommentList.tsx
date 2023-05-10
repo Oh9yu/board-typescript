@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import useCreatedAt from '../../../../utils/hook/useCreatedAt';
 import CommentUser from './CommentUser/CommentUser';
-import CommentLike from './CommentLike';
+import CommentLike from './CommentLike.jtsx';
 
 const CommentList = ({ name, id, postId, createdAt, contents, likes }) => {
   const commentTime = useCreatedAt(createdAt);
