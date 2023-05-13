@@ -4,7 +4,16 @@ import Button from '../../../../components/Button/Button';
 import { API } from '../../../../config/config';
 import getToken from '../../../../utils/getToken';
 
-const CreateSubCategory = ({ data }) => {
+type MainCat = {
+  mainCatId: string;
+  mainCatName: string;
+};
+
+type Props = {
+  data: MainCat[];
+};
+
+const CreateSubCategory = ({ data }: Props) => {
   const token = getToken('TOKEN');
   const [options, setOptions] = useState('');
   const [inputValue, setInputValue] = useState('');
@@ -32,14 +41,14 @@ const CreateSubCategory = ({ data }) => {
       <Title>Create Sub Category</Title>
       <Select
         value={options}
-        onChange={e => {
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => {
           setOptions(e.target.value);
         }}
       >
-        {data?.map(e => {
+        {data?.map(data => {
           return (
-            <Option key={e.mainCatId} value={e.mainCatId}>
-              {e.mainCatName}
+            <Option key={data.mainCatId} value={data.mainCatId}>
+              {data.mainCatName}
             </Option>
           );
         })}

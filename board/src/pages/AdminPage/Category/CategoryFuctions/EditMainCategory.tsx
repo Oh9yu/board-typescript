@@ -4,7 +4,16 @@ import Button from '../../../../components/Button/Button';
 import { API } from '../../../../config/config';
 import getToken from '../../../../utils/getToken';
 
-const EditMainCategory = ({ data }) => {
+type MainCat = {
+  mainCatId: string;
+  mainCatName: string;
+};
+
+type Props = {
+  data: MainCat[];
+};
+
+const EditMainCategory = ({ data }: Props) => {
   const token = getToken('TOKEN');
   const [options, setOptions] = useState('');
   const [inputValue, setInputValue] = useState('');
@@ -36,10 +45,10 @@ const EditMainCategory = ({ data }) => {
           setOptions(e.target.value);
         }}
       >
-        {data?.map(e => {
+        {data?.map(data => {
           return (
-            <Option key={e.mainCatId} value={e.mainCatId}>
-              {e.mainCatName}
+            <Option key={data.mainCatId} value={data.mainCatId}>
+              {data.mainCatName}
             </Option>
           );
         })}

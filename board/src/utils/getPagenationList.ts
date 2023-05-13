@@ -1,4 +1,4 @@
-const getPagenationList = pageCounts => {
+const getPagenationList = (pageCounts: number) => {
   // console.log(pageCounts);
   const totalArray = Array(pageCounts)
     .fill()

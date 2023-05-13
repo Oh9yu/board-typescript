@@ -4,8 +4,30 @@ import { API } from '../../../config/config';
 import MainPostList from './MainPostList/MainPostList';
 import Pagenation from '../../../components/Pagenation/Pagenation';
 
+interface Data {
+  accountId: string;
+  mainCatId: string;
+  subCatId: string;
+  title: string;
+  views: number;
+  createdAt: string;
+  updatedAt: string;
+  postId: string;
+  name: string;
+  email: string;
+  profileImage: string;
+  likes: number;
+  mainCatName: string;
+  subCatName: string;
+}
+
+interface DataType {
+  totalCount: number;
+  data: Data[];
+}
+
 const PostAllSection = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState<DataType>();
   const [page, setPage] = useState(1);
 
   useEffect(() => {

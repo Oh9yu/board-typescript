@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
-const SearchInput = ({ value, setSearchInput }) => {
-  const searchInputHandler = e => {
+type Props = {
+  value: any;
+  setSearchInput: Dispatch<SetStateAction<string>>;
+};
+
+const SearchInput = ({ value, setSearchInput }: Props) => {
+  const searchInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
   };
 

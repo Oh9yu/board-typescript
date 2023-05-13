@@ -2,7 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const CategoryList = ({ mainCatId, name }) => {
+interface Props {
+  mainCatId: string;
+  name: string;
+}
+
+const CategoryList = ({ mainCatId, name }: Props) => {
   const navigate = useNavigate();
 
   const clickHandler = () => {

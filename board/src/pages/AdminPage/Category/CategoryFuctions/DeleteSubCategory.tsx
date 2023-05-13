@@ -4,8 +4,22 @@ import Button from '../../../../components/Button/Button';
 import { API } from '../../../../config/config';
 import getToken from '../../../../utils/getToken';
 
-const DeleteSubCategory = ({ data }) => {
-  const [subCat, setSubCat] = useState([]);
+type MainCat = {
+  mainCatId: string;
+  mainCatName: string;
+};
+
+type Props = {
+  data: MainCat[];
+};
+
+type SubCategory = {
+  subCatId: string;
+  subCatName: string;
+};
+
+const DeleteSubCategory = ({ data }: Props) => {
+  const [subCat, setSubCat] = useState<SubCategory[]>([]);
   const token = getToken('TOKEN');
   const [options, setOptions] = useState('');
   const [subOptions, setSubOptions] = useState('');
@@ -16,9 +30,10 @@ const DeleteSubCategory = ({ data }) => {
       .then(data => setSubCat(data));
   }, [options]);
 
-  const selectChange = e => {
+  const selectChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     setOptions(e.target.value);
   };
+
   const buttonHandler = () => {
     fetch(`${API.category}/sub/admin`, {
       method: 'DELETE',
@@ -39,10 +54,10 @@ const DeleteSubCategory = ({ data }) => {
       <Title>Delete Sub Category</Title>
       <Section>
         <Select value={options} onChange={selectChange}>
-          {data?.map(e => {
+          {data?.map(data => {
             return (
-              <Option key={e.mainCatId} value={e.mainCatId}>
-                {e.mainCatName}
+              <Option key={data.mainCatId} value={data.mainCatId}>
+                {data.mainCatName}
               </Option>
             );
           })}
@@ -53,10 +68,10 @@ const DeleteSubCategory = ({ data }) => {
             setSubOptions(e.target.value);
           }}
         >
-          {subCat?.map(e => {
+          {subCat?.map(data => {
             return (
-              <Option key={e.subCatId} value={e.subCatId}>
-                {e.subCatName}
+              <Option key={data.subCatId} value={data.subCatId}>
+                {data.subCatName}
               </Option>
             );
           })}

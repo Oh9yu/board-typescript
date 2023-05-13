@@ -3,8 +3,13 @@ import styled from 'styled-components';
 import { API } from '../../../config/config';
 import CategoryList from './CategoryList';
 
+type CategoryType = {
+  mainCatName: string;
+  mainCatId: string;
+};
+
 const Category = () => {
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState<CategoryType[]>([]);
 
   useEffect(() => {
     fetch(`${API.category}`)
@@ -14,12 +19,12 @@ const Category = () => {
 
   return (
     <Container>
-      {category?.map(e => {
+      {category?.map(data => {
         return (
           <CategoryList
-            name={e.mainCatName}
-            mainCatId={e.mainCatId}
-            key={e.mainCatName}
+            name={data.mainCatName}
+            mainCatId={data.mainCatId}
+            key={data.mainCatName}
           />
         );
       })}

@@ -1,16 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const NavBtn = props => {
-  const btn = props;
+interface ButtonProps {
+  btnName: string;
+  width: number;
+  height: number;
+  fontSize: number;
+  borderColor: string;
+  hoverColor: string;
+  onClick: () => void;
+}
 
-  const btnName = btn.btnName;
-  const width = btn.width;
-  const height = btn.height;
-  const fontSize = btn.fontSize;
-  const borderColor = btn.borderColor;
-  const hoverColor = btn.hoverColer;
-  const onClick = btn.onClick;
+const NavBtn = ({
+  width,
+  height,
+  fontSize,
+  borderColor,
+  hoverColor,
+  btnName,
+  onClick,
+}: ButtonProps) => {
   return (
     <Container
       width={width}
@@ -27,7 +36,7 @@ const NavBtn = props => {
 
 export default NavBtn;
 
-const Container = styled.button`
+const Container = styled.button<Omit<ButtonProps, 'btnName'>>`
   width: ${props => props.width}px;
   height: ${props => props.height}px;
   margin: 5px;

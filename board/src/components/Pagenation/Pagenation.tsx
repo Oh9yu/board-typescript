@@ -7,7 +7,13 @@ import { AiOutlineDoubleLeft } from 'react-icons/ai';
 import { AiOutlineRight } from 'react-icons/ai';
 import { AiOutlineDoubleRight } from 'react-icons/ai';
 
-const Pagenation = ({ page, setPage, pageLength, totalCount }) => {
+interface PageNationType {
+  page: number;
+  pageLength: number;
+  setPage: (value: number) => void;
+}
+
+const Pagenation = ({ page, setPage, pageLength }: PageNationType) => {
   const pagenationArray = getPagenationList(pageLength);
 
   return (

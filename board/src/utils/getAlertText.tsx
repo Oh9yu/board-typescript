@@ -1,4 +1,4 @@
-const getAlertText = data => {
+const getAlertText = (data: any) => {
   if (data.data.length > 1) {
     return `${data.data[0].name} 님 외 ${data.data.length - 1}명이 ${
       data.data[0].title

@@ -1,7 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const PageNumBtn = ({ value, setPage, page }) => {
+interface PageNumType {
+  value: number;
+  page: number;
+  setPage: (value: number) => void;
+}
+
+const PageNumBtn = ({ value, setPage, page }: PageNumType) => {
   const isSelected = page === value ? '#9ab2eb' : 'transparent';
 
   return (
@@ -18,7 +24,7 @@ const PageNumBtn = ({ value, setPage, page }) => {
 
 export default PageNumBtn;
 
-const Button = styled.button`
+const Button = styled.button<{ bgc: string }>`
   border: none;
   width: 30px;
   height: 30px;

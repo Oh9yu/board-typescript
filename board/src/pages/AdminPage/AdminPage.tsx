@@ -9,19 +9,13 @@ const AdminPage = () => {
   const [page, setPage] = useState('');
   const token = localStorage.getItem('TOKEN');
 
-  const asideClick = e => {
-    setPage(e);
+  const asideClick = (pageName: string) => {
+    setPage(pageName);
   };
 
-  //user fetch
-  // useEffect(() => {
-  //   fetch(`${API.admin}/admin/userAccounts`, {
-  //     headers: { Authorization: `${token}` },
-  //   });
-  // }, []);
   return (
     <Container>
-      <Aside page={page} setPage={asideClick} />
+      <Aside page={page} asideClick={asideClick} />
       {page === 'UserList' ? <UserList /> : null}
       {page === 'Category' ? <Category /> : null}
     </Container>

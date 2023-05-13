@@ -2,8 +2,25 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const TitleSection = ({ data }) => {
-  const img = data?.img ? data.img : 'images/text.png';
+interface Props {
+  accountId: string;
+  createdAt: string;
+  email: string;
+  likes: number;
+  mainCatId: string;
+  mainCatName: string;
+  name: string;
+  postId: string;
+  profileImage: string;
+  subCatId: string;
+  subCatName: string;
+  title: string;
+  updatedAt: string;
+  views: number;
+}
+
+const TitleSection = ({ data }: { data: Props }) => {
+  const img = 'images/text.png';
   const navigate = useNavigate();
 
   const titleHandler = () => {
@@ -34,18 +51,18 @@ const TitleSection = ({ data }) => {
     <Container>
       <Img src={img} />
       <ColumnWrapper>
-        <Text fontsize={16} onClick={titleHandler}>
+        <Text Fontsize={16} onClick={titleHandler}>
           {data.title}
         </Text>
         <Wrapper>
-          <Text fontsize={12} color="#777" onClick={mainHandler}>
+          <Text Fontsize={12} color="#777" onClick={mainHandler}>
             {data.mainCatName}
           </Text>
-          <Text fontsize={12} color="#777" onClick={subHandler}>
+          <Text Fontsize={12} color="#777" onClick={subHandler}>
             {data.subCatName}
           </Text>
         </Wrapper>
-        <Text fontsize={12}>{data.name}</Text>
+        <Text Fontsize={12}>{data.name}</Text>
       </ColumnWrapper>
     </Container>
   );
@@ -67,10 +84,10 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-const Text = styled.p`
+const Text = styled.p<{ Fontsize: number }>`
   margin-right: 8px;
   width: max-content;
-  font-size: ${props => props.fontsize}px;
+  font-size: ${props => props.Fontsize}px;
   color: ${props => props.color};
   padding: 2px;
   border-radius: 3px;

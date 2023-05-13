@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SearchBtn = ({ onClick }) => {
+const SearchBtn = ({ onClick }: any) => {
   return (
     <Button type="button" onClick={onClick}>
       <ButtonImg src="/images/searchBtn.png" />

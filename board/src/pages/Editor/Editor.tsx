@@ -20,8 +20,8 @@ const toolbarModule = [
 ];
 
 const Editor = () => {
-  const token = getToken();
-  const navigate = useNavigate('');
+  const token = getToken('TOKEN');
+  const navigate = useNavigate();
   const location = useLocation();
   const isEditMode = {
     title: location.state.title ? location.state.title : '',
@@ -37,21 +37,25 @@ const Editor = () => {
     subCatId: location.state.subCatId,
   };
 
-  const titleHandler = e => {
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+  };
+  if (token) {
+    headers.Authorization = token;
+  }
+
+  const titleHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setTitle(e.target.value);
   };
 
-  const contentsHandler = e => {
-    setContents(e);
+  const contentsHandler = (value: string) => {
+    setContents(value);
   };
 
   const postHandler = () => {
     fetch(`${API.post}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token,
-      },
+      headers: headers,
       body: JSON.stringify({
         mainCatId: catId.mainCatId,
         subCatId: catId.subCatId,
@@ -67,10 +71,7 @@ const Editor = () => {
   const editHandler = () => {
     fetch(`${API.post}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token,
-      },
+      headers: headers,
       body: JSON.stringify({
         postId: location.state.postId,
         newTitle: title,

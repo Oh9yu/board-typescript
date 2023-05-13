@@ -7,10 +7,11 @@ import NavSignOutBtn from './NavBtn/NavSignOut';
 import NavProfile from './NavBtn/NavProfile';
 import NavAdmin from './NavBtn/NavAdmin';
 import Alert from './Alert/Alert';
+import getToken from '../../../utils/getToken';
 
 const SignStatus = () => {
-  const token = localStorage.getItem('TOKEN');
-  const isAdmin = token ? jwt_decode(token).isAdmin : null;
+  const token = getToken('TOKEN');
+  const isAdmin: boolean = token ? jwt_decode<any>(token).isAdmin : null;
 
   return (
     <Container>

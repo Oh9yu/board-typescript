@@ -1,4 +1,4 @@
-const getHTML = content => {
+const getHTML = (content: string) => {
   return { __html: content };
 };
 

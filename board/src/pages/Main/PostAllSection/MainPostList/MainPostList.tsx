@@ -3,7 +3,24 @@ import styled from 'styled-components';
 import useCreatedAt from '../../../../utils/hook/useCreatedAt';
 import TitleSection from './TitleSection';
 
-const MainPostList = ({ data }) => {
+interface Props {
+  accountId: string;
+  createdAt: string;
+  email: string;
+  likes: number;
+  mainCatId: string;
+  mainCatName: string;
+  name: string;
+  postId: string;
+  profileImage: string;
+  subCatId: string;
+  subCatName: string;
+  title: string;
+  updatedAt: string;
+  views: number;
+}
+
+const MainPostList = ({ data }: { data: Props }) => {
   const createdAt = useCreatedAt(data.createdAt);
 
   return (

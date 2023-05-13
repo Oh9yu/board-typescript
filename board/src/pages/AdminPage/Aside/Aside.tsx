@@ -3,19 +3,24 @@ import styled from 'styled-components';
 
 const AsideList = [{ name: 'UserList' }, { name: 'Category' }];
 
-const Aside = ({ page, setPage }) => {
+interface Props {
+  page: string;
+  asideClick: (pageName: string) => void;
+}
+
+const Aside = ({ page, asideClick }: Props) => {
   return (
     <Container>
-      {AsideList.map(e => {
+      {AsideList.map(d => {
         return (
           <ListBox
-            bgc={page === e.name ? '#9ab2eb' : '#fff'}
-            key={e.name}
+            bgc={page === d.name ? '#9ab2eb' : '#fff'}
+            key={d.name}
             onClick={() => {
-              setPage(e.name);
+              asideClick(d.name);
             }}
           >
-            {e.name}
+            {d.name}
           </ListBox>
         );
       })}
@@ -36,7 +41,7 @@ const Container = styled.div`
   border: 2px solid #738cd3;
 `;
 
-const ListBox = styled.div`
+const ListBox = styled.div<{ bgc: string }>`
   display: flex;
   justify-content: center;
   align-items: center;

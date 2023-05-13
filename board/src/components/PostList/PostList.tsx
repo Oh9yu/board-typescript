@@ -3,7 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useCreatedAt from '../../utils/hook/useCreatedAt';
 
-const PostList = ({ postId, title, name, views, likes, createdAt }) => {
+interface PostListType {
+  postId: string;
+  title: string;
+  name: string;
+  views: number;
+  likes: number;
+  createdAt: string;
+}
+
+const PostList = ({
+  postId,
+  title,
+  name,
+  views,
+  likes,
+  createdAt,
+}: PostListType) => {
   const navigate = useNavigate();
   const postTime = useCreatedAt(createdAt);
 
@@ -45,7 +61,7 @@ const Section = styled.section`
   width: 50%;
 `;
 
-const Text = styled.p`
+const Text = styled.p<{ width: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
