@@ -3,10 +3,19 @@ import styled from 'styled-components';
 import { API } from '../../../config/config';
 import CategoryList from '../CategoryList/CategoryList';
 
-const PostCategory = ({ mainCatId, name, statusHandler }) => {
-  const [category, setCategory] = useState([]);
+interface Props {
+  mainCatId: string;
+  name: string;
+  statusHandler: (name: string, id: string) => void;
+}
 
-  console.log('??', mainCatId);
+type CategoryData = {
+  subCatId: string;
+  subCatName: string;
+};
+
+const PostCategory = ({ mainCatId, name, statusHandler }: Props) => {
+  const [category, setCategory] = useState<CategoryData[]>([]);
 
   useEffect(() => {
     fetch(`${API.category}/sub?mainCatId=${mainCatId}`)

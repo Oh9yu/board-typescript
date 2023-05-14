@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const UserList = ({ name }) => {
+interface Props {
+  name: string;
+}
+const UserList = ({ name }: Props) => {
   return <User>{name}</User>;
 };
 

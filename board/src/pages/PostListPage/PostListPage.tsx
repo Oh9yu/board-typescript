@@ -5,6 +5,8 @@ import PostCategory from './PostCategory/PostCategory';
 import PostSection from './PostSection/PostSection';
 import Button from '../../components/Button/Button';
 
+type StatusHandlerType = (name: string, id: string) => void;
+
 const PostListPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,7 +20,7 @@ const PostListPage = () => {
     mainCatId: location.state.mainCatId,
   };
 
-  const statusHandler = (name, id) => {
+  const statusHandler: StatusHandlerType = (name, id) => {
     setStatus({ ...status, name: name, queryType: 'subCatId', subCatId: id });
   };
 

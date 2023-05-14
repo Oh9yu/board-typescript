@@ -2,9 +2,27 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import SignInForm from '../Form/SignInForm/SignInForm';
-import SignUpForm from '../Form/SignUpForm/SignUpForm.jtsx';
+import SignUpForm from '../Form/SignUpForm/SignUpForm';
 
-const SignContainer = ({ type, onClick, inputValue, onChangeInput }) => {
+type InputValue = {
+  name?: string;
+  email: string;
+  password: string;
+};
+
+type SignContainerProps = {
+  type: string;
+  onClick: () => void;
+  inputValue: InputValue;
+  onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const SignContainer = ({
+  type,
+  onClick,
+  inputValue,
+  onChangeInput,
+}: SignContainerProps) => {
   const location = useLocation();
   const pathname = location.pathname;
 

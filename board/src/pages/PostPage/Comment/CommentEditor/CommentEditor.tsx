@@ -3,8 +3,12 @@ import styled from 'styled-components';
 import getToken from '../../../../utils/getToken';
 import { API } from '../../../../config/config';
 
-const CommentEditor = ({ postId }) => {
-  const token = getToken();
+interface Props {
+  postId: string;
+}
+
+const CommentEditor = ({ postId }: Props) => {
+  const token = getToken('TOKEN') || '';
   const [inputValue, setInputValue] = useState('');
 
   const clickHandler = () => {
@@ -35,7 +39,6 @@ const CommentEditor = ({ postId }) => {
       )}
       <Section>
         <CommentInput
-          type="textarea"
           value={inputValue}
           onChange={e => {
             setInputValue(e.target.value);
@@ -65,7 +68,7 @@ const Container = styled.div`
   background-color: #eee;
 `;
 
-const Text = styled.p`
+const Text = styled.p<{ fontsize: number }>`
   padding: 5px;
   font-size: ${props => props.fontsize}px;
   color: ${props => props.color};

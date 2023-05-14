@@ -9,15 +9,45 @@ import PostLikes from './PostLikes/PostLikes';
 import Comment from './Comment/Comment';
 import PostEdit from './PostEdit/PostEdit';
 
+interface DataType {
+  post: PostType;
+  author: AuthorType;
+  user: UserType;
+}
+
+interface PostType {
+  subCatId: string;
+  title: string;
+  contents: string;
+  views: number;
+  createdAt: string;
+  updatedAt: string;
+  postId: string;
+  likes: number;
+  usersWhoLiked: string[];
+}
+
+interface AuthorType {
+  name: string;
+  email: string;
+  profileImage: string;
+  descriptions: string;
+  authorId: string;
+}
+
+interface UserType {
+  likeStatus: boolean;
+  deleteAllowed: boolean;
+  modifyAllowed: boolean;
+}
+
 const PostPage = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<DataType>();
   const location = useLocation();
-  const token = getToken();
+  const token = getToken('TOKEN') || '';
   const { id } = useParams();
-  // console.log(params);
 
   useEffect(() => {
-    // fetch(`${API.post}?postId=${location.state.postId}`, {
     fetch(`${API.post}?postId=${id}`, {
       headers: {
         Authorization: `${token}`,
@@ -28,28 +58,31 @@ const PostPage = () => {
   }, [id]);
   return (
     <Container>
-      <PostHeader
-        title={data.post?.title}
-        createdAt={data.post?.createdAt}
-        name={data.author?.name}
-        views={data.post?.views}
-      />
-      {data.user?.modifyAllowed && (
-        <PostEdit
-          title={data.post?.title}
-          contents={data.post?.contents}
-          postId={id}
+      {data && (
+        <PostHeader
+          title={data.post.title}
+          createdAt={data.post.createdAt}
+          name={data.author.name}
+          views={data.post.views}
         />
       )}
-      <PostContent content={data.post?.contents} />
-      <PostLikes
-        token={token}
-        postId={id}
-        likes={data.post?.likes}
-        likeStatus={data.user?.likeStatus}
-        usersWhoLiked={data.post?.usersWhoLiked}
-      />
-      <Comment comments={data.comments} postId={id} />
+      {data?.user.modifyAllowed && (
+        <PostEdit
+          title={data.post.title}
+          contents={data.post.contents}
+          postId={id || ''}
+        />
+      )}
+      <PostContent content={data?.post.contents} />
+      {data && (
+        <PostLikes
+          postId={id || ''}
+          likes={data.post.likes}
+          likeStatus={data.user.likeStatus}
+          usersWhoLiked={data.post.usersWhoLiked}
+        />
+      )}
+      <Comment />
     </Container>
   );
 };

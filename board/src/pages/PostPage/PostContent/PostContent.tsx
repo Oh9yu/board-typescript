@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
 
-const PostContent = ({ content }) => {
+const PostContent = ({ content }: any) => {
   return (
     <Container>
       <Content dangerouslySetInnerHTML={{ __html: content }} />

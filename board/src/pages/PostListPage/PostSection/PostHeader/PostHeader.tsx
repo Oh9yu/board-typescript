@@ -1,7 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const PostHeader = ({ title, name, views, likes, createdAt }) => {
+interface Props {
+  title: string;
+  name: string;
+  views: string;
+  likes: string;
+  createdAt: string;
+}
+
+const PostHeader = ({ title, name, views, likes, createdAt }: Props) => {
   return (
     <List>
       <Section>
@@ -35,7 +43,7 @@ const Section = styled.section`
   width: 50%;
 `;
 
-const Text = styled.p`
+const Text = styled.p<{ width: number }>`
   display: flex;
   justify-content: center;
   align-items: center;

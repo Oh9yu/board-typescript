@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
-const SignUpForm = ({ inputValue, onChangeInput }) => {
+type InputValue = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+type Props = {
+  inputValue: InputValue;
+  onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+const SignUpForm = ({ inputValue, onChangeInput }: Props) => {
   return (
     <Form>
       <Input

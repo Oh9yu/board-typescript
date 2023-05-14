@@ -3,14 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import SignContainer from './SignContainer/SignContainer';
 import { API } from '../../config/config';
 
+interface InputValue {
+  [key: string]: string;
+}
+
 const Signin = () => {
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState({
+  const [inputValue, setInputValue] = useState<InputValue>({
     email: '',
     password: '',
   });
 
-  const onChangeInput = e => {
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputValue({ ...inputValue, [name]: value });
   };

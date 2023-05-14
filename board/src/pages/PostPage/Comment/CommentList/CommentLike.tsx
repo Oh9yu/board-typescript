@@ -3,9 +3,15 @@ import styled from 'styled-components';
 import { API } from '../../../../config/config';
 import getToken from '../../../../utils/getToken';
 
-const CommentLike = ({ id, postId, likes }) => {
+interface Props {
+  id: string;
+  postId: string;
+  likes: number;
+}
+
+const CommentLike = ({ id, postId, likes }: Props) => {
   const [likeCount, setLikeCount] = useState(likes);
-  const token = getToken();
+  const token = getToken('TOKEN');
 
   const likeHandler = () => {
     fetch(`${API.likes}/comment`, {

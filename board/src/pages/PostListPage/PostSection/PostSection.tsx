@@ -4,8 +4,35 @@ import { API } from '../../../config/config';
 import PostList from '../../../components/PostList/PostList';
 import PostHeader from './PostHeader/PostHeader';
 
-const PostSection = ({ status, mainCatId, queryType }) => {
-  const [postData, setPostData] = useState([]);
+interface Props {
+  status: string | undefined;
+  mainCatId: string;
+  queryType: string | undefined;
+}
+interface DataType {
+  totalCount: number;
+  data: Data[];
+}
+
+interface Data {
+  accountId: string;
+  mainCatId: string;
+  subCatId: string;
+  title: string;
+  views: number;
+  createdAt: string;
+  updatedAt: string;
+  postId: string;
+  name: string;
+  email: string;
+  profileImage: string;
+  likes: number;
+  mainCatName: string;
+  subCatName: string;
+}
+
+const PostSection = ({ status, mainCatId, queryType }: Props) => {
+  const [postData, setPostData] = useState<DataType>();
 
   useEffect(() => {
     if (!queryType || queryType === undefined) return;
@@ -29,19 +56,20 @@ const PostSection = ({ status, mainCatId, queryType }) => {
         likes="좋아요"
         createdAt="날짜"
       />
-      {postData.data?.map(e => {
-        return (
-          <PostList
-            key={e.postId}
-            postId={e.postId}
-            title={e.title}
-            name={e.name}
-            views={e.views}
-            likes={e.likes}
-            createdAt={e.createdAt}
-          />
-        );
-      })}
+      {postData &&
+        postData.data.map(data => {
+          return (
+            <PostList
+              key={data.postId}
+              postId={data.postId}
+              title={data.title}
+              name={data.name}
+              views={data.views}
+              likes={data.likes}
+              createdAt={data.createdAt}
+            />
+          );
+        })}
     </Container>
   );
 };

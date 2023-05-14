@@ -1,7 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CategoryList = ({ categoryName, name, subCatId, statusHandler }) => {
+interface Props {
+  categoryName: string;
+  name: string;
+  subCatId: string;
+  statusHandler: (categoryName: string, subCatId: string) => void;
+}
+
+const CategoryList = ({
+  categoryName,
+  name,
+  subCatId,
+  statusHandler,
+}: Props) => {
   const bgc = name === categoryName ? '#5173c2' : 'transparent';
   const color = name === categoryName ? '#eee' : '#111';
 
@@ -20,7 +32,7 @@ const CategoryList = ({ categoryName, name, subCatId, statusHandler }) => {
 
 export default CategoryList;
 
-const List = styled.div`
+const List = styled.div<{ bgc: string }>`
   display: flex;
   justify-content: center;
   align-items: center;

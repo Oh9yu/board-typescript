@@ -4,7 +4,14 @@ import { API } from '../../../config/config';
 import LikeBtn from './LiikeBtn/LikeBtn';
 import LikeUser from './LikeUser/LikeUser';
 
-const PostLikes = ({ likes, likeStatus, postId, usersWhoLiked }) => {
+interface Props {
+  likes: number;
+  likeStatus: boolean;
+  postId: string;
+  usersWhoLiked: string[];
+}
+
+const PostLikes = ({ likes, likeStatus, postId, usersWhoLiked }: Props) => {
   const [isHover, setIsHover] = useState(false);
 
   return (

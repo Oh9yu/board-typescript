@@ -7,9 +7,15 @@ const like = { color: '#5173c2', img: 'images/like.png' };
 
 const unlike = { color: '#111', img: 'images/unlike.png' };
 
-const LikeBtn = ({ likes, likeStatus, postId }) => {
-  const token = getToken();
-  const [isLike, setIsLike] = useState({ likeStatus: '', likesCount: 0 });
+interface Props {
+  likes: number;
+  likeStatus: boolean;
+  postId: string;
+}
+
+const LikeBtn = ({ likes, likeStatus, postId }: Props) => {
+  const token = getToken('TOKEN');
+  const [isLike, setIsLike] = useState({ likeStatus: false, likesCount: 0 });
   const isStatus = isLike.likeStatus ? like : unlike;
 
   useEffect(() => {

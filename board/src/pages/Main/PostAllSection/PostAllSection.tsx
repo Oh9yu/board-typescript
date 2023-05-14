@@ -49,7 +49,6 @@ const PostAllSection = () => {
           setPage(page);
         }}
         page={page}
-        totalCount={data.totalCount}
         pageLength={Math.ceil(data.totalCount / 5)}
       />
     </Container>

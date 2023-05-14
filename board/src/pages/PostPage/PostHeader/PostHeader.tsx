@@ -3,7 +3,14 @@ import styled from 'styled-components';
 import useCreatedAt from '../../../utils/hook/useCreatedAt';
 import PostSubHeader from './PostSubHeader/PostSubHeader';
 
-const PostHeader = ({ title, createdAt, name, likes, views }) => {
+interface Props {
+  title: string;
+  createdAt: string;
+  name: string;
+  views: number;
+}
+
+const PostHeader = ({ title, createdAt, name, views }: Props) => {
   const postTime = useCreatedAt(createdAt);
 
   return (
@@ -16,7 +23,7 @@ const PostHeader = ({ title, createdAt, name, likes, views }) => {
           {postTime}
         </Text>
       </Header>
-      <PostSubHeader name={name} likes={likes} views={views} />
+      <PostSubHeader name={name} views={views} />
     </>
   );
 };
@@ -34,7 +41,7 @@ const Header = styled.div`
   border-bottom: 2px solid #7594dd;
 `;
 
-const Text = styled.div`
+const Text = styled.div<{ fontsize: number }>`
   font-size: ${props => props.fontsize}px;
   color: ${props => props.color};
 `;

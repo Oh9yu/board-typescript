@@ -5,8 +5,36 @@ import CommentList from './CommentList/CommentList';
 import CommentEditor from './CommentEditor/CommentEditor';
 import { useParams } from 'react-router-dom';
 
+interface DataType {
+  comment: CommentType;
+  author: AuthorType;
+  user: UserType;
+}
+
+interface CommentType {
+  contents: string;
+  createdAt: string;
+  updatedAt: string;
+  commentId: string;
+  likes: number;
+  usersWhoLiked?: string[];
+}
+
+interface AuthorType {
+  accountId: string;
+  name: string;
+  email: string;
+  profileImage?: string;
+}
+
+interface UserType {
+  likeStatus: boolean;
+  modifyAllowed: boolean;
+  deleteAllowed: boolean;
+}
+
 const Comment = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<DataType[]>([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -18,20 +46,21 @@ const Comment = () => {
   return (
     <Container>
       <CommentHeader>댓글</CommentHeader>
-      {data?.map(({ comment, author }) => {
-        return (
-          <CommentList
-            key={comment?.commentId}
-            postId={id}
-            id={comment?.commentId}
-            name={author?.name}
-            createdAt={comment?.createdAt}
-            contents={comment?.contents}
-            likes={comment?.likes}
-          />
-        );
-      })}
-      <CommentEditor postId={id} />
+      {data &&
+        data.map(({ comment, author }) => {
+          return (
+            <CommentList
+              key={comment?.commentId}
+              postId={id || ''}
+              id={comment?.commentId}
+              name={author?.name}
+              createdAt={comment?.createdAt}
+              contents={comment?.contents}
+              likes={comment?.likes}
+            />
+          );
+        })}
+      <CommentEditor postId={id || ''} />
     </Container>
   );
 };

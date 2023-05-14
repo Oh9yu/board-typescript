@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import UserList from './UserList/UserList';
 
-const LikeUser = ({ usersWhoLiked }) => {
+interface Props {
+  usersWhoLiked: string[];
+}
+
+const LikeUser = ({ usersWhoLiked }: Props) => {
   return (
     <Container>
       {usersWhoLiked?.map((name, idx) => {

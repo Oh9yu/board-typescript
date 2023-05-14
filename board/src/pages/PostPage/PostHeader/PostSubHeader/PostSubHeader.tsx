@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const PostSubHeader = ({ likes, views, name }) => {
+interface Props {
+  views: number;
+  name: string;
+}
+
+const PostSubHeader = ({ views, name }: Props) => {
   return (
     <Container>
       <Text fontsize={20}>{name}</Text>
@@ -23,7 +28,7 @@ const Container = styled.div`
   border-bottom: 1px solid #7594dd;
 `;
 
-const Text = styled.div`
+const Text = styled.div<{ fontsize: number }>`
   font-size: ${props => props.fontsize}px;
   color: ${props => props.color};
 `;

@@ -2,9 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import useCreatedAt from '../../../../utils/hook/useCreatedAt';
 import CommentUser from './CommentUser/CommentUser';
-import CommentLike from './CommentLike.jtsx';
+import CommentLike from './CommentLike';
 
-const CommentList = ({ name, id, postId, createdAt, contents, likes }) => {
+interface Props {
+  name: string;
+  id: string;
+  postId: string;
+  createdAt: string;
+  contents: string;
+  likes: number;
+}
+
+const CommentList = ({
+  name,
+  id,
+  postId,
+  createdAt,
+  contents,
+  likes,
+}: Props) => {
   const commentTime = useCreatedAt(createdAt);
 
   return (
@@ -31,7 +47,7 @@ const List = styled.div`
   border-bottom: 1px solid #c9d9f9;
 `;
 
-const Section = styled.div`
+const Section = styled.div<{ width: string; fontsize: number }>`
   display: flex;
   justify-content: space-between;
   align-items: center;

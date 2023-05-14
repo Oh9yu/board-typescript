@@ -4,9 +4,15 @@ import styled from 'styled-components';
 import { API } from '../../../config/config';
 import getToken from '../../../utils/getToken';
 
-const PostEdit = ({ title, contents, postId }) => {
-  const token = getToken();
-  const navigate = useNavigate('');
+interface Props {
+  title: string;
+  contents: any;
+  postId: string;
+}
+
+const PostEdit = ({ title, contents, postId }: Props) => {
+  const token = getToken('TOKEN') || '';
+  const navigate = useNavigate();
 
   const editHandler = () => {
     navigate('/editor', {
@@ -22,8 +28,10 @@ const PostEdit = ({ title, contents, postId }) => {
         body: JSON.stringify({ postId: postId }),
       })
         .then(res => res.json())
-        .then(res => alert(res.message))
-        .then(navigate('/'));
+        .then(res => {
+          alert(res.message);
+          navigate('/');
+        });
     }
   };
 

@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import UserModal from './UserModal';
 
-const CommentUser = ({ name }) => {
+interface Props {
+  name: string;
+}
+
+const CommentUser = ({ name }: Props) => {
   const [modal, setmodal] = useState(false);
 
   return (
