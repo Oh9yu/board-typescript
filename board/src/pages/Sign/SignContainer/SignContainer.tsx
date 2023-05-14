@@ -4,16 +4,10 @@ import styled from 'styled-components';
 import SignInForm from '../Form/SignInForm/SignInForm';
 import SignUpForm from '../Form/SignUpForm/SignUpForm';
 
-type InputValue = {
-  name?: string;
-  email: string;
-  password: string;
-};
-
 type SignContainerProps = {
   type: string;
   onClick: () => void;
-  inputValue: InputValue;
+  inputValue: any;
   onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 

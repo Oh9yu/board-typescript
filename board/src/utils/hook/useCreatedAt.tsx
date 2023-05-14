@@ -1,4 +1,4 @@
-const useCreatedAt = time => {
+const useCreatedAt = (time: any) => {
   const now = new Date();
   const postDate = new Date(time);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Delete = ({ value, onChangeHandler, onClick }) => {
+const Delete = ({ value, onChangeHandler, onClick }: any) => {
   return (
     <>
       <Input type="password" value={value} onChange={onChangeHandler} />

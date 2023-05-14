@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-const useOutSideClick = (ref, handler) => {
+const useOutSideClick = (ref: any, handler: any) => {
   useEffect(() => {
-    const close = event => {
+    const close = (event: any) => {
       if (!ref.current || ref.current.contains(event.target)) {
         return;
       }

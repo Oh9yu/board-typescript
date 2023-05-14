@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import useOutSideClick from '../../../../../utils/hook/useOutSideClick';
 
 const EditModal = () => {
-  useOutSideClick();
-
   return <Container></Container>;
 };
 

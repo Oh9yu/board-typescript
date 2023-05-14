@@ -1,6 +1,6 @@
-const getAlertCount = data => {
+const getAlertCount = (data: any) => {
   let num = 0;
-  data.map(doc => {
+  data.map((doc: any) => {
     if (doc?._id.readStatus === false) {
       num++;
     }

@@ -4,13 +4,9 @@ import styled from 'styled-components';
 import SignContainer from './SignContainer/SignContainer';
 import { API } from '../../config/config';
 
-interface InputValue {
-  [key: string]: string;
-}
-
 const Signup = () => {
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState<InputValue>({
+  const [inputValue, setInputValue] = useState<any>({
     name: '',
     email: '',
     password: '',

@@ -4,12 +4,12 @@ import ProfileImage from './ProfileImage/ProfileImage';
 import ProfileInForm from './ProfileInForm/ProfileInForm';
 import EditProfile from './EditProfile/EditProfile';
 
-const Profile = ({ userdata }) => {
+const Profile = ({ userdata }: any) => {
   console.log('userdata: ', userdata);
 
   return (
     <Container>
-      <ProfileImage img={userdata.profileImage} />
+      {/* <ProfileImage img={userdata.profileImage} /> */}
       <ProfileInForm
         username={userdata.name}
         userEmail={userdata.email}

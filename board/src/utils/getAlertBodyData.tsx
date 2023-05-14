@@ -1,7 +1,7 @@
-const getAlertBodyData = ({ data }) => {
-  const alertData = [];
+const getAlertBodyData = ({ data }: any) => {
+  const alertData: any = [];
 
-  data.map(({ accountId }) => {
+  data.map(({ accountId }: any) => {
     alertData.push(accountId);
   });
 

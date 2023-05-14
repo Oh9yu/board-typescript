@@ -6,8 +6,8 @@ import getToken from '../../utils/getToken';
 import PostList from '../../components/PostList/PostList';
 
 const UserPage = () => {
-  const [data, setData] = useState([]);
-  const token = getToken();
+  const [data, setData] = useState<any>([]);
+  const token = getToken('TOKEN') || '';
 
   useEffect(() => {
     fetch(`${API.userpage}?accountId=${''}`, {
@@ -23,21 +23,22 @@ const UserPage = () => {
         <Profile userdata={data} />
       </Section>
       <Section width={520}>
-        {data.posts?.map(e => {
-          return (
-            <PostList
-              key={e._id}
-              id={e.postId}
-              createdAt={e.createdAt}
-              views={e.views}
-              postId={e.postId}
-              title={e.title}
-              name={e.name}
-              likes={e.likes}
-              type="userpage"
-            />
-          );
-        })}
+        {data &&
+          data.posts.map((data: any) => {
+            return (
+              <PostList
+                key={data._id}
+                // id={data.postId || ''}
+                createdAt={data.createdAt}
+                views={data.views}
+                postId={data.postId}
+                title={data.title}
+                name={data.name}
+                likes={data.likes}
+                // type="userpage"
+              />
+            );
+          })}
       </Section>
     </Container>
   );
@@ -56,7 +57,7 @@ const Container = styled.div`
   border-radius: 8px;
   box-shadow: 0 0 5px #f1f4f7;
 `;
-const Section = styled.section`
+const Section = styled.section<{ width: number }>`
   margin: 10px;
   padding: 30px 10px;
   width: ${props => props.width}px;

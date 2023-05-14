@@ -1,7 +1,7 @@
 const getPagenationList = (pageCounts: number) => {
   // console.log(pageCounts);
   const totalArray = Array(pageCounts)
-    .fill()
+    .fill(undefined)
     .map((_, index) => index + 1);
 
   const pageArray = [];

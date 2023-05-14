@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ProfileInForm = ({ username, userEmail, description }) => {
+const ProfileInForm = ({ username, userEmail, description }: any) => {
   console.log(username);
 
   return (
     <UserInform>
       <Text fontsize={24}>{username}</Text>
       <Text fontsize={18}>{userEmail}</Text>
-      <Desc>{description ? { description } : 'Hello'}</Desc>
+      {/* <Desc>{description ? { description } : 'Hello'}</Desc> */}
     </UserInform>
   );
 };
@@ -22,7 +22,7 @@ const UserInform = styled.div`
   margin-top: 10px;
 `;
 
-const Text = styled.p`
+const Text = styled.p<{ fontsize: number }>`
   min-height: 20px;
   margin-top: 5px;
   color: #555;
