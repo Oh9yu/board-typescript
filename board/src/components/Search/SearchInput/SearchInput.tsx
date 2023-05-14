@@ -26,4 +26,9 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
+  @media screen and (max-width: 600px) {
+    max-width: 100px;
+    height: 30px;
+    font-size: 12px;
+  }
 `;

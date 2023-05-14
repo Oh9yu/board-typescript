@@ -17,8 +17,11 @@ export default HotPostSection;
 const Container = styled.div`
   display: flex;
   /* justify-content: space-evenly; */
-  width: 100%;
+  width: 95%;
   gap: 20px;
-  height: 280px;
+  height: 200px;
   margin-top: 20px;
+  @media screen and (max-width: 600px) {
+    height: 180px;
+  }
 `;

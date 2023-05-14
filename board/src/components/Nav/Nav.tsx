@@ -31,7 +31,6 @@ const Container = styled.div`
   width: 100%;
   justify-content: center;
   background-color: #c9d9f9;
-  padding: 0px 100px;
   border-bottom: 1px solid #7594dd;
 `;
 
@@ -39,17 +38,23 @@ const Section = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 1024px;
   height: 50px;
 `;
 
 const Logo = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const MainLogo = styled.img`
+  margin-left: 5px;
   width: 36px;
   height: 36px;
   cursor: pointer;
+  @media screen and (max-width: 600px) {
+    width: 30px;
+    height: 30px;
+  }
 `;

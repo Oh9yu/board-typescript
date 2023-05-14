@@ -13,4 +13,7 @@ const Container = styled.div`
   border: 2px solid #7594dd;
   border-radius: 5px;
   background-color: #fff;
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+  }
 `;

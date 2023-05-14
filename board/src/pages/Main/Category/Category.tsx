@@ -43,4 +43,7 @@ const Container = styled.div`
   height: max-content;
   background-color: #9ab2eb;
   border-bottom: 2px solid #7594dd;
+  @media screen and (max-width: 600px) {
+    padding: 4px 5px;
+  }
 `;

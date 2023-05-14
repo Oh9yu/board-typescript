@@ -69,4 +69,9 @@ const ListHeader = styled.div`
   font-size: 16px;
   border: 2px solid #ccc;
   border-radius: 5px;
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+    padding: 8px;
+    margin-top: 10px;
+  }
 `;

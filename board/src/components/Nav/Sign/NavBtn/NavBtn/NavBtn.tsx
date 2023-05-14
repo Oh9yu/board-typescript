@@ -6,27 +6,15 @@ interface ButtonProps {
   width: number;
   height: number;
   fontSize: number;
-  borderColor: string;
-  hoverColor: string;
   onClick: () => void;
 }
 
-const NavBtn = ({
-  width,
-  height,
-  fontSize,
-  borderColor,
-  hoverColor,
-  btnName,
-  onClick,
-}: ButtonProps) => {
+const NavBtn = ({ width, height, fontSize, btnName, onClick }: ButtonProps) => {
   return (
     <Container
       width={width}
       height={height}
       fontSize={fontSize}
-      borderColor={borderColor}
-      hoverColor={hoverColor}
       onClick={onClick}
     >
       {btnName}
@@ -42,11 +30,18 @@ const Container = styled.button<Omit<ButtonProps, 'btnName'>>`
   margin: 5px;
   font-size: ${props => props.fontSize}px;
   background-color: transparent;
-  border: 2px solid ${props => props.borderColor};
+  border: 2px solid #7594dd;
   border-radius: 5px;
   transition: 0.2s;
   &:hover {
-    background-color: ${props => props.borderColor};
+    background-color: #5173c2;
     transition: 0.2s;
+  }
+
+  @media screen and (min-width: 200px) and (max-width: 600px) {
+    width: max-content;
+    height: max-content;
+    padding: 6px;
+    font-size: 12px;
   }
 `;

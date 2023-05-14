@@ -51,18 +51,18 @@ const TitleSection = ({ data }: { data: Props }) => {
     <Container>
       <Img src={img} />
       <ColumnWrapper>
-        <Text Fontsize={16} onClick={titleHandler}>
+        <Text fontSize={16} onClick={titleHandler}>
           {data.title}
         </Text>
         <Wrapper>
-          <Text Fontsize={12} color="#777" onClick={mainHandler}>
+          <Text fontSize={12} color="#777" onClick={mainHandler}>
             {data.mainCatName}
           </Text>
-          <Text Fontsize={12} color="#777" onClick={subHandler}>
+          <Text fontSize={12} color="#777" onClick={subHandler}>
             {data.subCatName}
           </Text>
         </Wrapper>
-        <Text Fontsize={12}>{data.name}</Text>
+        <Text fontSize={12}>{data.name}</Text>
       </ColumnWrapper>
     </Container>
   );
@@ -84,10 +84,10 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-const Text = styled.p<{ Fontsize: number }>`
+const Text = styled.p<{ fontSize: number }>`
   margin-right: 8px;
   width: max-content;
-  font-size: ${props => props.Fontsize}px;
+  font-size: ${props => props.fontSize}px;
   color: ${props => props.color};
   padding: 2px;
   border-radius: 3px;

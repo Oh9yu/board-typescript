@@ -33,4 +33,7 @@ const List = styled.div`
     background-color: #738cd3;
     transition: 0.2s;
   }
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+  }
 `;

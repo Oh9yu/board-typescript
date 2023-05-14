@@ -84,6 +84,9 @@ const Img = styled.img`
     transition: 0.3s;
     background-color: #afc9ff;
   }
+  @media screen and (max-width: 600px) {
+    width: 30px;
+  }
 `;
 
 const AlertCount = styled.div`
@@ -111,9 +114,15 @@ const AlertSection = styled.section`
   width: 300px;
   padding: 10px;
   top: 55px;
-  left: 0px;
+  right: -150px;
   z-index: 1;
   border: 2px solid #afc9ff;
   border-radius: 5px;
   background-color: #f9fbff;
+  @media screen and (max-width: 600px) {
+    width: 200px;
+    padding: 5px;
+    top: 40px;
+    right: -120px;
+  }
 `;

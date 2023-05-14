@@ -15,8 +15,6 @@ const NavProfile = () => {
       width={80}
       height={40}
       fontSize={16}
-      borderColor="#7594dd"
-      hoverColor="#5173c2"
       onClick={clickHandler}
     />
   );
