@@ -1,13 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import LikesCountPosts from './LikesCountPosts/LikesCountPosts';
 import ViewCountPosts from './ViewsCountPosts/ViewCountPosts';
+import { API } from '../../../config/config';
+
+interface DataType {
+  topViewPosts: TopViewPosts[];
+  topLikePosts: TopLikePosts[];
+}
+
+interface TopViewPosts {
+  _id: string;
+  accountId: string;
+  mainCatId: string;
+  subCatId: string;
+  title: string;
+  contents: string;
+  views: number;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+interface TopLikePosts {
+  accountId: string;
+  title: string;
+  views: number;
+  createdAt: string;
+  postId: string;
+  likes: number;
+}
 
 const HotPostSection = () => {
+  const [data, setData] = useState<DataType>();
+
+  useEffect(() => {
+    fetch(`${API.post}/top`)
+      .then(res => res.json())
+      .then(data => setData(data));
+  }, []);
+
   return (
     <Container>
-      <LikesCountPosts />
-      <ViewCountPosts />
+      <ViewCountPosts data={data?.topViewPosts} />
+      <LikesCountPosts data={data?.topLikePosts} />
     </Container>
   );
 };
@@ -21,7 +57,9 @@ const Container = styled.div`
   gap: 20px;
   height: 200px;
   margin-top: 20px;
-  @media screen and (max-width: 600px) {
-    height: 180px;
+  @media screen and (max-width: 750px) {
+    height: max-content;
+    gap: 10px;
+    flex-direction: column;
   }
 `;

@@ -114,4 +114,10 @@ const SubCat = styled.div`
   width: 180px;
   height: 50px;
   font-size: 18px;
+  @media screen and (max-width: 600px) {
+    padding-left: 20px;
+    top: 5px;
+    justify-content: space-around;
+    font-size: 14px;
+  }
 `;
