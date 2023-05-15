@@ -4,14 +4,29 @@ import styled from 'styled-components';
 type Props = {
   value: any;
   setSearchInput: Dispatch<SetStateAction<string>>;
+  focusHandler: () => void;
+  blurHandler: () => void;
 };
 
-const SearchInput = ({ value, setSearchInput }: Props) => {
+const SearchInput = ({
+  value,
+  setSearchInput,
+  focusHandler,
+  blurHandler,
+}: Props) => {
   const searchInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
   };
 
-  return <Input type="text" value={value} onChange={searchInputHandler} />;
+  return (
+    <Input
+      type="text"
+      value={value}
+      onChange={searchInputHandler}
+      onFocus={focusHandler}
+      onBlur={blurHandler}
+    />
+  );
 };
 
 export default SearchInput;
@@ -23,11 +38,12 @@ const Input = styled.input`
   border: 2px solid #7594dd;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  width: 100%; /* 초기 너비 설정 */
   &:focus {
     outline: none;
   }
   @media screen and (max-width: 600px) {
-    max-width: 100px;
+    max-width: 220px;
     height: 30px;
     font-size: 12px;
   }

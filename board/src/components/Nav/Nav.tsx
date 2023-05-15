@@ -26,6 +26,7 @@ const Nav = () => {
 export default Nav;
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   width: 100%;

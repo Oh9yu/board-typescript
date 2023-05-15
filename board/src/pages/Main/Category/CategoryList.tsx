@@ -34,6 +34,6 @@ const List = styled.div`
     transition: 0.2s;
   }
   @media screen and (max-width: 600px) {
-    font-size: 12px;
+    font-size: 14px;
   }
 `;
