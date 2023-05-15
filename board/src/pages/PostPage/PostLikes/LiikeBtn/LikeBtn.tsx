@@ -69,15 +69,21 @@ const LikesBtn = styled.div`
   border: 2px solid ${props => props.color};
   border-radius: 5px;
   cursor: pointer;
-
   &:hover {
     background-color: #c9d9f9;
     transition: 0.2s;
+  }
+  @media screen and (max-width: 600px) {
+    width: 100px;
+    height: 50px;
   }
 `;
 
 const LikeImg = styled.img`
   width: 40px;
+  @media screen and (max-width: 600px) {
+    width: 30px;
+  }
 `;
 
 const Text = styled.p`

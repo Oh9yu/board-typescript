@@ -79,4 +79,7 @@ export default PostSection;
 const Container = styled.div`
   width: 80%;
   height: 600px;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;

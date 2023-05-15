@@ -6,8 +6,8 @@ const ProfileInForm = ({ username, userEmail, description }: any) => {
 
   return (
     <UserInform>
-      <Text fontsize={24}>{username}</Text>
-      <Text fontsize={18}>{userEmail}</Text>
+      <Text fontSize={24}>{username}</Text>
+      <Text fontSize={18}>{userEmail}</Text>
       {/* <Desc>{description ? { description } : 'Hello'}</Desc> */}
     </UserInform>
   );
@@ -22,11 +22,11 @@ const UserInform = styled.div`
   margin-top: 10px;
 `;
 
-const Text = styled.p<{ fontsize: number }>`
+const Text = styled.p<{ fontSize: number }>`
   min-height: 20px;
   margin-top: 5px;
   color: #555;
-  font-size: ${props => props.fontsize}px;
+  font-size: ${props => props.fontSize}px;
 `;
 const Desc = styled.div`
   display: flex;

@@ -81,4 +81,7 @@ const CommentHeader = styled.div`
   font-size: 12px;
   border: 2px solid #c9d9f9;
   border-radius: 5px;
+  @media screen and (max-width: 600px) {
+    padding: 10px 15px;
+  }
 `;

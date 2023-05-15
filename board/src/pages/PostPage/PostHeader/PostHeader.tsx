@@ -16,10 +16,10 @@ const PostHeader = ({ title, createdAt, name, views }: Props) => {
   return (
     <>
       <Header>
-        <Text fontsize={20} color="#333">
+        <Text fontSize={20} mobile={16} color="#333">
           {title}
         </Text>
-        <Text fontsize={16} color="#777">
+        <Text fontSize={16} mobile={14} color="#777">
           {postTime}
         </Text>
       </Header>
@@ -41,7 +41,10 @@ const Header = styled.div`
   border-bottom: 2px solid #7594dd;
 `;
 
-const Text = styled.div<{ fontsize: number }>`
-  font-size: ${props => props.fontsize}px;
+const Text = styled.div<{ fontSize: number; mobile: number }>`
+  font-size: ${props => props.fontSize}px;
   color: ${props => props.color};
+  @media screen and (max-width: 600px) {
+    font-size: ${props => props.mobile}px;
+  }
 `;

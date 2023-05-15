@@ -84,6 +84,9 @@ const Section = styled.section`
   width: 1024px;
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const Title = styled.div`
@@ -95,6 +98,10 @@ const Title = styled.div`
   font-size: 36px;
   color: #333;
   cursor: pointer;
+  @media screen and (max-width: 600px) {
+    height: 50px;
+    font-size: 18px;
+  }
 `;
 
 const SubCat = styled.div`

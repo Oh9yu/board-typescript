@@ -45,6 +45,9 @@ const Container = styled.div`
   /* width: 1024px; */
   margin-top: 8px;
   border-bottom: 2px solid #ddd;
+  @media screen and (max-width: 600px) {
+    margin-top: 5px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -65,4 +68,8 @@ const ColumnSection = styled.section`
 const Img = styled.img`
   width: ${props => props.width}px;
   height: ${props => props.height}px;
+  @media screen and (max-width: 600px) {
+    width: 20px;
+    height: 20px;
+  }
 `;

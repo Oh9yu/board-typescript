@@ -68,4 +68,8 @@ const Text = styled.p<{ width: number }>`
   width: ${props => props.width}%;
   font-size: 14px;
   cursor: pointer;
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+    width: max-content;
+  }
 `;

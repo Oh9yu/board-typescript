@@ -72,6 +72,7 @@ export default TitleSection;
 
 const Container = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const ColumnWrapper = styled.div`
@@ -95,10 +96,18 @@ const Text = styled.p<{ fontSize: number }>`
   &:hover {
     background-color: #ddd;
   }
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+    padding: 1px;
+  }
 `;
 
 const Img = styled.img`
   width: 60px;
   height: 60px;
   cursor: pointer;
+  @media screen and (max-width: 600px) {
+    width: 48px;
+    height: 48px;
+  }
 `;

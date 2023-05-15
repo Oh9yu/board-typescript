@@ -9,9 +9,9 @@ interface Props {
 const PostSubHeader = ({ views, name }: Props) => {
   return (
     <Container>
-      <Text fontsize={20}>{name}</Text>
+      <Text fontSize={20}>{name}</Text>
       <Section>
-        <Text fontsize={14}>조회수 {views}</Text>
+        <Text fontSize={14}>조회수 {views}</Text>
       </Section>
     </Container>
   );
@@ -28,9 +28,12 @@ const Container = styled.div`
   border-bottom: 1px solid #7594dd;
 `;
 
-const Text = styled.div<{ fontsize: number }>`
-  font-size: ${props => props.fontsize}px;
+const Text = styled.div<{ fontSize: number }>`
+  font-size: ${props => props.fontSize}px;
   color: ${props => props.color};
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+  }
 `;
 
 const Section = styled.div`

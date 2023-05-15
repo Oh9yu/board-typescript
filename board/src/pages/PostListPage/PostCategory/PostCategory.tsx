@@ -46,7 +46,13 @@ const ListSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 180px;
+  width: 180px;
   height: 600px;
   background-color: #c9d9f9;
+  @media screen and (max-width: 600px) {
+    flex-direction: row;
+    padding: 5px;
+    width: 100%;
+    height: max-content;
+  }
 `;

@@ -13,13 +13,23 @@ const PostHeader = ({ title, name, views, likes, createdAt }: Props) => {
   return (
     <List>
       <Section>
-        <Text width={50}>{title}</Text>
+        <Text width={50} mobile={50}>
+          {title}
+        </Text>
       </Section>
       <Section>
-        <Text width={20}>{name}</Text>
-        <Text width={40}>{createdAt}</Text>
-        <Text width={15}>{views}</Text>
-        <Text width={15}>{likes}</Text>
+        <Text width={20} mobile={25}>
+          {name}
+        </Text>
+        <Text width={40} mobile={35}>
+          {createdAt}
+        </Text>
+        <Text width={15} mobile={20}>
+          {views}
+        </Text>
+        <Text width={15} mobile={20}>
+          {likes}
+        </Text>
       </Section>
     </List>
   );
@@ -43,10 +53,14 @@ const Section = styled.section`
   width: 50%;
 `;
 
-const Text = styled.p<{ width: number }>`
+const Text = styled.p<{ width: number; mobile: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: ${props => props.width}%;
   font-size: 16px;
+  @media screen and (max-width: 750px) {
+    width: ${props => props.mobile}%;
+    font-size: 12px;
+  }
 `;

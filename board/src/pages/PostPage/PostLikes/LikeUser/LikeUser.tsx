@@ -30,4 +30,8 @@ const Container = styled.div`
   border: 2px solid #7594dd;
   border-radius: 5px;
   overflow: scroll;
+  @media screen and (max-width: 600px) {
+    width: 80px;
+    right: -80px;
+  }
 `;

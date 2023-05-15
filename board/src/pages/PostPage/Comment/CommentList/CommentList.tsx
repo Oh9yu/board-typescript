@@ -25,16 +25,14 @@ const CommentList = ({
 
   return (
     <List>
-      <Section width="100%" fontsize={12}>
+      <Section width="100%" fontSize={12}>
         <CommentUser name={name} />
-        <Section width="150px" fontsize={12}>
+        <Section width="150px" fontSize={12}>
           {commentTime}
           <CommentLike id={id} postId={postId} likes={likes} />
         </Section>
       </Section>
-      <Section width="100%" fontsize={16}>
-        {contents}
-      </Section>
+      <ContentSection>{contents}</ContentSection>
     </List>
   );
 };
@@ -47,11 +45,16 @@ const List = styled.div`
   border-bottom: 1px solid #c9d9f9;
 `;
 
-const Section = styled.div<{ width: string; fontsize: number }>`
+const Section = styled.div<{ width: string; fontSize: number }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: ${props => props.width};
-  font-size: ${props => props.fontsize}px;
+  font-size: ${props => props.fontSize}px;
   color: #666;
+`;
+
+const ContentSection = styled.div`
+  padding-top: 12px;
+  font-size: 12px;
 `;

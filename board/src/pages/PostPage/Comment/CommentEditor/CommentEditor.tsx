@@ -29,11 +29,11 @@ const CommentEditor = ({ postId }: Props) => {
 
   return (
     <Container>
-      <Text fontsize={12} color="#333">
+      <Text fontSize={12} color="#333">
         댓글쓰기
       </Text>
       {!token && (
-        <Text fontsize={10} color="red">
+        <Text fontSize={10} color="red">
           로그인이 필요한 서비스입니다
         </Text>
       )}
@@ -68,9 +68,9 @@ const Container = styled.div`
   background-color: #eee;
 `;
 
-const Text = styled.p<{ fontsize: number }>`
+const Text = styled.p<{ fontSize: number }>`
   padding: 5px;
-  font-size: ${props => props.fontsize}px;
+  font-size: ${props => props.fontSize}px;
   color: ${props => props.color};
 `;
 
@@ -86,6 +86,10 @@ const CommentInput = styled.textarea`
   &:focus {
     outline: none;
     border-color: #7594dd;
+  }
+  @media screen and (max-width: 600px) {
+    width: 600px;
+    height: 50px;
   }
 `;
 
@@ -103,4 +107,9 @@ const Btn = styled.button`
   background-color: #c9d9f9;
   border: 2px solid #7594dd;
   cursor: pointer;
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+    width: 60px;
+    height: 48px;
+  }
 `;

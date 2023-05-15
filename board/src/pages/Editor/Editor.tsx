@@ -112,7 +112,7 @@ export default Editor;
 
 const Container = styled.div`
   margin: auto;
-  width: 1024px;
+  max-width: 1024px;
 `;
 
 const Title = styled.div`
@@ -140,7 +140,7 @@ const Input = styled.input`
 
 const StyledQuill = styled(ReactQuill)`
   margin: auto;
-  width: 1024px;
+  max-width: 1024px;
   height: 500px;
 
   .ql-toolbar {
