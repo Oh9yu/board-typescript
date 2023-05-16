@@ -3,10 +3,11 @@ import { styled } from 'styled-components';
 import ResultList from './ResultList';
 
 interface Props {
-  isfocus: any;
+  isfocus: boolean;
   data: any[] | undefined;
+  keyFocus: number;
 }
-const PreviewResult = ({ isfocus, data }: Props) => {
+const PreviewResult = ({ isfocus, data, keyFocus }: Props) => {
   const [height, setHeight] = useState(0);
   const [display, setDisplay] = useState('none');
 
@@ -30,7 +31,9 @@ const PreviewResult = ({ isfocus, data }: Props) => {
       {height > 0 &&
         data &&
         data.map((data, idx) => {
-          return <ResultList key={idx} title={data} />;
+          return (
+            <ResultList keyFocus={keyFocus === idx} key={idx} title={data} />
+          );
         })}
     </Container>
   );

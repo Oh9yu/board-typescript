@@ -5,19 +5,22 @@ interface Props {
   title: string[];
 }
 
-const ResultList = ({ title }: any) => {
-  return <Post>{title}</Post>;
+const ResultList = ({ title, keyFocus }: any) => {
+  return <Post keyfocus={keyFocus}>{title}</Post>;
 };
 
 export default ResultList;
 
-const Post = styled.div`
+const Post = styled.div<{ keyfocus: boolean }>`
   margin: 5px;
   font-size: 14px;
   width: 340px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  background-color: ${({ keyfocus }) => {
+    return keyfocus ? '#ddd' : '#fff';
+  }};
   cursor: pointer;
   &:hover {
     background-color: #f0f0f0;

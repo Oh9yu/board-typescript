@@ -6,6 +6,7 @@ type Props = {
   setSearchInput: Dispatch<SetStateAction<string>>;
   focusHandler: () => void;
   blurHandler: () => void;
+  keypressHandler: (e: React.KeyboardEvent<HTMLDivElement>) => void;
 };
 
 const SearchInput = ({
@@ -13,6 +14,7 @@ const SearchInput = ({
   setSearchInput,
   focusHandler,
   blurHandler,
+  keypressHandler,
 }: Props) => {
   const searchInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
@@ -25,6 +27,7 @@ const SearchInput = ({
       onChange={searchInputHandler}
       onFocus={focusHandler}
       onBlur={blurHandler}
+      onKeyDown={keypressHandler}
     />
   );
 };
