@@ -34,17 +34,15 @@ export default SearchInput;
 const Input = styled.input`
   padding-left: 5px;
   height: 36px;
-  font-size: 16px;
+  font-size: 12px;
   border: 2px solid #7594dd;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  width: 100%; /* 초기 너비 설정 */
+  width: 100%;
   &:focus {
     outline: none;
   }
-  @media screen and (max-width: 600px) {
-    max-width: 220px;
+  @media screen and (max-width: 700px) {
     height: 30px;
-    font-size: 12px;
   }
 `;

@@ -21,7 +21,7 @@ const Button = styled.button`
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   background-color: #7594dd;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     width: 30px;
     height: 30px;
     font-size: 12px;

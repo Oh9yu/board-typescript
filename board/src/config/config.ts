@@ -20,5 +20,6 @@ const API = {
   admin: `${URL}:${AUTH}/auth/admin`,
   likes: `${URL}:${POST}/nb/like`,
   alert: `${URL}:${POST}/nb/alert`,
+  search: `${URL}:${POST}/nb/search`,
 };
 export { API };
