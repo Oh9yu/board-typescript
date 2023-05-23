@@ -3,23 +3,25 @@ import { styled } from 'styled-components';
 
 interface Props {
   title: string[];
+  keyFocus: boolean;
 }
 
-const ResultList = ({ title, keyFocus }: any) => {
-  return <Post keyfocus={keyFocus}>{title}</Post>;
+const ResultList = ({ title, keyFocus }: Props) => {
+  console.log('@@@@@@', keyFocus);
+  return <Post iskeyfocus={keyFocus.toString()}>{title}</Post>;
 };
 
 export default ResultList;
 
-const Post = styled.div<{ keyfocus: boolean }>`
+const Post = styled.div<{ iskeyfocus: string }>`
   margin: 5px;
   font-size: 14px;
   width: 340px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-color: ${({ keyfocus }) => {
-    return keyfocus ? '#ddd' : '#fff';
+  background-color: ${({ iskeyfocus }) => {
+    return iskeyfocus === 'true' ? '#ddd' : '#fff';
   }};
   cursor: pointer;
   &:hover {

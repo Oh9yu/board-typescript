@@ -5,7 +5,7 @@ import ResultList from './ResultList';
 interface Props {
   isfocus: boolean;
   data: any[] | undefined;
-  keyFocus: number;
+  keyFocus: any;
 }
 const PreviewResult = ({ isfocus, data, keyFocus }: Props) => {
   const [height, setHeight] = useState(0);

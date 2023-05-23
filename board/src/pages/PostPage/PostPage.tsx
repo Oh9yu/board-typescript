@@ -43,7 +43,6 @@ interface UserType {
 
 const PostPage = () => {
   const [data, setData] = useState<DataType>();
-  const location = useLocation();
   const token = getToken('TOKEN') || '';
   const { id } = useParams();
 

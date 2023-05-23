@@ -4,12 +4,43 @@ import SearchInput from './SearchInput/SearchInput';
 import SearchBtn from './SearchBtn/SearchBtn';
 import PreviewResult from './PreviewResult/PreviewResult';
 import { API } from '../../config/config';
+import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
+  const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState('');
   const [isFocus, setIsFocus] = useState(false);
   const [data, setData] = useState<any>([]);
   const [keyFocus, setKeyFocus] = useState(0);
+
+  const focusHandler = () => {
+    setIsFocus(true);
+  };
+  const blurHandler = () => {
+    setIsFocus(false);
+  };
+
+  const searchHandler = () => {
+    if (searchInput.length > 3) return;
+    navigate(`/result/${searchInput}`);
+  };
+
+  const keypressHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (keyFocus >= data.length - 1) {
+        setKeyFocus(0);
+      } else setKeyFocus(keyFocus + 1);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (keyFocus <= 0) {
+        setKeyFocus(data.length - 1);
+      } else setKeyFocus(keyFocus - 1);
+    } else if (e.key === 'Enter') {
+      navigate(`/result/${data[keyFocus]}`);
+      setSearchInput('');
+    }
+  };
 
   useEffect(() => {
     if (!searchInput) {
@@ -35,33 +66,8 @@ const Search = () => {
     return () => clearTimeout(timeout);
   }, [searchInput]);
 
-  const focusHandler = () => {
-    setIsFocus(true);
-  };
-  const blurHandler = () => {
-    setIsFocus(false);
-  };
-
-  const searchHandler = () => {
-    console.log('click event');
-  };
-
-  const keypressHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (keyFocus >= data.length - 1) {
-        setKeyFocus(0);
-      } else setKeyFocus(keyFocus + 1);
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (keyFocus <= 0) {
-        setKeyFocus(data.length - 1);
-      } else setKeyFocus(keyFocus - 1);
-    }
-  };
-
   return (
-    <Container isfocus={isFocus}>
+    <Container isfocus={isFocus.toString()}>
       <SearchInput
         value={searchInput}
         setSearchInput={setSearchInput}
@@ -70,18 +76,16 @@ const Search = () => {
         keypressHandler={keypressHandler}
       />
       <SearchBtn onClick={searchHandler} />
-      {isFocus && (
-        <PreviewResult isfocus={isFocus} data={data} keyFocus={keyFocus} />
-      )}
+      {isFocus && <PreviewResult isfocus data={data} keyFocus={keyFocus} />}
     </Container>
   );
 };
 
 export default Search;
 
-const Container = styled.div<{ isfocus: any }>`
+const Container = styled.div<{ isfocus: string }>`
   display: flex;
-  width: ${props => (props.isfocus ? 400 : 200)}px;
+  width: ${props => (props.isfocus === 'true' ? 400 : 200)}px;
   align-items: center;
   margin-left: 10px;
   transition: all 0.1s ease-in-out;

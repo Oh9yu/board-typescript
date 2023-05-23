@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SignStatus from './Sign/SignStatus';
 import Search from '../Search/Search';
 
 const Nav = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const gotoMain = () => {
     navigate('/');
   };

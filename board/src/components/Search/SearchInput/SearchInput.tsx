@@ -28,6 +28,7 @@ const SearchInput = ({
       onFocus={focusHandler}
       onBlur={blurHandler}
       onKeyDown={keypressHandler}
+      placeholder="3글자 이상"
     />
   );
 };

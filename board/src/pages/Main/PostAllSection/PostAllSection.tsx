@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { API } from '../../../config/config';
+import { useQuery } from '@tanstack/react-query';
 import MainPostList from './MainPostList/MainPostList';
 import Pagenation from '../../../components/Pagenation/Pagenation';
 
@@ -26,22 +27,32 @@ interface DataType {
   data: Data[];
 }
 
+const fetchPosts = (currentPage: number) => {
+  return fetch(`${API.post}/list?page=${currentPage}`).then(res => res.json());
+};
+
 const PostAllSection = () => {
-  const [data, setData] = useState<DataType>();
+  // const [data, setData] = useState<DataType>();
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    fetch(`${API.post}/list?page=${page}`)
-      .then(res => res.json())
-      .then(data => setData(data));
-  }, [page]);
+  const { data } = useQuery(['postLists', page], () => fetchPosts(page), {
+    keepPreviousData: true,
+  });
+
+  // console.log(querydata.data);
+
+  // useEffect(() => {
+  //   fetch(`${API.post}/list?page=${page}`)
+  //     .then(res => res.json())
+  //     .then(data => setData(data));
+  // }, [page]);
 
   if (!data) return <div>로딩</div>;
 
   return (
     <Container>
       <ListHeader>전체글 보기</ListHeader>
-      {data.data.map(data => {
+      {data.data.map((data: any) => {
         return <MainPostList key={data.postId} data={data} />;
       })}
       <Pagenation
