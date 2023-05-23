@@ -6,6 +6,9 @@ import Button from '../../components/Button/Button';
 import getToken from '../../utils/getToken';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { API } from '../../config/config';
+import { useMutation } from '@tanstack/react-query';
+import postFetch from '../../utils/dataFetch/postFetch';
+import editFetch from '../../utils/dataFetch/editFetch';
 
 const toolbarModule = [
   ['bold', 'italic', 'underline'],
@@ -20,7 +23,7 @@ const toolbarModule = [
 ];
 
 const Editor = () => {
-  const token = getToken('TOKEN');
+  const token = getToken('TOKEN') || '';
   const navigate = useNavigate();
   const location = useLocation();
   const isEditMode = {
@@ -51,36 +54,32 @@ const Editor = () => {
     setContents(value);
   };
 
-  const postHandler = () => {
-    fetch(`${API.post}`, {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify({
-        mainCatId: catId.mainCatId,
-        subCatId: catId.subCatId,
-        title: title,
-        contents: contents,
-      }),
-    })
-      .then(response => response.json())
-      .then(res => alert(res.message));
-    navigate('/');
-  };
+  const postMutaition = useMutation(() => {
+    return postFetch(`${API.post}`, token, {
+      mainCatId: catId.mainCatId,
+      subCatId: catId.subCatId,
+      title: title,
+      contents: contents,
+    });
+  });
 
-  const editHandler = () => {
-    fetch(`${API.post}`, {
-      method: 'PATCH',
-      headers: headers,
-      body: JSON.stringify({
-        postId: location.state.postId,
-        newTitle: title,
-        newContents: contents,
-      }),
-    })
-      .then(response => response.json())
-      .then(res => alert(res.message));
+  const editMutation = useMutation(() => {
+    return editFetch(`${API.post}`, token, {
+      postId: location.state.postId,
+      newTitle: title,
+      newContents: contents,
+    });
+  });
+
+  if (postMutaition.isSuccess) {
+    alert('게시글이 등록되었습니다');
     navigate('/');
-  };
+  }
+
+  if (editMutation.isSuccess) {
+    alert('수정되었습니다');
+    navigate('/');
+  }
 
   return (
     <Container>
@@ -93,9 +92,19 @@ const Editor = () => {
           placeholder="제목을 입력하세요"
         />
         {isEditMode.title ? (
-          <Button name="Edit" onClick={editHandler} />
+          <Button
+            name="Edit"
+            onClick={() => {
+              editMutation.mutate();
+            }}
+          />
         ) : (
-          <Button name="Submit" onClick={postHandler} />
+          <Button
+            name="Submit"
+            onClick={() => {
+              postMutaition.mutate();
+            }}
+          />
         )}
       </Section>
       <StyledQuill
