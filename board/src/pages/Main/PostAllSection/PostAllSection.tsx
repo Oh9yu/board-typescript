@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { API } from '../../../config/config';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import MainPostList from './MainPostList/MainPostList';
 import Pagenation from '../../../components/Pagenation/Pagenation';
+import getFetch from '../../../utils/dataFetch/getFetch';
 
 interface Data {
   accountId: string;
@@ -27,32 +28,37 @@ interface DataType {
   data: Data[];
 }
 
-const fetchPosts = (currentPage: number) => {
-  return fetch(`${API.post}/list?page=${currentPage}`).then(res => res.json());
-};
-
 const PostAllSection = () => {
-  // const [data, setData] = useState<DataType>();
   const [page, setPage] = useState(1);
+  const queryClient = useQueryClient();
+  const { data } = useQuery<DataType>(
+    ['postLists', page],
+    () => {
+      return getFetch(`${API.post}/list?page=${page}`);
+    },
+    {
+      staleTime: 30000,
+      keepPreviousData: true,
+      enabled: !!page,
+    }
+  );
+  const pageLength = data ? Math.ceil(data.totalCount / 5) : 0;
 
-  const { data } = useQuery(['postLists', page], () => fetchPosts(page), {
-    keepPreviousData: true,
-  });
-
-  // console.log(querydata.data);
-
-  // useEffect(() => {
-  //   fetch(`${API.post}/list?page=${page}`)
-  //     .then(res => res.json())
-  //     .then(data => setData(data));
-  // }, [page]);
+  useEffect(() => {
+    if (page < pageLength) {
+      const nextPage = page + 1;
+      queryClient.prefetchQuery(['postLists', nextPage], () => {
+        return getFetch(`${API.post}/list?page=${nextPage}`);
+      });
+    }
+  }, [page, queryClient]);
 
   if (!data) return <div>로딩</div>;
 
   return (
     <Container>
       <ListHeader>전체글 보기</ListHeader>
-      {data.data.map((data: any) => {
+      {data.data.map(data => {
         return <MainPostList key={data.postId} data={data} />;
       })}
       <Pagenation
@@ -60,7 +66,7 @@ const PostAllSection = () => {
           setPage(page);
         }}
         page={page}
-        pageLength={Math.ceil(data.totalCount / 5)}
+        pageLength={pageLength}
       />
     </Container>
   );

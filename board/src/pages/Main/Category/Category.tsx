@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 import { API } from '../../../config/config';
 import CategoryList from './CategoryList';
+import getFetch from '../../../utils/dataFetch/getFetch';
 
 type CategoryType = {
   mainCatName: string;
@@ -9,17 +11,22 @@ type CategoryType = {
 };
 
 const Category = () => {
-  const [category, setCategory] = useState<CategoryType[]>([]);
+  const { data, isLoading } = useQuery<CategoryType[]>(
+    ['mainCategory'],
+    () => {
+      return getFetch(`${API.category}`);
+    },
+    {
+      staleTime: 30000,
+      enabled: !!Category,
+    }
+  );
 
-  useEffect(() => {
-    fetch(`${API.category}`)
-      .then(res => res.json())
-      .then(data => setCategory(data));
-  }, []);
+  if (isLoading) return <div>loading</div>;
 
   return (
     <Container>
-      {category?.map(data => {
+      {data?.map(data => {
         return (
           <CategoryList
             name={data.mainCatName}

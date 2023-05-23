@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import LikesCountPosts from './LikesCountPosts/LikesCountPosts';
 import ViewCountPosts from './ViewsCountPosts/ViewCountPosts';
 import { API } from '../../../config/config';
+import { useQuery } from '@tanstack/react-query';
+import getFetch from '../../../utils/dataFetch/getFetch';
 
 interface DataType {
   topViewPosts: TopViewPosts[];
@@ -32,13 +34,13 @@ interface TopLikePosts {
 }
 
 const HotPostSection = () => {
-  const [data, setData] = useState<DataType>();
-
-  useEffect(() => {
-    fetch(`${API.post}/top`)
-      .then(res => res.json())
-      .then(data => setData(data));
-  }, []);
+  const { data } = useQuery<DataType>(
+    ['hotPost'],
+    () => {
+      return getFetch(`${API.post}/top`);
+    },
+    { staleTime: 30000, keepPreviousData: true, enabled: !!HotPostSection }
+  );
 
   return (
     <Container>
