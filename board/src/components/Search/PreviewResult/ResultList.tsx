@@ -7,7 +7,6 @@ interface Props {
 }
 
 const ResultList = ({ title, keyFocus }: Props) => {
-  console.log('@@@@@@', keyFocus);
   return <Post iskeyfocus={keyFocus.toString()}>{title}</Post>;
 };
 

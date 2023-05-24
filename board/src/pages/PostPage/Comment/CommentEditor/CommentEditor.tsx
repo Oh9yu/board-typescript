@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import getToken from '../../../../utils/getToken';
 import { API } from '../../../../config/config';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import postFetch from '../../../../utils/dataFetch/postFetch';
 
 interface Props {
   postId: string;
@@ -10,22 +12,22 @@ interface Props {
 const CommentEditor = ({ postId }: Props) => {
   const token = getToken('TOKEN') || '';
   const [inputValue, setInputValue] = useState('');
+  const queryClient = useQueryClient();
 
-  const clickHandler = () => {
-    if (!inputValue) return;
-    fetch(`${API.comment}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token,
-      },
-      body: JSON.stringify({
+  const postMutation = useMutation(
+    () => {
+      return postFetch(`${API.comment}`, token, {
         postId: postId,
         contents: inputValue,
-      }),
-    }).then(res => res.json());
-    setInputValue('');
-  };
+      });
+    },
+    {
+      onSuccess: () => {
+        setInputValue('');
+        // queryClient.invalidateQueries(['comment', postId]);
+      },
+    }
+  );
 
   return (
     <Container>
@@ -46,7 +48,10 @@ const CommentEditor = ({ postId }: Props) => {
         />
         <Btn
           type="button"
-          onClick={clickHandler}
+          onClick={() => {
+            if (!inputValue) return;
+            postMutation.mutate();
+          }}
           disabled={token ? false : true}
         >
           등록

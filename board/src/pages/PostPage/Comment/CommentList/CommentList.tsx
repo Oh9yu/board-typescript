@@ -40,8 +40,8 @@ const CommentList = ({
 export default CommentList;
 
 const List = styled.div`
-  margin: 5px;
-  padding: 15px;
+  /* margin: 5px; */
+  padding: 10px;
   border-bottom: 1px solid #c9d9f9;
 `;
 
@@ -55,6 +55,6 @@ const Section = styled.div<{ width: string; fontSize: number }>`
 `;
 
 const ContentSection = styled.div`
-  padding-top: 12px;
+  /* padding-top: 12px; */
   font-size: 12px;
 `;

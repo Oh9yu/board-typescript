@@ -4,6 +4,8 @@ import { API } from '../../../config/config';
 import CommentList from './CommentList/CommentList';
 import CommentEditor from './CommentEditor/CommentEditor';
 import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import getFetch from '../../../utils/dataFetch/getFetch';
 
 interface DataType {
   comment: CommentType;
@@ -34,18 +36,27 @@ interface UserType {
 }
 
 const Comment = () => {
-  const [data, setData] = useState<DataType[]>([]);
+  // const [data, setData] = useState<DataType[]>([]);
   const { id } = useParams();
 
-  useEffect(() => {
-    fetch(`${API.comment}?postId=${id}`)
-      .then(res => res.json())
-      .then(data => setData(data));
-  }, [id]);
+  // useEffect(() => {
+  //   fetch(`${API.comment}?postId=${id}`)
+  //     .then(res => res.json())
+  //     .then(data => setData(data));
+  // }, [id]);
+
+  const { data, isLoading } = useQuery<DataType[]>(
+    ['comment', id],
+    () => {
+      return getFetch(`${API.comment}?postId=${id}&page=1`);
+    },
+    { staleTime: 30000 }
+  );
 
   return (
     <Container>
       <CommentHeader>댓글</CommentHeader>
+      <CommentEditor postId={id || ''} />
       {data &&
         data.map(({ comment, author }) => {
           return (
@@ -60,7 +71,6 @@ const Comment = () => {
             />
           );
         })}
-      <CommentEditor postId={id || ''} />
     </Container>
   );
 };
