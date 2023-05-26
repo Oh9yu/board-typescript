@@ -24,7 +24,7 @@ const CommentEditor = ({ postId }: Props) => {
     {
       onSuccess: () => {
         setInputValue('');
-        // queryClient.invalidateQueries(['comment', postId]);
+        queryClient.invalidateQueries(['comments', postId]);
       },
     }
   );
