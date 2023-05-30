@@ -31,7 +31,7 @@ interface DataType {
 const PostAllSection = () => {
   const [page, setPage] = useState(1);
   const queryClient = useQueryClient();
-  const { data } = useQuery<DataType>(
+  const { data, isError } = useQuery<DataType>(
     ['postLists', page],
     () => {
       return getFetch(`${API.post}/list?page=${page}`);
@@ -39,19 +39,9 @@ const PostAllSection = () => {
     {
       staleTime: 30000,
       keepPreviousData: true,
-      enabled: !!page,
     }
   );
   const pageLength = data ? Math.ceil(data.totalCount / 5) : 0;
-
-  useEffect(() => {
-    if (page < pageLength) {
-      const nextPage = page + 1;
-      queryClient.prefetchQuery(['postLists', nextPage], () => {
-        return getFetch(`${API.post}/list?page=${nextPage}`);
-      });
-    }
-  }, [page, queryClient]);
 
   if (!data) return <div>로딩</div>;
 

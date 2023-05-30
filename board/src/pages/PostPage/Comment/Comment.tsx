@@ -21,6 +21,7 @@ interface CommentType {
   commentId: string;
   likes: number;
   usersWhoLiked?: string[];
+  replyCount: number;
 }
 
 interface AuthorType {
@@ -39,7 +40,6 @@ interface UserType {
 const Comment = () => {
   const { id } = useParams();
   const commentRef = useRef<HTMLDivElement>(null);
-  const [isFetchingData, setIsFetchingData] = useState(false);
 
   const { data, fetchNextPage, isFetching, isLoading } = useInfiniteQuery(
     ['comments', id],
@@ -47,9 +47,9 @@ const Comment = () => {
       return getFetch(`${API.comment}?postId=${id}&page=${pageParam}`);
     },
     {
-      staleTime: Infinity,
+      staleTime: 30000,
       getNextPageParam: (lastPage, allPages) => {
-        const pageLength = Math.ceil(lastPage.totalCount / 5);
+        const pageLength = Math.ceil(lastPage.totalCount / 10);
         if (allPages.length < pageLength) {
           return allPages.length + 1;
         }
@@ -57,10 +57,8 @@ const Comment = () => {
       },
     }
   );
-  console.log('REF', commentRef);
 
   useEffect(() => {
-    console.log('effed=');
     const observer = new IntersectionObserver(([{ isIntersecting }]) => {
       if (isIntersecting) {
         fetchNextPage();
@@ -80,7 +78,7 @@ const Comment = () => {
       <CommentHeader>댓글</CommentHeader>
       <CommentEditor postId={id || ''} />
       {data?.pages.map((pages: any, pageIdx: any) => {
-        return pages.data.map(({ comment, author }: DataType, dataIdx: any) => {
+        return pages.data.map(({ comment, author }: DataType) => {
           return (
             <CommentList
               key={comment?.commentId}
@@ -90,6 +88,7 @@ const Comment = () => {
               createdAt={comment?.createdAt}
               contents={comment?.contents}
               likes={comment?.likes}
+              replyCount={comment?.replyCount}
             />
           );
         });
@@ -98,7 +97,6 @@ const Comment = () => {
     </Container>
   );
 };
-//pageIdx + 1 === pages.data.length && dataIdx === page
 export default Comment;
 
 const Container = styled.div`

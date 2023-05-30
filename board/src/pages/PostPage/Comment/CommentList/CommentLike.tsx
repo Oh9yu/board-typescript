@@ -25,13 +25,13 @@ const CommentLike = ({ id, postId, likes }: Props) => {
       .then(res => res.json())
       .then(res => {
         if (res.message === 'Created like') {
-          setLikeCount(likeCount + 1);
+          setLikeCount(prev => prev + 1);
         } else if (res.message === 'Deleted like') {
-          setLikeCount(likeCount - 1);
+          setLikeCount(prev => prev - 1);
         }
       });
   };
-
+  //on Click data fetch - >
   return (
     <Container>
       <LikeBtn src="images/unlike.png" onClick={likeHandler} />
@@ -50,6 +50,6 @@ const Container = styled.div`
 `;
 
 const LikeBtn = styled.img`
-  width: 18px;
+  width: 20px;
   cursor: pointer;
 `;

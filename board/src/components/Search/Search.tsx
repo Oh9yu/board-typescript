@@ -51,8 +51,6 @@ const Search = () => {
     }
 
     const timeout = setTimeout(() => {
-      console.log('fetch Data!');
-
       fetch(`${API.search}/auto?keyword=${searchInput}`)
         .then(res => res.json())
         .then(data => {

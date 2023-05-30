@@ -17,8 +17,7 @@ const Category = () => {
       return getFetch(`${API.category}`);
     },
     {
-      cacheTime: Infinity,
-      enabled: !!Category,
+      staleTime: Infinity,
     }
   );
 
