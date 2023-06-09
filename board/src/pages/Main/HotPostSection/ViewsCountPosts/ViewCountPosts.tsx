@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import getCreatedAt from '../../../../utils/getCreatedAt';
 import { GrFormView } from 'react-icons/gr';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   data: TopViewPosts[] | undefined;
@@ -21,6 +22,8 @@ interface TopViewPosts {
 }
 
 const ViewCountPosts = ({ data }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Title>조회수 TOP</Title>
@@ -28,7 +31,10 @@ const ViewCountPosts = ({ data }: Props) => {
         {data &&
           data.map(data => {
             return (
-              <Section key={data.accountId}>
+              <Section
+                key={data.accountId}
+                onClick={() => navigate(`/postpage/${data._id}`)}
+              >
                 <MainContents>
                   <ViewBox>
                     <GrFormView size={20} />

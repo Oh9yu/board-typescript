@@ -58,6 +58,8 @@ const Comment = () => {
     }
   );
 
+  console.log(data?.pages[0].data);
+
   useEffect(() => {
     const observer = new IntersectionObserver(([{ isIntersecting }]) => {
       if (isIntersecting) {

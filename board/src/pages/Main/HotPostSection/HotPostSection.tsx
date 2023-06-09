@@ -42,6 +42,8 @@ const HotPostSection = () => {
     { staleTime: 30000, keepPreviousData: true, enabled: !!HotPostSection }
   );
 
+  console.log(data);
+
   return (
     <Container>
       <ViewCountPosts data={data?.topViewPosts} />

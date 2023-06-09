@@ -4,14 +4,14 @@
 // const POST = 3000;
 
 //EC2
-const URL = process.env.REACT_APP_URL;
-const AUTH = 81;
-const POST = 80;
+// const URL = process.env.REACT_APP_URL;
+// const AUTH = 81;
+// const POST = 80;
 
 //Docker
-// const URL = 'http://localhost';
-// const POST = 6001;
-// const AUTH = 6002;
+const URL = 'http://localhost';
+const POST = 3005;
+const AUTH = 3006;
 
 const USERPAGE = 5000;
 

@@ -5,6 +5,9 @@ import CommentUser from './CommentUser/CommentUser';
 import CommentLike from './CommentLike';
 import { FaRegComment } from 'react-icons/fa';
 import { FaRegCommentDots } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query';
+import getFetch from '../../../../utils/dataFetch/getFetch';
+import { API } from '../../../../config/config';
 
 interface Props {
   name: string;
@@ -27,6 +30,15 @@ const CommentList = ({
 }: Props) => {
   const commentTime = useCreatedAt(createdAt);
   const [isOpen, setIsOpen] = useState(false);
+  const [replyData, setReplyData] = useState([]);
+
+  const replyHandler = () => {
+    setIsOpen(prev => !prev);
+    if (replyCount === 0) return;
+    fetch(`${API.comment}/reply?commentId=${id}`)
+      .then(res => res.json())
+      .then(data => setReplyData(data));
+  };
 
   return (
     <List>
@@ -40,11 +52,26 @@ const CommentList = ({
       <ReplySection>
         <CommentLike id={id} postId={postId} likes={likes} />
         {isOpen ? (
-          <FaRegCommentDots size={20} style={{ cursor: 'pointer' }} />
+          <Div>
+            <FaRegCommentDots
+              size={20}
+              style={{ cursor: 'pointer', marginRight: 10 }}
+              onClick={() => setIsOpen(prev => !prev)}
+            />
+            {replyCount}
+          </Div>
         ) : (
-          <FaRegComment size={20} style={{ cursor: 'pointer' }} />
+          <Div>
+            <FaRegComment
+              size={20}
+              style={{ cursor: 'pointer', marginRight: 10 }}
+              onClick={replyHandler}
+            />
+            {replyCount}
+          </Div>
         )}
       </ReplySection>
+      {isOpen && <div>123</div>}
     </List>
   );
 };
@@ -75,4 +102,8 @@ const ReplySection = styled.section`
   justify-content: space-between;
   width: 100px;
   margin: 10px 0px;
+`;
+
+const Div = styled.div`
+  display: flex;
 `;

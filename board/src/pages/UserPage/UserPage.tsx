@@ -23,7 +23,7 @@ const UserPage = () => {
         <Profile userdata={data} />
       </Section>
       <Section width={520}>
-        {data &&
+        {/* {data &&
           data.posts.map((data: any) => {
             return (
               <PostList
@@ -38,7 +38,7 @@ const UserPage = () => {
                 // type="userpage"
               />
             );
-          })}
+          })} */}
       </Section>
     </Container>
   );
