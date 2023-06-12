@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
@@ -14,11 +14,10 @@ const toolbarModule = [
   ['bold', 'italic', 'underline'],
   ['blockquote', 'code-block'],
   [{ header: 1 }, { header: 2 }],
-  [{ list: 'ordered' }, { list: 'bullet' }],
-  [{ header: [1, 2, 3, 4, 5, 6, false] }],
   [{ color: [] }],
   [{ font: [] }],
   [{ align: [] }],
+  ['image'],
   ['clean'],
 ];
 
@@ -26,6 +25,7 @@ const Editor = () => {
   const token = getToken('TOKEN') || '';
   const navigate = useNavigate();
   const location = useLocation();
+  const quillRef = useRef<any>();
   const isEditMode = {
     title: location.state.title ? location.state.title : '',
     contents: location.state.contents ? location.state.contents : '',
@@ -39,13 +39,6 @@ const Editor = () => {
     subCatId: location.state.subCatId,
   };
 
-  const headers: HeadersInit = {
-    'Content-Type': 'application/json',
-  };
-  if (token) {
-    headers.Authorization = token;
-  }
-
   const titleHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setTitle(e.target.value);
   };
@@ -53,6 +46,49 @@ const Editor = () => {
   const contentsHandler = (value: string) => {
     setContents(value);
   };
+
+  const modules = useMemo(() => {
+    return {
+      toolbar: {
+        container: [
+          ['bold', 'italic', 'underline'],
+          ['blockquote', 'code-block'],
+          [{ header: 1 }, { header: 2 }],
+          [{ color: [] }],
+          [{ font: [] }],
+          [{ align: [] }],
+          ['image'],
+          ['clean'],
+        ],
+        handlers: {
+          image: () => {
+            const input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+            input.click();
+            input.onchange = (e: any) => {
+              const formData = new FormData();
+              formData.append('file', e.target.files[0]);
+              fetch(`${API.upload}`, {
+                method: 'POST',
+                body: formData,
+              })
+                .then(res => res.json())
+                .then(data => {
+                  const img = data.url;
+                  setContents(
+                    (prevContent: any) =>
+                      `${prevContent}<img src=${img} alt='img' width=60%/>`
+                  );
+                });
+            };
+          },
+        },
+      },
+    };
+  }, []);
+
+  console.log(contents);
 
   const postMutaition = useMutation(() => {
     return postFetch(`${API.post}`, token, {
@@ -108,9 +144,10 @@ const Editor = () => {
         )}
       </Section>
       <StyledQuill
-        modules={{ toolbar: toolbarModule }}
+        modules={modules}
         value={contents}
         onChange={contentsHandler}
+        ref={quillRef}
       />
     </Container>
   );
