@@ -17,7 +17,7 @@ const Nav = () => {
       <Section>
         <Logo>
           <MainLogo src="images/home-button.png" onClick={gotoMain} />
-          <Search />
+          {/* <Search /> */}
         </Logo>
         <SignStatus />
       </Section>

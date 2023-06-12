@@ -5,7 +5,12 @@ import getToken from '../../../../utils/getToken';
 import { API } from '../../../../config/config';
 import { useMutation } from '@tanstack/react-query';
 
-const ReplyEditor = () => {
+interface Props {
+  postId: string;
+  commentId: string;
+}
+
+const ReplyEditor = ({ postId, commentId }: Props) => {
   const token = getToken('TOKEN') || '';
   const [inputValue, setInputValue] = useState('');
 
@@ -15,16 +20,20 @@ const ReplyEditor = () => {
 
   const replyMutation = useMutation(() => {
     return postFetch(`${API.comment}/reply`, token, {
-      postId: '',
-      commentId: '',
-      contents: '',
+      postId: postId,
+      commentId: commentId,
+      contents: inputValue,
     });
   });
 
   return (
     <Section>
       <ReplyInput value={inputValue} onChange={inputHandler} />
-      <ReplyButton />
+      <ReplyButton
+        onClick={() => {
+          replyMutation.mutate();
+        }}
+      />
     </Section>
   );
 };

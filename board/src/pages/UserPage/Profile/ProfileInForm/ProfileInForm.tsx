@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ProfileInForm = ({ username, userEmail, description }: any) => {
+const ProfileInForm = ({ username, userEmail, descriptions }: any) => {
   console.log(username);
 
   return (
     <UserInform>
       <Text fontSize={24}>{username}</Text>
       <Text fontSize={18}>{userEmail}</Text>
-      {/* <Desc>{description ? { description } : 'Hello'}</Desc> */}
+      <Desc>{descriptions ? descriptions : 'Hello'}</Desc>
     </UserInform>
   );
 };
@@ -36,4 +36,7 @@ const Desc = styled.div`
   min-height: 30px;
   border: 1px solid #738cd3;
   border-radius: 5px;
+  @media screen and (max-width: 800px) {
+    min-width: 240px;
+  }
 `;

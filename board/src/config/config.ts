@@ -13,14 +13,12 @@ const URL = 'http://localhost';
 const POST = 3005;
 const AUTH = 3006;
 
-const USERPAGE = 5000;
-
 const API = {
   signin: `${URL}:${AUTH}/auth/token`,
   signup: `${URL}:${AUTH}/auth/user`,
   updatePW: `${URL}:${AUTH}/auth/user/password`,
   deleteAccount: `${URL}:${AUTH}/auth/user`,
-  userpage: `${URL}:${USERPAGE}/userPage`,
+  userpage: `${URL}:${AUTH}/userpage`,
   category: `${URL}:${POST}/nb/category`,
   post: `${URL}:${POST}/nb/post`,
   comment: `${URL}:${POST}/nb/comment`,
@@ -28,5 +26,7 @@ const API = {
   likes: `${URL}:${POST}/nb/like`,
   alert: `${URL}:${POST}/nb/alert`,
   search: `${URL}:${POST}/nb/search`,
+  upload: `${URL}:${AUTH}/image/upload`,
+  user: `${URL}:${AUTH}/auth/user/info`,
 };
 export { API };

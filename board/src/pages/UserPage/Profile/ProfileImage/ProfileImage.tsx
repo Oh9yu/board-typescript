@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ProfileImage = () => {
-  const img = '';
+const ProfileImage = ({ img }: any) => {
   return (
     <Container>
       {/* <ImageUpdate /> */}
-      <Image src="images/user.png" />
+      <Image src={img === null ? 'images/user.png' : ''} />
     </Container>
   );
 };

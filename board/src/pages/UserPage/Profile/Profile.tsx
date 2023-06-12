@@ -9,11 +9,11 @@ const Profile = ({ userdata }: any) => {
 
   return (
     <Container>
-      {/* <ProfileImage img={userdata.profileImage} /> */}
+      <ProfileImage img={userdata.profileImage} />
       <ProfileInForm
         username={userdata.name}
         userEmail={userdata.email}
-        description={userdata.description}
+        descriptions={userdata.descriptions}
       />
       <EditProfile />
     </Container>

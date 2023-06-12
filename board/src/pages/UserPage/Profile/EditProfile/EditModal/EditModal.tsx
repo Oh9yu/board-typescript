@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import useOutSideClick from '../../../../../utils/hook/useOutSideClick';
 
 const EditModal = () => {
-  return <Container></Container>;
+  return <Container>adsf</Container>;
 };
 
 export default EditModal;

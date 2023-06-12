@@ -8,6 +8,8 @@ import { FaRegCommentDots } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query';
 import getFetch from '../../../../utils/dataFetch/getFetch';
 import { API } from '../../../../config/config';
+import ReplyEditor from '../Reply/ReplyEditor';
+import getToken from '../../../../utils/getToken';
 
 interface Props {
   name: string;
@@ -31,14 +33,19 @@ const CommentList = ({
   const commentTime = useCreatedAt(createdAt);
   const [isOpen, setIsOpen] = useState(false);
   const [replyData, setReplyData] = useState([]);
+  const token = getToken('TOKEN') || '';
 
   const replyHandler = () => {
     setIsOpen(prev => !prev);
     if (replyCount === 0) return;
-    fetch(`${API.comment}/reply?commentId=${id}`)
+    fetch(`${API.comment}/reply?commentId=${id}`, {
+      headers: { Authorization: token },
+    })
       .then(res => res.json())
       .then(data => setReplyData(data));
   };
+
+  console.log(`${API.comment}/reply?commentId=${id}`);
 
   return (
     <List>
@@ -71,7 +78,7 @@ const CommentList = ({
           </Div>
         )}
       </ReplySection>
-      {isOpen && <div>123</div>}
+      {isOpen && <ReplyEditor postId={postId} commentId={id} />}
     </List>
   );
 };
