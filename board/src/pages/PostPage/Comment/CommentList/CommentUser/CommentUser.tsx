@@ -4,9 +4,10 @@ import UserModal from './UserModal';
 
 interface Props {
   name: string;
+  profileImg: string;
 }
 
-const CommentUser = ({ name }: Props) => {
+const CommentUser = ({ name, profileImg }: Props) => {
   const [modal, setmodal] = useState(false);
 
   return (
@@ -18,6 +19,7 @@ const CommentUser = ({ name }: Props) => {
         setmodal(false);
       }}
     >
+      <Profile src={profileImg ? profileImg : 'images/user.png'} />
       {name}
       {modal && <UserModal />}
     </User>
@@ -27,9 +29,18 @@ const CommentUser = ({ name }: Props) => {
 export default CommentUser;
 
 const User = styled.div`
+  display: flex;
+  align-items: center;
   position: relative;
   font-size: 14px;
   padding: 5px 10px;
   width: max-content;
   cursor: pointer;
+`;
+
+const Profile = styled.img`
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  margin-right: 10px;
 `;

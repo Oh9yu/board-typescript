@@ -25,6 +25,8 @@ const Container = styled.div`
   position: absolute;
   width: 90px;
   height: 24px;
+  left: 50px;
+  top: 30px;
   padding: 2px 10px;
   font-size: 12px;
   background-color: #fff;

@@ -38,11 +38,16 @@ const EditProfile = () => {
 
   const profileEditHandler = () => {
     if (!editForm.profileImg && !editForm.descriptions) return;
+    console.log(`${API.user}`);
+
+    console.log(editForm.profileImg, editForm.descriptions);
+
     fetch(`${API.user}`, {
       method: 'PATCH',
-      headers: { Authorization: token },
+      headers: { 'Content-Type': 'application/json', Authorization: token },
       body: JSON.stringify({
-        ...editForm,
+        profileImage: editForm.profileImg,
+        descriptions: editForm.descriptions,
       }),
     })
       .then(res => res.json())

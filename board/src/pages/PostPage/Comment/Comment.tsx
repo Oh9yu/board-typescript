@@ -85,6 +85,7 @@ const Comment = () => {
             <CommentList
               key={comment?.commentId}
               postId={id || ''}
+              profileImg={author?.profileImage || ''}
               id={comment?.commentId}
               name={author?.name}
               createdAt={comment?.createdAt}

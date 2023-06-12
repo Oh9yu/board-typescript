@@ -1,7 +1,7 @@
 // //B.E. server
-// const URL = 'http://10.58.59.146';
-// const AUTH = 8000;
-// const POST = 3000;
+// const URL = 'http://10.58.59.135';
+// const POST = 3005;
+// const AUTH = 3006;
 
 //EC2
 // const URL = process.env.REACT_APP_URL;
