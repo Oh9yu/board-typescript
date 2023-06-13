@@ -14,6 +14,10 @@ interface PageNationType {
   showCount: number;
 }
 
+type MovePageBtnProps = {
+  img: string;
+};
+
 const Pagenation = ({
   page,
   setPage,
@@ -26,8 +30,9 @@ const Pagenation = ({
     <Container>
       <PageSection>
         {/* 처음으로 */}
-        <AiOutlineDoubleLeft
-          size="25px"
+        <MovePageBtn
+          type="button"
+          img="images/leftbtn2.png"
           onClick={() => {
             if (page <= 1) return;
             setPage(1);
@@ -35,14 +40,15 @@ const Pagenation = ({
         />
 
         {/* 이전으로 */}
-        <AiOutlineLeft
-          size="25px"
+        <MovePageBtn
+          type="button"
+          img="images/leftbtn.png"
           onClick={() => {
             if (page <= 1) return;
             setPage(page - 1);
           }}
-          width="30px"
         />
+
         {/* Number 페이지네이션 */}
         {pagenationArray[Math.ceil(page / showCount) - 1]?.map(value => {
           return (
@@ -55,16 +61,18 @@ const Pagenation = ({
           );
         })}
         {/* 다음으로 */}
-        <AiOutlineRight
-          size="25px"
+        <MovePageBtn
+          type="button"
+          img="images/rightbtn.png"
           onClick={() => {
             if (page >= pageLength) return;
             setPage(page + 1);
           }}
         />
         {/* 마지막으로 */}
-        <AiOutlineDoubleRight
-          className="my-icon"
+        <MovePageBtn
+          type="button"
+          img="images/rightbtn2.png"
           onClick={() => {
             if (page >= pageLength) return;
             setPage(pageLength);
@@ -91,15 +99,15 @@ const PageSection = styled.section`
   padding: 10px;
 `;
 
-const MovePageBtn = styled.button`
+const MovePageBtn = styled.input<MovePageBtnProps>`
+  margin: 3px;
   border: none;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
+  background: url(${props => props.img});
   background-color: transparent;
   border-radius: 15px;
   background-size: cover;
   background-repeat: no-repeat;
-  &:hover {
-    background-color: #eee;
-  }
+  cursor: pointer;
 `;

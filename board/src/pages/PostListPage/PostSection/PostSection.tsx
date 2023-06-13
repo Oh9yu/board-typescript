@@ -41,21 +41,23 @@ const PostSection = ({ status, mainCatId, queryType }: Props) => {
   console.log(status);
 
   const { data } = useQuery(['subPostLists', [page, status]], () => {
-    return getFetch(`${API.post}/list?subCatId=${status}&page=${page}`);
+    return getFetch(`${API.post}/list?${queryType}=${status}&page=${page}`);
   });
+
+  console.log(page);
 
   // useEffect(() => {
   //   if (!queryType || queryType === undefined) return;
-  //   fetch(`${API.post}/list?${queryType}=${status}`)
+  //   fetch(`${API.post}/list?${queryType}=${status}&page=${page}`)
   //     .then(res => res.json())
   //     .then(data => setPostData(data));
-  // }, [status]);
+  // }, [status, page]);
 
   // useEffect(() => {
-  //   fetch(`${API.post}/list?mainCatId=${mainCatId}`)
+  //   fetch(`${API.post}/list?mainCatId=${mainCatId}${page}`)
   //     .then(res => res.json())
   //     .then(data => setPostData(data));
-  // }, []);
+  // }, [page]);
 
   const pageLength = data ? Math.ceil(data.totalCount / 5) : 0;
 
