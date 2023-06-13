@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { API } from '../../../config/config';
 import PostList from '../../../components/PostList/PostList';
 import PostHeader from './PostHeader/PostHeader';
+import Pagenation from '../../../components/Pagenation/Pagenation';
+import { useQuery } from '@tanstack/react-query';
+import getFetch from '../../../utils/dataFetch/getFetch';
 
 interface Props {
   status: string | undefined;
@@ -33,19 +36,28 @@ interface Data {
 
 const PostSection = ({ status, mainCatId, queryType }: Props) => {
   const [postData, setPostData] = useState<DataType>();
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    if (!queryType || queryType === undefined) return;
-    fetch(`${API.post}/list?${queryType}=${status}`)
-      .then(res => res.json())
-      .then(data => setPostData(data));
-  }, [status]);
+  console.log(status);
 
-  useEffect(() => {
-    fetch(`${API.post}/list?mainCatId=${mainCatId}`)
-      .then(res => res.json())
-      .then(data => setPostData(data));
-  }, []);
+  const { data } = useQuery(['subPostLists', [page, status]], () => {
+    return getFetch(`${API.post}/list?subCatId=${status}&page=${page}`);
+  });
+
+  // useEffect(() => {
+  //   if (!queryType || queryType === undefined) return;
+  //   fetch(`${API.post}/list?${queryType}=${status}`)
+  //     .then(res => res.json())
+  //     .then(data => setPostData(data));
+  // }, [status]);
+
+  // useEffect(() => {
+  //   fetch(`${API.post}/list?mainCatId=${mainCatId}`)
+  //     .then(res => res.json())
+  //     .then(data => setPostData(data));
+  // }, []);
+
+  const pageLength = data ? Math.ceil(data.totalCount / 5) : 0;
 
   return (
     <Container>
@@ -56,8 +68,8 @@ const PostSection = ({ status, mainCatId, queryType }: Props) => {
         likes="좋아요"
         createdAt="날짜"
       />
-      {postData &&
-        postData.data.map(data => {
+      {data &&
+        data.data.map((data: any) => {
           return (
             <PostList
               key={data.postId}
@@ -70,6 +82,14 @@ const PostSection = ({ status, mainCatId, queryType }: Props) => {
             />
           );
         })}
+      <Pagenation
+        setPage={page => {
+          setPage(page);
+        }}
+        page={page}
+        pageLength={pageLength}
+        showCount={5}
+      />
     </Container>
   );
 };

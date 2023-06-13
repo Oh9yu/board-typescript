@@ -18,7 +18,7 @@ const API = {
   signup: `${URL}:${AUTH}/auth/user`,
   updatePW: `${URL}:${AUTH}/auth/user/password`,
   deleteAccount: `${URL}:${AUTH}/auth/user`,
-  userpage: `${URL}:${AUTH}/userpage`,
+  userpage: `${URL}:${AUTH}/auth/userInfo/userPage`,
   category: `${URL}:${POST}/nb/category`,
   post: `${URL}:${POST}/nb/post`,
   comment: `${URL}:${POST}/nb/comment`,

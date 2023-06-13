@@ -58,7 +58,7 @@ const Comment = () => {
     }
   );
 
-  console.log(data?.pages[0].data);
+  console.log(' data :', data?.pages[0].data);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([{ isIntersecting }]) => {
@@ -86,6 +86,7 @@ const Comment = () => {
               key={comment?.commentId}
               postId={id || ''}
               profileImg={author?.profileImage || ''}
+              accountId={author?.accountId}
               id={comment?.commentId}
               name={author?.name}
               createdAt={comment?.createdAt}

@@ -57,6 +57,7 @@ const PostAllSection = () => {
         }}
         page={page}
         pageLength={pageLength}
+        showCount={5}
       />
     </Container>
   );

@@ -4,27 +4,90 @@ import Profile from './Profile/Profile';
 import { API } from '../../config/config';
 import getToken from '../../utils/getToken';
 import PostList from '../../components/PostList/PostList';
+import PostHeader from '../PostListPage/PostSection/PostHeader/PostHeader';
+import { useLocation } from 'react-router-dom';
+import Pagenation from '../../components/Pagenation/Pagenation';
+import { useQuery } from '@tanstack/react-query';
+import getFetch from '../../utils/dataFetch/getFetch';
 
 const UserPage = () => {
-  const [data, setData] = useState<any>([]);
+  const [userdata, setUserData] = useState<any>([]);
+  const [postData, setPostData] = useState<any>([]);
+  const [page, setPage] = useState(1);
   const token = getToken('TOKEN') || '';
+  const location = useLocation();
+
+  const accountId = location.state === null ? '' : location.state.accountId;
+  const pageLength = postData ? Math.ceil(postData.totalCount / 5) : 0;
+
+  useQuery<any>(['userPosting', page], async () => {
+    if (accountId === '') {
+      const response = await fetch(`${API.post}/mine/page/${page}`, {
+        headers: { Authorization: token },
+      });
+      const data = await response.json();
+      setPostData(data);
+      return data;
+    } else {
+      const response = await fetch(
+        `${API.post}/user/page/${page}?accountId=${accountId}`
+      );
+      const data = await response.json();
+      setPostData(data);
+      return data;
+    }
+  });
 
   useEffect(() => {
-    fetch(`${API.userpage}/mypage`, {
-      headers: { Authorization: token },
-    })
-      .then(res => res.json())
-      .then(data => setData(data));
+    if (accountId === '') {
+      fetch(`${API.userpage}`, {
+        headers: { Authorization: token },
+      })
+        .then(res => res.json())
+        .then(data => setUserData(data));
+    } else {
+      fetch(`${API.userpage}?accountId=${accountId}`)
+        .then(res => res.json())
+        .then(data => setUserData(data));
+    }
   }, []);
-
-  console.log(data);
 
   return (
     <Container>
       <Section width={240}>
-        <Profile userdata={data} />
+        <Profile userdata={userdata} modifyAllow={userdata.modifyAllowed} />
       </Section>
-      <Section width={520}></Section>
+      <Section width={520}>
+        <PostHeader
+          title="제목"
+          name="이름"
+          views="조회수"
+          likes="좋아요"
+          createdAt="날짜"
+        />
+        {postData &&
+          postData.data?.map((data: any) => {
+            return (
+              <PostList
+                key={data.postId}
+                postId={data.postId}
+                title={data.title}
+                name={data.name}
+                createdAt={data.createdAt}
+                views={data.views}
+                likes={data.likes}
+              />
+            );
+          })}
+        <Pagenation
+          setPage={page => {
+            setPage(page);
+          }}
+          page={page}
+          pageLength={pageLength}
+          showCount={5}
+        />
+      </Section>
     </Container>
   );
 };
@@ -46,7 +109,7 @@ const Section = styled.section<{ width: number }>`
   margin: 10px;
   padding: 30px 10px;
   width: ${props => props.width}px;
-  height: max-content;
+  min-height: 300px;
   background-color: #fff;
   border: 2px solid #7594dd;
   border-radius: 6px;

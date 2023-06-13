@@ -4,7 +4,7 @@ import ProfileImage from './ProfileImage/ProfileImage';
 import ProfileInForm from './ProfileInForm/ProfileInForm';
 import EditProfile from './EditProfile/EditProfile';
 
-const Profile = ({ userdata }: any) => {
+const Profile = ({ userdata, modifyAllow }: any) => {
   console.log('userdata: ', userdata);
 
   return (
@@ -15,7 +15,7 @@ const Profile = ({ userdata }: any) => {
         userEmail={userdata.email}
         descriptions={userdata.descriptions}
       />
-      <EditProfile />
+      {modifyAllow && <EditProfile />}
     </Container>
   );
 };

@@ -32,7 +32,7 @@ const LikesCountPosts = ({ data }: Props) => {
         {data &&
           data.map(data => {
             return (
-              <Section key={data.accountId} onClick={clickHandler}>
+              <Section key={data.postId} onClick={clickHandler}>
                 <MainContents>
                   <LikeBox>
                     <LikeImg src="images/like.png" />

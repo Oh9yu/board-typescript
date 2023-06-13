@@ -11,10 +11,16 @@ interface PageNationType {
   page: number;
   pageLength: number;
   setPage: (value: number) => void;
+  showCount: number;
 }
 
-const Pagenation = ({ page, setPage, pageLength }: PageNationType) => {
-  const pagenationArray = getPagenationList(pageLength);
+const Pagenation = ({
+  page,
+  setPage,
+  pageLength,
+  showCount,
+}: PageNationType) => {
+  const pagenationArray = pageLength ? getPagenationList(pageLength) : [];
 
   return (
     <Container>
@@ -38,7 +44,7 @@ const Pagenation = ({ page, setPage, pageLength }: PageNationType) => {
           width="30px"
         />
         {/* Number 페이지네이션 */}
-        {pagenationArray[Math.ceil(page / 5) - 1]?.map(value => {
+        {pagenationArray[Math.ceil(page / showCount) - 1]?.map(value => {
           return (
             <PageNumBtn
               key={value}

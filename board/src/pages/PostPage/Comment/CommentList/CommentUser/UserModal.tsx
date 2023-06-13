@@ -2,13 +2,17 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const UserModal = () => {
+interface Props {
+  accountId: string;
+}
+
+const UserModal = ({ accountId }: Props) => {
   const navigate = useNavigate();
 
   return (
     <Container
       onClick={() => {
-        navigate('/userpage');
+        navigate('/userpage', { state: { accountId: accountId } });
       }}
     >
       유저 정보보기

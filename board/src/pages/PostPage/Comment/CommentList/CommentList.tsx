@@ -20,6 +20,7 @@ interface Props {
   likes: number;
   replyCount: number;
   profileImg: string;
+  accountId: string;
 }
 
 const CommentList = ({
@@ -31,6 +32,7 @@ const CommentList = ({
   likes,
   replyCount,
   profileImg,
+  accountId,
 }: Props) => {
   const commentTime = useCreatedAt(createdAt);
   const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +54,11 @@ const CommentList = ({
   return (
     <List>
       <Section width="100%" fontSize={12}>
-        <CommentUser name={name} profileImg={profileImg} />
+        <CommentUser
+          name={name}
+          profileImg={profileImg}
+          accountId={accountId}
+        />
         <Section width="100px" fontSize={12}>
           {commentTime}
         </Section>

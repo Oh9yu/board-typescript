@@ -32,7 +32,7 @@ const ViewCountPosts = ({ data }: Props) => {
           data.map(data => {
             return (
               <Section
-                key={data.accountId}
+                key={data._id}
                 onClick={() => navigate(`/postpage/${data._id}`)}
               >
                 <MainContents>

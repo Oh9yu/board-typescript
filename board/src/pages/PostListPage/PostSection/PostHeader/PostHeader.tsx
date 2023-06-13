@@ -58,7 +58,7 @@ const Text = styled.p<{ width: number; mobile: number }>`
   justify-content: center;
   align-items: center;
   width: ${props => props.width}%;
-  font-size: 16px;
+  font-size: 14px;
   @media screen and (max-width: 750px) {
     width: ${props => props.mobile}%;
     font-size: 12px;

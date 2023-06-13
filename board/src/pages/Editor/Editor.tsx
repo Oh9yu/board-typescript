@@ -10,17 +10,6 @@ import { useMutation } from '@tanstack/react-query';
 import postFetch from '../../utils/dataFetch/postFetch';
 import editFetch from '../../utils/dataFetch/editFetch';
 
-const toolbarModule = [
-  ['bold', 'italic', 'underline'],
-  ['blockquote', 'code-block'],
-  [{ header: 1 }, { header: 2 }],
-  [{ color: [] }],
-  [{ font: [] }],
-  [{ align: [] }],
-  ['image'],
-  ['clean'],
-];
-
 const Editor = () => {
   const token = getToken('TOKEN') || '';
   const navigate = useNavigate();
@@ -33,7 +22,6 @@ const Editor = () => {
   };
   const [title, setTitle] = useState(isEditMode.title);
   const [contents, setContents] = useState(isEditMode.contents);
-
   const catId = {
     mainCatId: location.state.mainCatId,
     subCatId: location.state.subCatId,
@@ -87,8 +75,6 @@ const Editor = () => {
       },
     };
   }, []);
-
-  console.log(contents);
 
   const postMutaition = useMutation(() => {
     return postFetch(`${API.post}`, token, {
