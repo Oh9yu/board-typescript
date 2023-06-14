@@ -19,9 +19,22 @@ const PostListPage = () => {
     name: location.state.categoryName,
     mainCatId: location.state.mainCatId,
   };
+  const [page, setPage] = useState(1);
+
+  console.log(mainCat);
+
+  const pageHandler = (page: number) => {
+    setPage(page);
+  };
 
   const statusHandler: StatusHandlerType = (name, id) => {
-    setStatus({ ...status, name: name, queryType: 'subCatId', subCatId: id });
+    setStatus({
+      ...status,
+      name: name,
+      queryType: 'subCatId',
+      subCatId: id,
+    });
+    setPage(1);
   };
 
   const listAll = () => {
@@ -62,6 +75,8 @@ const PostListPage = () => {
           status={status.subCatId}
           queryType={status.queryType}
           mainCatId={mainCat.mainCatId}
+          page={page}
+          pageHandler={pageHandler}
         />
       </Section>
     </Container>
@@ -84,7 +99,7 @@ const Section = styled.section`
   width: 1024px;
   display: flex;
   justify-content: space-between;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     flex-direction: column;
   }
 `;
@@ -114,7 +129,7 @@ const SubCat = styled.div`
   width: 180px;
   height: 50px;
   font-size: 18px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     padding-left: 20px;
     top: 5px;
     justify-content: space-around;

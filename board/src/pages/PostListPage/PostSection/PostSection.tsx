@@ -11,6 +11,8 @@ interface Props {
   status: string | undefined;
   mainCatId: string;
   queryType: string | undefined;
+  page: number;
+  pageHandler: (page: number) => void;
 }
 interface DataType {
   totalCount: number;
@@ -34,14 +36,23 @@ interface Data {
   subCatName: string;
 }
 
-const PostSection = ({ status, mainCatId, queryType }: Props) => {
+const PostSection = ({
+  status,
+  mainCatId,
+  queryType,
+  page,
+  pageHandler,
+}: Props) => {
   const [postData, setPostData] = useState<DataType>();
-  const [page, setPage] = useState(1);
 
   console.log(status);
+  console.log(queryType);
 
-  const { data } = useQuery(['subPostLists', [page, status]], () => {
-    return getFetch(`${API.post}/list?${queryType}=${status}&page=${page}`);
+  const { data } = useQuery<DataType>(['subPostLists', [page, status]], () => {
+    if (!queryType) {
+      return getFetch(`${API.post}/list?mainCatId=${mainCatId}&page=${page}`);
+    } else
+      return getFetch(`${API.post}/list?${queryType}=${status}&page=${page}`);
   });
 
   console.log(page);
@@ -71,7 +82,7 @@ const PostSection = ({ status, mainCatId, queryType }: Props) => {
         createdAt="날짜"
       />
       {data &&
-        data.data.map((data: any) => {
+        data.data.map(data => {
           return (
             <PostList
               key={data.postId}
@@ -85,9 +96,7 @@ const PostSection = ({ status, mainCatId, queryType }: Props) => {
           );
         })}
       <Pagenation
-        setPage={page => {
-          setPage(page);
-        }}
+        setPage={pageHandler}
         page={page}
         pageLength={pageLength}
         showCount={5}
@@ -101,7 +110,7 @@ export default PostSection;
 const Container = styled.div`
   width: 80%;
   height: 600px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     width: 100%;
   }
 `;

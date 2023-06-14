@@ -49,7 +49,7 @@ const ListSection = styled.div`
   width: 180px;
   height: 600px;
   background-color: #c9d9f9;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     flex-direction: row;
     padding: 5px;
     width: 100%;

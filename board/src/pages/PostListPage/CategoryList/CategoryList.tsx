@@ -45,7 +45,7 @@ const List = styled.div<{ bgc: string }>`
     background-color: #7594dd;
     transition: 0.1s;
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     border-radius: 3px;
     margin: 2px;
     width: max-content;
