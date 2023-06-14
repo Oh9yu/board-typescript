@@ -16,6 +16,21 @@ const EditProfile = () => {
   const navigate = useNavigate();
   const token = getToken('TOKEN') || '';
 
+  console.log(editForm.profileImg);
+
+  //회원정보 수정 예외처리
+  const FormRequestData = () => {
+    if (editForm.profileImg === '') {
+      return { descriptions: editForm.descriptions };
+    } else if (editForm.descriptions === '') {
+      return { profileImage: editForm.profileImg };
+    } else
+      return {
+        profileImage: editForm.profileImg,
+        descriptions: editForm.descriptions,
+      };
+  };
+
   const modalHandler = () => {
     setIsOpen(prev => !prev);
   };
@@ -42,10 +57,7 @@ const EditProfile = () => {
     fetch(`${API.user}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', Authorization: token },
-      body: JSON.stringify({
-        profileImage: editForm.profileImg,
-        descriptions: editForm.descriptions,
-      }),
+      body: JSON.stringify(FormRequestData()),
     })
       .then(res => res.json())
       .then(res => {
