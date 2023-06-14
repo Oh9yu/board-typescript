@@ -5,7 +5,7 @@ const ProfileImage = ({ img }: any) => {
   return (
     <Container>
       {/* <ImageUpdate /> */}
-      <Image src={img === null ? 'images/user.png' : img} />
+      <Image src={img === null || img === '' ? 'images/user.png' : img} />
     </Container>
   );
 };

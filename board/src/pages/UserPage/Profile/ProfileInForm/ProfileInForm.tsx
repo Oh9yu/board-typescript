@@ -28,15 +28,14 @@ const Text = styled.p<{ fontSize: number }>`
   color: #555;
   font-size: ${props => props.fontSize}px;
 `;
-const Desc = styled.div`
-  display: flex;
-  align-items: center;
+const Desc = styled.p`
+  width: 100%;
   padding: 5px;
+  word-break: break-all;
   margin: 10px 0px;
-  min-height: 30px;
   border: 1px solid #738cd3;
   border-radius: 5px;
   @media screen and (max-width: 800px) {
-    min-width: 240px;
+    min-width: 280px;
   }
 `;
