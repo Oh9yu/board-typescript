@@ -4,6 +4,7 @@ import useOutSideClick from '../../../../utils/hook/useOutSideClick';
 import { API } from '../../../../config/config';
 import getToken from '../../../../utils/getToken';
 import { useNavigate } from 'react-router-dom';
+import EditPassWord from './EditPassWord';
 
 const EditProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,10 +39,6 @@ const EditProfile = () => {
 
   const profileEditHandler = () => {
     if (!editForm.profileImg && !editForm.descriptions) return;
-    console.log(`${API.user}`);
-
-    console.log(editForm.profileImg, editForm.descriptions);
-
     fetch(`${API.user}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', Authorization: token },
@@ -88,6 +85,7 @@ const EditProfile = () => {
             />
             <SubmitBtn onClick={profileEditHandler}>프로필 정보 변경</SubmitBtn>
           </FormSection>
+          <EditPassWord />
         </Modal>
       )}
       <ModalBtn onClick={modalHandler}>Edit</ModalBtn>
@@ -120,6 +118,7 @@ const Modal = styled.div`
   top: -300px;
   left: -40px;
   width: 800px;
+  padding: 20px;
   height: 500px;
   background-color: #fff;
   border: 2px solid #7594dd;
@@ -144,9 +143,8 @@ const PreviewSection = styled.section`
   width: 160px;
   height: 160px;
   border-radius: 80px;
-  border: 1px solid #111;
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 700px) {
     width: 120px;
     height: 120px;
   }
@@ -170,7 +168,7 @@ const ProfileBtn = styled.label`
   &:hover {
     background-color: #ccc;
   }
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 700px) {
     width: 30px;
     height: 30px;
     top: 80px;
@@ -183,10 +181,16 @@ const Title = styled.p`
 `;
 
 const Desc = styled.input`
+  padding-left: 5px;
+  height: 36px;
+  font-size: 12px;
+  border: 2px solid #7594dd;
+  border-radius: 5px;
   width: 300px;
-  height: 30px;
-  padding: 10px;
-  @media screen and (max-width: 800px) {
+  &:focus {
+    outline: none;
+  }
+  @media screen and (max-width: 700px) {
     width: 200px;
   }
 `;
@@ -195,4 +199,13 @@ const Uploadfile = styled.input`
   display: none;
 `;
 
-const SubmitBtn = styled.button``;
+const SubmitBtn = styled.button`
+  padding: 4px 5px;
+  border-radius: 5px;
+  border: none;
+  border: 1px solid #7594dd;
+  background-color: #c9d9f9;
+  &:hover {
+    background-color: #7594dd;
+  }
+`;
