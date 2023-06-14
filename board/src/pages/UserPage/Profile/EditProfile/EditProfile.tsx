@@ -85,7 +85,7 @@ const EditProfile = () => {
             />
             <SubmitBtn onClick={profileEditHandler}>프로필 정보 변경</SubmitBtn>
           </FormSection>
-          <EditPassWord />
+          <EditPassWord modalHandler={modalHandler} />
         </Modal>
       )}
       <ModalBtn onClick={modalHandler}>Edit</ModalBtn>

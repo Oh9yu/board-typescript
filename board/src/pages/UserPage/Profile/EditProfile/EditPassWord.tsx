@@ -2,10 +2,17 @@ import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import { AiFillEyeInvisible } from 'react-icons/ai';
 import { AiFillEye } from 'react-icons/ai';
+import { API } from '../../../../config/config';
+import getToken from '../../../../utils/getToken';
 
-const EditPassWord = () => {
+interface Props {
+  modalHandler: () => void;
+}
+
+const EditPassWord = ({ modalHandler }: Props) => {
   const [inputValue, setInputValue] = useState({ pw: '', newPw: '' });
   const [inputType, setinputType] = useState('password');
+  const token = getToken('TOKEN') || '';
 
   const visibleHandler = () => {
     if (inputType === 'password') {
@@ -16,6 +23,26 @@ const EditPassWord = () => {
   const inputHandler: React.ChangeEventHandler<HTMLInputElement> = e => {
     const { name, value } = e.target;
     setInputValue({ ...inputValue, [name]: value });
+  };
+
+  const submitHandler = () => {
+    fetch(`${API.updatePW}`, {
+      method: 'PATCH',
+      headers: { Authorization: token, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        password: inputValue.pw,
+        newPassword: inputValue.newPw,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'Successfully updated the password!') {
+          alert('비밀번호르 변경했습니다');
+          modalHandler();
+        } else if (res.message === 'Passed in wrong password') {
+          alert('비밀번호를 확인해주세요');
+        }
+      });
   };
 
   return (
@@ -45,6 +72,7 @@ const EditPassWord = () => {
           placeholder="변경 비밀번호"
         />
       </Wrap>
+      <SubmitBtn onClick={submitHandler}>비밀번호 변경</SubmitBtn>
     </EditForm>
   );
 };
@@ -99,5 +127,17 @@ const Input = styled.input`
   }
   @media screen and (max-width: 700px) {
     height: 30px;
+  }
+`;
+
+const SubmitBtn = styled.button`
+  margin-top: 8px;
+  padding: 4px 5px;
+  border-radius: 5px;
+  border: none;
+  border: 1px solid #7594dd;
+  background-color: #c9d9f9;
+  &:hover {
+    background-color: #7594dd;
   }
 `;
