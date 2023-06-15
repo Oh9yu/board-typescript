@@ -4,12 +4,16 @@ import styled from 'styled-components';
 interface Props {
   views: number;
   name: string;
+  profileImg: string;
 }
 
-const PostSubHeader = ({ views, name }: Props) => {
+const PostSubHeader = ({ views, name, profileImg }: Props) => {
   return (
     <Container>
-      <Text fontSize={20}>{name}</Text>
+      <Section>
+        <Img src={profileImg ? profileImg : 'images/user.png'} />
+        <Text fontSize={20}>{name ? name : 'Unknown'}</Text>
+      </Section>
       <Section>
         <Text fontSize={14}>조회수 {views}</Text>
       </Section>
@@ -26,6 +30,13 @@ const Container = styled.div`
   padding: 10px 30px;
   height: 40px;
   border-bottom: 1px solid #7594dd;
+`;
+
+const Img = styled.img`
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  margin-right: 10px;
 `;
 
 const Text = styled.div<{ fontSize: number }>`

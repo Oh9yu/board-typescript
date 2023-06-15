@@ -55,6 +55,9 @@ const PostPage = () => {
       .then(res => res.json())
       .then(data => setData(data));
   }, [id]);
+
+  console.log(data);
+
   return (
     <Container>
       {data && (
@@ -63,6 +66,7 @@ const PostPage = () => {
           createdAt={data.post.createdAt}
           name={data.author.name}
           views={data.post.views}
+          profileImg={data.author.profileImage}
         />
       )}
       {data?.user.modifyAllowed && (

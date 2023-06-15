@@ -19,12 +19,6 @@ interface TopLikePosts {
 const LikesCountPosts = ({ data }: Props) => {
   const navigate = useNavigate();
 
-  const clickHandler = () => {
-    console.log('aesdf');
-
-    navigate('/postpage');
-  };
-
   return (
     <Container>
       <Title>추천수 TOP</Title>
@@ -32,7 +26,12 @@ const LikesCountPosts = ({ data }: Props) => {
         {data &&
           data.map(data => {
             return (
-              <Section key={data.postId} onClick={clickHandler}>
+              <Section
+                key={data.postId}
+                onClick={() => {
+                  navigate(`/postpage/${data.postId}`);
+                }}
+              >
                 <MainContents>
                   <LikeBox>
                     <LikeImg src="images/like.png" />

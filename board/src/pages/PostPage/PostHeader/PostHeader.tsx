@@ -8,9 +8,10 @@ interface Props {
   createdAt: string;
   name: string;
   views: number;
+  profileImg: string;
 }
 
-const PostHeader = ({ title, createdAt, name, views }: Props) => {
+const PostHeader = ({ title, createdAt, name, views, profileImg }: Props) => {
   const postTime = useCreatedAt(createdAt);
 
   return (
@@ -23,7 +24,7 @@ const PostHeader = ({ title, createdAt, name, views }: Props) => {
           {postTime}
         </Text>
       </Header>
-      <PostSubHeader name={name} views={views} />
+      <PostSubHeader name={name} views={views} profileImg={profileImg} />
     </>
   );
 };
