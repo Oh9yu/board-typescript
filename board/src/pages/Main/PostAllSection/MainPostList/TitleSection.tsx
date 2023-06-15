@@ -37,16 +37,6 @@ const TitleSection = ({ data }: { data: Props }) => {
     });
   };
 
-  const subHandler = () => {
-    navigate('/postlist', {
-      state: {
-        categoryName: data.subCatName,
-        queryType: 'subCatId',
-        mainCatId: data.mainCatId,
-        subCatId: data.subCatId,
-      },
-    });
-  };
   return (
     <Container>
       <Img src={img} />
@@ -58,11 +48,11 @@ const TitleSection = ({ data }: { data: Props }) => {
           <Text fontSize={12} color="#777" onClick={mainHandler}>
             {data.mainCatName}
           </Text>
-          <Text fontSize={12} color="#777" onClick={subHandler}>
+          <Text fontSize={12} color="#777">
             {data.subCatName}
           </Text>
         </Wrapper>
-        <Text fontSize={12}>{data.name}</Text>
+        <Text fontSize={12}>{data.name ? data.name : 'Unknown'}</Text>
       </ColumnWrapper>
     </Container>
   );

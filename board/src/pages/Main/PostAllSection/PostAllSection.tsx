@@ -6,6 +6,10 @@ import MainPostList from './MainPostList/MainPostList';
 import Pagenation from '../../../components/Pagenation/Pagenation';
 import getFetch from '../../../utils/dataFetch/getFetch';
 
+interface DataType {
+  totalCount: number;
+  data: Data[];
+}
 interface Data {
   accountId: string;
   mainCatId: string;
@@ -23,15 +27,9 @@ interface Data {
   subCatName: string;
 }
 
-interface DataType {
-  totalCount: number;
-  data: Data[];
-}
-
 const PostAllSection = () => {
   const [page, setPage] = useState(1);
-  const queryClient = useQueryClient();
-  const { data, isError } = useQuery<DataType>(
+  const { data } = useQuery<DataType>(
     ['postLists', page],
     () => {
       return getFetch(`${API.post}/list?page=${page}`);

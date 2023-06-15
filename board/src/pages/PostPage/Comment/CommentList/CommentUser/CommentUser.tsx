@@ -21,8 +21,8 @@ const CommentUser = ({ name, profileImg, accountId }: Props) => {
       }}
     >
       <Profile src={profileImg ? profileImg : 'images/user.png'} />
-      {name}
-      {modal && <UserModal accountId={accountId} />}
+      {name ? name : 'Unknown'}
+      {modal && name && <UserModal accountId={accountId} />}
     </User>
   );
 };

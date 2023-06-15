@@ -12,28 +12,25 @@ import getFetch from '../../utils/dataFetch/getFetch';
 
 const UserPage = () => {
   const [userdata, setUserData] = useState<any>([]);
-  const [postData, setPostData] = useState<any>([]);
   const [page, setPage] = useState(1);
   const token = getToken('TOKEN') || '';
   const location = useLocation();
 
   const accountId = location.state === null ? '' : location.state.accountId;
-  const pageLength = postData ? Math.ceil(postData.totalCount / 5) : 0;
 
-  useQuery<any>(['userPosting', page], async () => {
+  const { data, isLoading } = useQuery<any>(['userPosting', page], async () => {
     if (accountId === '') {
       const response = await fetch(`${API.post}/mine/page/${page}`, {
         headers: { Authorization: token },
       });
       const data = await response.json();
-      setPostData(data);
       return data;
     } else {
       const response = await fetch(
         `${API.post}/user/page/${page}?accountId=${accountId}`
       );
       const data = await response.json();
-      setPostData(data);
+
       return data;
     }
   });
@@ -52,7 +49,11 @@ const UserPage = () => {
     }
   }, []);
 
-  console.log(postData.data.length);
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
+
+  const pageLength = Math.ceil(data.totalCount / 5);
 
   return (
     <Container>
@@ -67,21 +68,20 @@ const UserPage = () => {
           likes="좋아요"
           createdAt="날짜"
         />
-        {postData &&
-          postData.data?.map((data: any) => {
-            return (
-              <PostList
-                key={data.postId}
-                postId={data.postId}
-                title={data.title}
-                name={data.name}
-                createdAt={data.createdAt}
-                views={data.views}
-                likes={data.likes}
-              />
-            );
-          })}
-        {postData.data.length > 0 && (
+        {data.data.map((data: any) => {
+          return (
+            <PostList
+              key={data.postId}
+              postId={data.postId}
+              title={data.title}
+              name={data.name}
+              createdAt={data.createdAt}
+              views={data.views}
+              likes={data.likes}
+            />
+          );
+        })}
+        {data.data.length > 0 && (
           <Pagenation
             setPage={page => {
               setPage(page);
