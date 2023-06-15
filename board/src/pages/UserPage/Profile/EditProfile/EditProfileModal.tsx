@@ -5,6 +5,8 @@ import { API } from '../../../../config/config';
 import getToken from '../../../../utils/getToken';
 import { useNavigate } from 'react-router-dom';
 import EditPassWord from './EditPassWord';
+import DeleteAccount from './DeleteAccount';
+import { MdAddCircle } from 'react-icons/md';
 
 const EditProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,8 +17,6 @@ const EditProfile = () => {
   });
   const navigate = useNavigate();
   const token = getToken('TOKEN') || '';
-
-  console.log(editForm.profileImg);
 
   //회원정보 수정 예외처리
   const FormRequestData = () => {
@@ -80,7 +80,9 @@ const EditProfile = () => {
                   editForm.profileImg ? editForm.profileImg : 'images/user.png'
                 }
               />
-              <ProfileBtn htmlFor="imgUpload" />
+              <ProfileBtn htmlFor="imgUpload">
+                <MdAddCircle size={40} />
+              </ProfileBtn>
             </PreviewSection>
             <Uploadfile
               type="file"
@@ -98,6 +100,7 @@ const EditProfile = () => {
             <SubmitBtn onClick={profileEditHandler}>프로필 정보 변경</SubmitBtn>
           </FormSection>
           <EditPassWord modalHandler={modalHandler} />
+          <DeleteAccount />
         </Modal>
       )}
       <ModalBtn onClick={modalHandler}>Edit</ModalBtn>
@@ -170,15 +173,18 @@ const Img = styled.img`
 
 const ProfileBtn = styled.label`
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 20px;
   top: 110px;
   right: 5px;
   width: 40px;
   height: 40px;
-  background-color: #ddd;
+  background-color: #eee;
   cursor: pointer;
   &:hover {
-    background-color: #ccc;
+    background-color: #ddd;
   }
   @media screen and (max-width: 700px) {
     width: 30px;

@@ -52,6 +52,8 @@ const UserPage = () => {
     }
   }, []);
 
+  console.log(postData.data.length);
+
   return (
     <Container>
       <Section width={240}>
@@ -79,14 +81,16 @@ const UserPage = () => {
               />
             );
           })}
-        <Pagenation
-          setPage={page => {
-            setPage(page);
-          }}
-          page={page}
-          pageLength={pageLength}
-          showCount={5}
-        />
+        {postData.data.length > 0 && (
+          <Pagenation
+            setPage={page => {
+              setPage(page);
+            }}
+            page={page}
+            pageLength={pageLength}
+            showCount={5}
+          />
+        )}
       </Section>
     </Container>
   );

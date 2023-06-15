@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ProfileImage from './ProfileImage/ProfileImage';
 import ProfileInForm from './ProfileInForm/ProfileInForm';
-import EditProfile from './EditProfile/EditProfile';
+import EditProfile from './EditProfile/EditProfileModal';
 
 const Profile = ({ userdata, modifyAllow }: any) => {
-  console.log('userdata: ', userdata);
-
   return (
     <Container>
       <ProfileImage img={userdata.profileImage} />
