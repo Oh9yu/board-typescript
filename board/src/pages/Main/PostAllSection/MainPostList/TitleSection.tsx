@@ -37,6 +37,15 @@ const TitleSection = ({ data }: { data: Props }) => {
     });
   };
 
+  const userHandler = () => {
+    if (!data.name) return;
+    navigate('/userpage', {
+      state: {
+        accountId: data.accountId,
+      },
+    });
+  };
+
   return (
     <Container>
       <Img src={img} />
@@ -52,7 +61,9 @@ const TitleSection = ({ data }: { data: Props }) => {
             {data.subCatName}
           </Text>
         </Wrapper>
-        <Text fontSize={12}>{data.name ? data.name : 'Unknown'}</Text>
+        <Text fontSize={12} onClick={userHandler}>
+          {data.name ? data.name : 'Unknown'}
+        </Text>
       </ColumnWrapper>
     </Container>
   );

@@ -8,8 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import getFetch from '../../../utils/dataFetch/getFetch';
 
 interface Props {
-  status: string | undefined;
-  mainCatId: string;
+  catId: string | undefined;
   queryType: string | undefined;
   page: number;
   pageHandler: (page: number) => void;
@@ -36,23 +35,17 @@ interface Data {
   subCatName: string;
 }
 
-const PostSection = ({
-  status,
-  mainCatId,
-  queryType,
-  page,
-  pageHandler,
-}: Props) => {
+const PostSection = ({ catId, queryType, page, pageHandler }: Props) => {
   const [postData, setPostData] = useState<DataType>();
 
-  console.log(status);
+  console.log(';', catId);
   console.log(queryType);
 
-  const { data } = useQuery<DataType>(['subPostLists', [page, status]], () => {
+  const { data } = useQuery<DataType>(['subPostLists', [page, catId]], () => {
     if (!queryType) {
-      return getFetch(`${API.post}/list?mainCatId=${mainCatId}&page=${page}`);
+      return getFetch(`${API.post}/list?mainCatId=${catId}&page=${page}`);
     } else
-      return getFetch(`${API.post}/list?${queryType}=${status}&page=${page}`);
+      return getFetch(`${API.post}/list?${queryType}=${catId}&page=${page}`);
   });
 
   console.log(page);

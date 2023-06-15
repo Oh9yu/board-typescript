@@ -35,7 +35,7 @@ const PostList = ({
         </Text>
       </Section>
       <Section>
-        <Text width={20}>{name}</Text>
+        <Text width={20}>{name ? name : 'Unknown'}</Text>
         <Text width={40}>{postTime}</Text>
         <Text width={15}>{views}</Text>
         <Text width={15}>{likes}</Text>
@@ -61,11 +61,11 @@ const Section = styled.section`
   width: 50%;
 `;
 
-const Text = styled.p<{ width: number }>`
+const Text = styled.div<{ width: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${props => props.width}%;
+  max-width: ${props => props.width}px;
   font-size: 14px;
   cursor: pointer;
   @media screen and (max-width: 600px) {

@@ -21,8 +21,6 @@ const PostListPage = () => {
   };
   const [page, setPage] = useState(1);
 
-  console.log(mainCat);
-
   const pageHandler = (page: number) => {
     setPage(page);
   };
@@ -72,9 +70,8 @@ const PostListPage = () => {
           statusHandler={statusHandler}
         />
         <PostSection
-          status={status.subCatId}
+          catId={status.subCatId ? status.subCatId : mainCat.mainCatId}
           queryType={status.queryType}
-          mainCatId={mainCat.mainCatId}
           page={page}
           pageHandler={pageHandler}
         />
@@ -96,7 +93,7 @@ const Container = styled.div`
 
 const Section = styled.section`
   margin: auto;
-  width: 1024px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   @media screen and (max-width: 700px) {
