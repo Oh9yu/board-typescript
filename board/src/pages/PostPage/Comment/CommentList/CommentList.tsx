@@ -20,6 +20,7 @@ interface Props {
   likes: number;
   replyCount: number;
   profileImg: string;
+  commentId: string;
   accountId: string;
 }
 
@@ -32,6 +33,7 @@ const CommentList = ({
   likes,
   replyCount,
   profileImg,
+  commentId,
   accountId,
 }: Props) => {
   const commentTime = useCreatedAt(createdAt);
@@ -42,14 +44,14 @@ const CommentList = ({
   const replyHandler = () => {
     setIsOpen(prev => !prev);
     if (replyCount === 0) return;
-    fetch(`${API.comment}/reply?commentId=${id}`, {
+    fetch(`${API.comment}/reply?commentId=${commentId}`, {
       headers: { Authorization: token },
     })
       .then(res => res.json())
       .then(data => setReplyData(data));
   };
 
-  console.log(`${API.comment}/reply?commentId=${id}`);
+  // console.log(`${API.comment}/reply?commentId=${1}`);
 
   return (
     <List>

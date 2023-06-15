@@ -30,5 +30,5 @@ const Container = styled.div`
   justify-content: space-between;
   margin: auto;
   margin-top: 20px;
-  width: 1024px;
+  width: 95%;
 `;

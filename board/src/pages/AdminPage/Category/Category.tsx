@@ -40,6 +40,7 @@ const Container = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   padding-top: 20px;
+  margin: auto;
   width: 800px;
   border: 2px solid #738cd3;
 `;

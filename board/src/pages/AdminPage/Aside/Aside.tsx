@@ -39,6 +39,12 @@ const Container = styled.div`
   padding: 5px;
   background-color: #fff;
   border: 2px solid #738cd3;
+  @media screen and (max-width: 1024px) {
+    margin: auto;
+    flex-direction: row;
+    width: 100%;
+    min-height: max-content;
+  }
 `;
 
 const ListBox = styled.div<{ bgc: string }>`
@@ -54,5 +60,8 @@ const ListBox = styled.div<{ bgc: string }>`
   cursor: pointer;
   &:hover {
     background-color: #9ab2eb;
+  }
+  @media screen and (max-width: 1024px) {
+    margin: 5px;
   }
 `;
