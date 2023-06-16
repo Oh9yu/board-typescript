@@ -8,7 +8,11 @@ import DeleteMainCategory from './CategoryFuctions/DeleteMainCategory';
 import EditSubCategory from './CategoryFuctions/EditSubCategory';
 import DeleteSubCategory from './CategoryFuctions/DeleteSubCategory';
 
-const Category = () => {
+interface Props {
+  setPage: (arg: string) => void;
+}
+
+const Category = ({ setPage }: Props) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -17,17 +21,21 @@ const Category = () => {
       .then(data => setData(data));
   }, []);
 
+  const successHandler = () => {
+    setPage('');
+  };
+
   return (
     <Container>
       <Section>
-        <CreateMainCategory />
-        <EditMainCategory data={data} />
-        <DeleteMainCategory data={data} />
+        <CreateMainCategory onSuccess={successHandler} />
+        <EditMainCategory data={data} onSuccess={successHandler} />
+        <DeleteMainCategory data={data} onSuccess={successHandler} />
       </Section>
       <Section>
-        <CreateSubCategory data={data} />
-        <EditSubCategory data={data} />
-        <DeleteSubCategory data={data} />
+        <CreateSubCategory data={data} onSuccess={successHandler} />
+        <EditSubCategory data={data} onSuccess={successHandler} />
+        <DeleteSubCategory data={data} onSuccess={successHandler} />
       </Section>
     </Container>
   );

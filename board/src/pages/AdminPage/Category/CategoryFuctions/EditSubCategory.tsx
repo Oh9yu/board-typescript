@@ -11,6 +11,7 @@ type MainCat = {
 
 type Props = {
   data: MainCat[];
+  onSuccess: () => void;
 };
 
 type SubCategory = {
@@ -18,7 +19,7 @@ type SubCategory = {
   subCatName: string;
 };
 
-const EditSubCategory = ({ data }: Props) => {
+const EditSubCategory = ({ data, onSuccess }: Props) => {
   const [subCat, setSubCat] = useState<SubCategory[]>([]);
   const token = getToken('TOKEN');
   const [options, setOptions] = useState('');
@@ -51,8 +52,8 @@ const EditSubCategory = ({ data }: Props) => {
         if (res.message.includes('already exists')) {
           alert(res.message);
         } else alert(res.message);
-      });
-    setInputValue('');
+      })
+      .then(() => onSuccess());
   };
 
   return (

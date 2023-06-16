@@ -4,7 +4,11 @@ import Button from '../../../../components/Button/Button';
 import { API } from '../../../../config/config';
 import getToken from '../../../../utils/getToken';
 
-const CreateMainCategory = () => {
+interface Props {
+  onSuccess: () => void;
+}
+
+const CreateMainCategory = ({ onSuccess }: Props) => {
   const token = getToken('TOKEN');
   const [inputValue, setInputValue] = useState('');
 
@@ -18,8 +22,8 @@ const CreateMainCategory = () => {
       body: JSON.stringify({ mainCatName: inputValue }),
     })
       .then(response => response.json())
-      .then(res => alert(res.message));
-    setInputValue('');
+      .then(res => alert(res.message))
+      .then(() => onSuccess());
   };
 
   return (

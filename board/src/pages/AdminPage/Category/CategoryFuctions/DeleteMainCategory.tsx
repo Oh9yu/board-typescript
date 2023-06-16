@@ -11,9 +11,10 @@ type MainCat = {
 
 type Props = {
   data: MainCat[];
+  onSuccess: () => void;
 };
 
-const DeleteMainCategory = ({ data }: Props) => {
+const DeleteMainCategory = ({ data, onSuccess }: Props) => {
   const token = getToken('TOKEN');
   const [options, setOptions] = useState('');
 
@@ -27,7 +28,8 @@ const DeleteMainCategory = ({ data }: Props) => {
       body: JSON.stringify({ mainCatId: options }),
     })
       .then(res => res.json())
-      .then(res => alert(res.message));
+      .then(res => alert(res.message))
+      .then(() => onSuccess());
   };
 
   useEffect(() => {

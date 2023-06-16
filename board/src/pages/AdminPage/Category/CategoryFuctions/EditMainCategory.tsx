@@ -11,9 +11,10 @@ type MainCat = {
 
 type Props = {
   data: MainCat[];
+  onSuccess: () => void;
 };
 
-const EditMainCategory = ({ data }: Props) => {
+const EditMainCategory = ({ data, onSuccess }: Props) => {
   const token = getToken('TOKEN');
   const [options, setOptions] = useState('');
   const [inputValue, setInputValue] = useState('');
@@ -32,8 +33,8 @@ const EditMainCategory = ({ data }: Props) => {
         if (res.message.includes('already exists')) {
           alert(res.message);
         } else alert(res.message);
-      });
-    setInputValue('');
+      })
+      .then(() => onSuccess());
   };
 
   useEffect(() => {

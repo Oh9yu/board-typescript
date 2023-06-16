@@ -11,9 +11,10 @@ type MainCat = {
 
 type Props = {
   data: MainCat[];
+  onSuccess: () => void;
 };
 
-const CreateSubCategory = ({ data }: Props) => {
+const CreateSubCategory = ({ data, onSuccess }: Props) => {
   const token = getToken('TOKEN');
   const [options, setOptions] = useState('');
   const [inputValue, setInputValue] = useState('');
@@ -28,8 +29,8 @@ const CreateSubCategory = ({ data }: Props) => {
       body: JSON.stringify({ subCatName: inputValue, mainCatId: options }),
     })
       .then(response => response.json())
-      .then(res => alert(res.message));
-    setInputValue('');
+      .then(res => alert(res.message))
+      .then(() => onSuccess());
   };
 
   useEffect(() => {

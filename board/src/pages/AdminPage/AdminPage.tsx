@@ -17,7 +17,7 @@ const AdminPage = () => {
     <Container>
       <Aside page={page} asideClick={asideClick} />
       {page === 'UserList' ? <UserList /> : null}
-      {page === 'Category' ? <Category /> : null}
+      {page === 'Category' ? <Category setPage={asideClick} /> : null}
     </Container>
   );
 };

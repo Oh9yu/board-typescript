@@ -11,6 +11,7 @@ type MainCat = {
 
 type Props = {
   data: MainCat[];
+  onSuccess: () => void;
 };
 
 type SubCategory = {
@@ -18,7 +19,7 @@ type SubCategory = {
   subCatName: string;
 };
 
-const DeleteSubCategory = ({ data }: Props) => {
+const DeleteSubCategory = ({ data, onSuccess }: Props) => {
   const [subCat, setSubCat] = useState<SubCategory[]>([]);
   const token = getToken('TOKEN');
   const [options, setOptions] = useState('');
@@ -46,7 +47,8 @@ const DeleteSubCategory = ({ data }: Props) => {
       }),
     })
       .then(response => response.json())
-      .then(res => alert(res.message));
+      .then(res => alert(res.message))
+      .then(() => onSuccess());
   };
 
   return (
