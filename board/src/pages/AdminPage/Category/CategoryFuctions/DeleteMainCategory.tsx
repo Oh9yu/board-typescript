@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import getToken from '../../../../utils/getToken';
 import Button from '../../../../components/Button/Button';
@@ -17,8 +17,6 @@ const DeleteMainCategory = ({ data }: Props) => {
   const token = getToken('TOKEN');
   const [options, setOptions] = useState('');
 
-  console.log(options);
-
   const buttonHandler = () => {
     fetch(`${API.category}/admin`, {
       method: 'DELETE',
@@ -31,6 +29,11 @@ const DeleteMainCategory = ({ data }: Props) => {
       .then(res => res.json())
       .then(res => alert(res.message));
   };
+
+  useEffect(() => {
+    setOptions(data[0]?.mainCatId);
+  }, [data]);
+
   return (
     <Container>
       <Title>Delete Main Category</Title>
@@ -66,6 +69,9 @@ const Container = styled.div`
   border: 2px solid #9ab2eb;
   padding: 10px;
   border-radius: 5px;
+  @media screen and (max-width: 800px) {
+    width: 240px;
+  }
 `;
 const Title = styled.p`
   color: #555;

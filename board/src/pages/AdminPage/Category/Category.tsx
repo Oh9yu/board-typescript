@@ -37,12 +37,16 @@ export default Category;
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   padding-top: 20px;
   margin: auto;
+  min-height: 600px;
   width: 800px;
   border: 2px solid #738cd3;
+  @media screen and (max-width: 1024px) {
+    width: 80%;
+  }
 `;
 
 const Section = styled.div`
@@ -50,4 +54,8 @@ const Section = styled.div`
   flex-direction: column;
   align-items: center;
   width: 350px;
+  margin: 5px;
+  @media screen and (max-width: 1024px) {
+    width: 240px;
+  }
 `;

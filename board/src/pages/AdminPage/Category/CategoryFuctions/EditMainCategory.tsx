@@ -36,6 +36,10 @@ const EditMainCategory = ({ data }: Props) => {
     setInputValue('');
   };
 
+  useEffect(() => {
+    setOptions(data[0]?.mainCatId);
+  }, [data]);
+
   return (
     <Container>
       <Title>Edit Main Category</Title>
@@ -80,6 +84,9 @@ const Container = styled.div`
   border: 2px solid #9ab2eb;
   padding: 10px;
   border-radius: 5px;
+  @media screen and (max-width: 800px) {
+    width: 240px;
+  }
 `;
 
 const Title = styled.p`

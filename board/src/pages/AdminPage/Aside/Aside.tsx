@@ -40,9 +40,10 @@ const Container = styled.div`
   background-color: #fff;
   border: 2px solid #738cd3;
   @media screen and (max-width: 1024px) {
-    margin: auto;
+    flex-wrap: wrap;
+    margin: 10px auto;
     flex-direction: row;
-    width: 100%;
+    width: 80%;
     min-height: max-content;
   }
 `;
