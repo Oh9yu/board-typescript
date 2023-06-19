@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { API } from '../../config/config';
 import Aside from './Aside/Aside';
-import UserList from './UserList/UserList';
+import UserList from './UserLists/UserListSection';
 import Category from './Category/Category';
 
 const AdminPage = () => {
   const [page, setPage] = useState('');
-  const token = localStorage.getItem('TOKEN');
 
   const asideClick = (pageName: string) => {
     setPage(pageName);
