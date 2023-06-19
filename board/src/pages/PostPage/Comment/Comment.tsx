@@ -7,6 +7,7 @@ import CommentList from './CommentList/CommentList';
 import CommentEditor from './CommentEditor/CommentEditor';
 
 import getFetch from '../../../utils/dataFetch/getFetch';
+import Spinner from '../../../components/Spinner/Spinner';
 
 interface DataType {
   comment: CommentType;
@@ -71,7 +72,7 @@ const Comment = () => {
     return () => observer.disconnect();
   }, [commentRef]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Spinner />;
 
   return (
     <Container>

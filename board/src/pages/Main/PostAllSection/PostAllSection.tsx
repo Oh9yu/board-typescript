@@ -5,6 +5,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import MainPostList from './MainPostList/MainPostList';
 import Pagenation from '../../../components/Pagenation/Pagenation';
 import getFetch from '../../../utils/dataFetch/getFetch';
+import Spinner from '../../../components/Spinner/Spinner';
 
 interface DataType {
   totalCount: number;
@@ -41,7 +42,7 @@ const PostAllSection = () => {
   );
   const pageLength = data ? Math.ceil(data.totalCount / 5) : 0;
 
-  if (!data) return <div>로딩</div>;
+  if (!data) return <Spinner />;
 
   return (
     <Container>

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { API } from '../../../config/config';
 import CategoryList from './CategoryList';
 import getFetch from '../../../utils/dataFetch/getFetch';
+import Spinner from '../../../components/Spinner/Spinner';
 
 type CategoryType = {
   mainCatName: string;
@@ -21,7 +22,7 @@ const Category = () => {
     }
   );
 
-  if (isLoading) return <div>loading</div>;
+  if (isLoading) return <Spinner />;
 
   return (
     <Container>

@@ -8,15 +8,14 @@ import PostHeader from '../PostListPage/PostSection/PostHeader/PostHeader';
 import { useLocation } from 'react-router-dom';
 import Pagenation from '../../components/Pagenation/Pagenation';
 import { useQuery } from '@tanstack/react-query';
-import getFetch from '../../utils/dataFetch/getFetch';
+import { BarLoader } from 'react-spinners';
+import Spinner from '../../components/Spinner/Spinner';
 
 const UserPage = () => {
   const [userdata, setUserData] = useState<any>([]);
   const [page, setPage] = useState(1);
   const token = getToken('TOKEN') || '';
   const location = useLocation();
-
-  // const isModifyAllow = token !== '' ? { Authorization: token } : undefined;
 
   const accountId = location.state === null ? '' : location.state.accountId;
 
@@ -54,7 +53,7 @@ const UserPage = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <Spinner />;
   }
 
   const pageLength = Math.ceil(data.totalCount / 5);
