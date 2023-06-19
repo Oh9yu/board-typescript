@@ -16,6 +16,8 @@ const UserPage = () => {
   const token = getToken('TOKEN') || '';
   const location = useLocation();
 
+  // const isModifyAllow = token !== '' ? { Authorization: token } : undefined;
+
   const accountId = location.state === null ? '' : location.state.accountId;
 
   const { data, isLoading } = useQuery<any>(['userPosting', page], async () => {
@@ -43,7 +45,9 @@ const UserPage = () => {
         .then(res => res.json())
         .then(data => setUserData(data));
     } else {
-      fetch(`${API.userpage}?accountId=${accountId}`)
+      fetch(`${API.userpage}?accountId=${accountId}`, {
+        headers: { Authorization: token },
+      })
         .then(res => res.json())
         .then(data => setUserData(data));
     }
@@ -68,7 +72,7 @@ const UserPage = () => {
           likes="좋아요"
           createdAt="날짜"
         />
-        {data.data.map((data: any) => {
+        {data.data?.map((data: any) => {
           return (
             <PostList
               key={data.postId}
@@ -81,7 +85,7 @@ const UserPage = () => {
             />
           );
         })}
-        {data.data.length > 0 && (
+        {data.data?.length > 0 && (
           <Pagenation
             setPage={page => {
               setPage(page);
