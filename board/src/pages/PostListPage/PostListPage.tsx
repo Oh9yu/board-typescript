@@ -4,12 +4,14 @@ import styled from 'styled-components';
 import PostCategory from './PostCategory/PostCategory';
 import PostSection from './PostSection/PostSection';
 import Button from '../../components/Button/Button';
+import SubCatRequest from './SubCatRequest/SubCatRequest';
 
 type StatusHandlerType = (name: string, id: string) => void;
 
 const PostListPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
   const [status, setStatus] = useState({
     name: location.state.categoryName,
     queryType: location.state.queryType,
@@ -20,6 +22,7 @@ const PostListPage = () => {
     mainCatId: location.state.mainCatId,
   };
   const [page, setPage] = useState(1);
+  const [isOpen, setIsOpen] = useState(false);
 
   const pageHandler = (page: number) => {
     setPage(page);
@@ -44,10 +47,28 @@ const PostListPage = () => {
     });
   };
 
+  const openHandler = () => {
+    setIsOpen(prev => !prev);
+  };
+
   return (
     <Container>
-      <Title onClick={listAll}>{location.state.categoryName}</Title>
+      <TitleSection>
+        <Title onClick={listAll}>{location.state.categoryName}</Title>
+      </TitleSection>
       <Section>
+        {(status.queryType === 'mainCatId' ||
+          status.queryType === undefined) && (
+          <SubCat>
+            <Button name="카테고리 신청" onClick={openHandler} />
+            {isOpen && (
+              <SubCatRequest
+                openHandler={openHandler}
+                mainCatId={mainCat.mainCatId}
+              />
+            )}
+          </SubCat>
+        )}
         {status.name.length > 0 && status.name !== mainCat.name && (
           <SubCat>
             {status.name}
@@ -101,19 +122,29 @@ const Section = styled.section`
   }
 `;
 
-const Title = styled.div`
+const TitleSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100px;
-  font-size: 36px;
   color: #333;
-  cursor: pointer;
   @media screen and (max-width: 600px) {
     height: 50px;
+  }
+`;
+
+const Title = styled.p`
+  font-size: 36px;
+  cursor: pointer;
+  @media screen and (max-width: 600px) {
     font-size: 18px;
   }
+`;
+
+const RefWrapper = styled.div`
+  position: absolute;
+  background-color: #111;
 `;
 
 const SubCat = styled.div`
@@ -126,7 +157,7 @@ const SubCat = styled.div`
   width: 180px;
   height: 50px;
   font-size: 18px;
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 600px) {
     padding-left: 20px;
     top: 5px;
     justify-content: space-around;

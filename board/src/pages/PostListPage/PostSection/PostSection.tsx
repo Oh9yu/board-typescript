@@ -36,32 +36,12 @@ interface Data {
 }
 
 const PostSection = ({ catId, queryType, page, pageHandler }: Props) => {
-  const [postData, setPostData] = useState<DataType>();
-
-  console.log(';', catId);
-  console.log(queryType);
-
   const { data } = useQuery<DataType>(['subPostLists', [page, catId]], () => {
     if (!queryType) {
       return getFetch(`${API.post}/list?mainCatId=${catId}&page=${page}`);
     } else
       return getFetch(`${API.post}/list?${queryType}=${catId}&page=${page}`);
   });
-
-  console.log(page);
-
-  // useEffect(() => {
-  //   if (!queryType || queryType === undefined) return;
-  //   fetch(`${API.post}/list?${queryType}=${status}&page=${page}`)
-  //     .then(res => res.json())
-  //     .then(data => setPostData(data));
-  // }, [status, page]);
-
-  // useEffect(() => {
-  //   fetch(`${API.post}/list?mainCatId=${mainCatId}${page}`)
-  //     .then(res => res.json())
-  //     .then(data => setPostData(data));
-  // }, [page]);
 
   const pageLength = data ? Math.ceil(data.totalCount / 5) : 0;
 
