@@ -35,7 +35,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 200px;
-  min-height: 600px;
+  height: 600px;
   padding: 5px;
   background-color: #fff;
   border: 2px solid #738cd3;
@@ -44,7 +44,7 @@ const Container = styled.div`
     margin: 10px auto;
     flex-direction: row;
     width: 80%;
-    min-height: max-content;
+    height: max-content;
   }
 `;
 

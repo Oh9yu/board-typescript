@@ -25,7 +25,14 @@ const UserCard = ({ userData, setPage }: any) => {
       }),
     })
       .then(res => res.json())
-      .then(() => setPage(''));
+      .then(res => {
+        if (res.message === 'Passed in wrong password') {
+          alert('비밀번호를 확인해주세요');
+        } else {
+          alert('변경했습니다');
+          setPage('');
+        }
+      });
   };
 
   return (
