@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { API } from '../../../config/config';
 import CategoryList from '../CategoryList/CategoryList';
+import Spinner from '../../../components/Spinner/Spinner';
 
 interface Props {
   mainCatId: string;
@@ -22,6 +23,8 @@ const PostCategory = ({ mainCatId, name, statusHandler }: Props) => {
       .then(res => res.json())
       .then(data => setCategory(data));
   }, []);
+
+  if (!category) return <Spinner />;
 
   return (
     <ListSection>

@@ -6,6 +6,7 @@ import PostHeader from './PostHeader/PostHeader';
 import Pagenation from '../../../components/Pagenation/Pagenation';
 import { useQuery } from '@tanstack/react-query';
 import getFetch from '../../../utils/dataFetch/getFetch';
+import Spinner from '../../../components/Spinner/Spinner';
 
 interface Props {
   catId: string | undefined;
@@ -44,6 +45,8 @@ const PostSection = ({ catId, queryType, page, pageHandler }: Props) => {
   });
 
   const pageLength = data ? Math.ceil(data.totalCount / 5) : 0;
+
+  if (!data) return <Spinner />;
 
   return (
     <Container>
