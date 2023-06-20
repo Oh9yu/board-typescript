@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { API } from '../../../config/config';
 import getToken from '../../../utils/getToken';
-import UserList from './UserCard';
+import UserCard from './UserCard';
+
+interface Props {
+  setPage: (arg: string) => void;
+}
 
 type UserData = User[];
 
@@ -20,7 +24,7 @@ interface User {
   __v?: number;
 }
 
-const UserListSection = () => {
+const UserListSection = ({ setPage }: Props) => {
   const [userData, setUserData] = useState<UserData>([]);
   const token = getToken('TOKEN') || '';
 
@@ -34,8 +38,8 @@ const UserListSection = () => {
 
   return (
     <Container>
-      {userData?.map((data: User) => {
-        return <UserList key={data._id} userData={data} />;
+      {userData?.splice(1).map((data: User) => {
+        return <UserCard key={data._id} userData={data} setPage={setPage} />;
       })}
     </Container>
   );

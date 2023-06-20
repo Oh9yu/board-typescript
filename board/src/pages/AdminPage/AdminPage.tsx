@@ -15,7 +15,7 @@ const AdminPage = () => {
   return (
     <Container>
       <Aside page={page} asideClick={asideClick} />
-      {page === 'UserList' ? <UserList /> : null}
+      {page === 'UserList' ? <UserList setPage={asideClick} /> : null}
       {page === 'Category' ? <Category setPage={asideClick} /> : null}
     </Container>
   );

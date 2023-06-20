@@ -130,7 +130,7 @@ const Modal = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  top: -300px;
+  top: -180px;
   left: -40px;
   width: 800px;
   padding: 20px;
