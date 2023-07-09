@@ -81,8 +81,6 @@ const CommentList = ({
       .then(data => setReplyData(data));
   };
 
-  // console.log(`${API.comment}/reply?commentId=${1}`);
-
   return (
     <List>
       <Section width="100%" fontSize={12}>
@@ -120,7 +118,14 @@ const CommentList = ({
       </ReplySection>
       {isOpen &&
         replyData?.map(data => {
-          return <ReplyLists key={data.comment.commentId} />;
+          return (
+            <ReplyLists
+              key={data.comment.commentId}
+              author={data.author}
+              comment={data.comment}
+              user={data.user}
+            />
+          );
         })}
       {isOpen && <ReplyEditor postId={postId} commentId={id} />}
     </List>

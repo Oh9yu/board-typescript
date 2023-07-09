@@ -3,17 +3,23 @@ import styled from 'styled-components';
 
 type ButtonProps = {
   name: string;
+  fontsize?: number;
   onClick: () => void;
 };
 
-const Button = ({ name, onClick }: ButtonProps) => {
-  return <Btn onClick={onClick}>{name}</Btn>;
+const Button = ({ name, onClick, fontsize }: ButtonProps) => {
+  return (
+    <Btn onClick={onClick} fontsize={fontsize}>
+      {name}
+    </Btn>
+  );
 };
 
 export default Button;
 
-const Btn = styled.button`
+const Btn = styled.button<{ fontsize?: number }>`
   padding: 5px 10px;
+  font-size: ${props => (props.fontsize ? props.fontsize : 12)}px;
   width: max-content;
   height: max-content;
   background-color: #fff;
