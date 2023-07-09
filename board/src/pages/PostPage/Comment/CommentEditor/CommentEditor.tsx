@@ -70,7 +70,7 @@ const Container = styled.div`
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 3px;
-  background-color: #eee;
+  background-color: #f1f6ff;
 `;
 
 const Text = styled.p<{ fontSize: number }>`

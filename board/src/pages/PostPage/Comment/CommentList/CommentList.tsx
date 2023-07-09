@@ -10,6 +10,7 @@ import getFetch from '../../../../utils/dataFetch/getFetch';
 import { API } from '../../../../config/config';
 import ReplyEditor from '../Reply/ReplyEditor';
 import getToken from '../../../../utils/getToken';
+import ReplyLists from '../Reply/ReplyLists';
 
 interface Props {
   name: string;
@@ -22,6 +23,35 @@ interface Props {
   profileImg: string;
   commentId: string;
   accountId: string;
+}
+
+export type ReplyData = Reply[];
+
+export interface Reply {
+  comment: Comment;
+  author: Author;
+  user: User;
+}
+
+export interface Comment {
+  contents: string;
+  createdAt: string;
+  updatedAt: string;
+  commentId: string;
+  likes: number;
+}
+
+export interface Author {
+  accountId: string;
+  name: string;
+  email: string;
+  profileImage: string;
+}
+
+export interface User {
+  likeStatus: boolean;
+  modifyAllowed: boolean;
+  deleteAllowed: boolean;
 }
 
 const CommentList = ({
@@ -38,7 +68,7 @@ const CommentList = ({
 }: Props) => {
   const commentTime = useCreatedAt(createdAt);
   const [isOpen, setIsOpen] = useState(false);
-  const [replyData, setReplyData] = useState([]);
+  const [replyData, setReplyData] = useState<ReplyData>([]);
   const token = getToken('TOKEN') || '';
 
   const replyHandler = () => {
@@ -69,25 +99,29 @@ const CommentList = ({
       <ReplySection>
         <CommentLike id={id} postId={postId} likes={likes} />
         {isOpen ? (
-          <Div>
+          <ReplyWrap>
             <FaRegCommentDots
               size={20}
               style={{ cursor: 'pointer', marginRight: 10 }}
               onClick={() => setIsOpen(prev => !prev)}
             />
             {replyCount}
-          </Div>
+          </ReplyWrap>
         ) : (
-          <Div>
+          <ReplyWrap>
             <FaRegComment
               size={20}
               style={{ cursor: 'pointer', marginRight: 10 }}
               onClick={replyHandler}
             />
             {replyCount}
-          </Div>
+          </ReplyWrap>
         )}
       </ReplySection>
+      {isOpen &&
+        replyData?.map(data => {
+          return <ReplyLists key={data.comment.commentId} />;
+        })}
       {isOpen && <ReplyEditor postId={postId} commentId={id} />}
     </List>
   );
@@ -121,6 +155,6 @@ const ReplySection = styled.section`
   margin: 10px 0px;
 `;
 
-const Div = styled.div`
+const ReplyWrap = styled.div`
   display: flex;
 `;

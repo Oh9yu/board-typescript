@@ -31,9 +31,12 @@ const ReplyEditor = ({ postId, commentId }: Props) => {
       <ReplyInput value={inputValue} onChange={inputHandler} />
       <ReplyButton
         onClick={() => {
+          if (!inputValue) return;
           replyMutation.mutate();
         }}
-      />
+      >
+        답글 등록
+      </ReplyButton>
     </Section>
   );
 };
@@ -41,10 +44,27 @@ const ReplyEditor = ({ postId, commentId }: Props) => {
 export default ReplyEditor;
 
 const Section = styled.section`
-  background-color: #ddd;
   display: flex;
+  margin-left: 30px;
 `;
 
-const ReplyInput = styled.input``;
+const ReplyInput = styled.input`
+  width: 100%;
+  border: 2px solid #c9d9f9;
+  border-radius: 4px;
+  &:focus {
+    outline: none;
+    border-color: #7594dd;
+  }
+`;
 
-const ReplyButton = styled.button``;
+const ReplyButton = styled.button`
+  background-color: #fff;
+  width: 100px;
+  height: 40px;
+  border: 2px solid #b0cbff;
+  border-radius: 4px;
+  &:hover {
+    background-color: #c9d9f9;
+  }
+`;
