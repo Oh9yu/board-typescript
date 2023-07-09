@@ -37,11 +37,9 @@ const ReplyLists = ({ author, comment, user }: ReplyType) => {
   const DeleteHandler = () => {
     fetch(`${API.comment}/reply`, {
       method: 'DELETE',
-      headers: { Authorization: token },
+      headers: { 'Content-Type': 'application/json', Authorization: token },
       body: JSON.stringify({ replyId: comment.commentId }),
-    })
-      .then(res => res.json())
-      .then(res => console.log(res));
+    }).then(res => res.json());
   };
 
   return (
