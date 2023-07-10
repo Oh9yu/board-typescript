@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import postFetch from '../../../../utils/dataFetch/postFetch';
 import getToken from '../../../../utils/getToken';
 import { API } from '../../../../config/config';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface Props {
   postId: string;
@@ -13,18 +13,28 @@ interface Props {
 const ReplyEditor = ({ postId, commentId }: Props) => {
   const token = getToken('TOKEN') || '';
   const [inputValue, setInputValue] = useState('');
+  const queryClient = useQueryClient();
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
-  const replyMutation = useMutation(() => {
-    return postFetch(`${API.comment}/reply`, token, {
-      postId: postId,
-      commentId: commentId,
-      contents: inputValue,
-    });
-  });
+  const replyMutation = useMutation(
+    () => {
+      return postFetch(`${API.comment}/reply`, token, {
+        postId: postId,
+        commentId: commentId,
+        contents: inputValue,
+      });
+    },
+    {
+      onSuccess: () => {
+        setInputValue('');
+        queryClient.invalidateQueries(['comments', postId]);
+        queryClient.invalidateQueries(['reply', commentId]);
+      },
+    }
+  );
 
   return (
     <Section>

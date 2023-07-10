@@ -11,6 +11,7 @@ import { API } from '../../../../config/config';
 import ReplyEditor from '../Reply/ReplyEditor';
 import getToken from '../../../../utils/getToken';
 import ReplyLists from '../Reply/ReplyLists';
+import Spinner from '../../../../components/Spinner/Spinner';
 
 interface Props {
   name: string;
@@ -71,15 +72,23 @@ const CommentList = ({
   const [replyData, setReplyData] = useState<ReplyData>([]);
   const token = getToken('TOKEN') || '';
 
-  const replyHandler = () => {
-    setIsOpen(prev => !prev);
-    if (replyCount === 0) return;
-    fetch(`${API.comment}/reply?commentId=${commentId}`, {
+  // const replyHandler = () => {
+  //   setIsOpen(prev => !prev);
+  //   if (replyCount === 0) return;
+  //   fetch(`${API.comment}/reply?commentId=${commentId}`, {
+  //     headers: { Authorization: token },
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => setReplyData(data));
+  // };
+
+  const { data, isLoading } = useQuery<ReplyData>(['reply', commentId], () => {
+    return fetch(`${API.comment}/reply?commentId=${commentId}`, {
       headers: { Authorization: token },
-    })
-      .then(res => res.json())
-      .then(data => setReplyData(data));
-  };
+    }).then(res => res.json());
+  });
+
+  if (isLoading) return <Spinner />;
 
   return (
     <List>
@@ -110,14 +119,16 @@ const CommentList = ({
             <FaRegComment
               size={20}
               style={{ cursor: 'pointer', marginRight: 10 }}
-              onClick={replyHandler}
+              onClick={() => {
+                setIsOpen(prev => !prev);
+              }}
             />
             {replyCount}
           </ReplyWrap>
         )}
       </ReplySection>
       {isOpen &&
-        replyData?.map(data => {
+        data?.map(data => {
           return (
             <ReplyLists
               key={data.comment.commentId}

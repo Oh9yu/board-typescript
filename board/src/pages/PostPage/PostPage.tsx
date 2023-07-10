@@ -56,8 +56,6 @@ const PostPage = () => {
       .then(data => setData(data));
   }, [id]);
 
-  console.log(data);
-
   return (
     <Container>
       {data && (
@@ -97,7 +95,7 @@ const Container = styled.div`
   max-width: 1024px;
   height: 100vh;
   margin: auto;
-  padding-top: 100px;
+  padding-top: 30px;
   @media screen and (max-width: 600px) {
     padding-top: 20px;
   }
