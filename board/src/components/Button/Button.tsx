@@ -18,8 +18,9 @@ const Button = ({ name, onClick, fontSize }: ButtonProps) => {
 export default Button;
 
 const Btn = styled.button<{ fontSize?: number }>`
-  padding: 5px 10px;
+  padding: ${props => (props.fontSize ? '2px 4px' : '5px 10px')};
   font-size: ${props => (props.fontSize ? props.fontSize : 12)}px;
+  margin: 2px;
   width: max-content;
   height: max-content;
   background-color: #fff;

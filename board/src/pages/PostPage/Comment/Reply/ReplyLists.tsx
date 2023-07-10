@@ -173,10 +173,13 @@ const ProfileImg = styled.img`
 const ReplySubHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: max-content;
 `;
 
 const ReplytContent = styled.div`
+  display: flex;
+  align-items: center;
   padding: 6px;
 `;
 
