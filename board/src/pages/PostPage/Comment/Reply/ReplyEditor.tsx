@@ -4,6 +4,7 @@ import postFetch from '../../../../utils/dataFetch/postFetch';
 import getToken from '../../../../utils/getToken';
 import { API } from '../../../../config/config';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   postId: string;
@@ -14,8 +15,13 @@ const ReplyEditor = ({ postId, commentId }: Props) => {
   const token = getToken('TOKEN') || '';
   const [inputValue, setInputValue] = useState('');
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!token) {
+      alert('로그인이 필요한 서비스입니다');
+      navigate('/signin');
+    }
     setInputValue(e.target.value);
   };
 
@@ -38,10 +44,16 @@ const ReplyEditor = ({ postId, commentId }: Props) => {
 
   return (
     <Section>
-      <ReplyInput value={inputValue} onChange={inputHandler} />
+      <ReplyInput
+        value={inputValue}
+        onChange={inputHandler}
+        placeholder={
+          !token ? '로그인이 필요한 서비스입니다' : '답글을 입력해 주세요'
+        }
+      />
       <ReplyButton
         onClick={() => {
-          if (!inputValue) return;
+          if (!inputValue || !token) return;
           replyMutation.mutate();
         }}
       >

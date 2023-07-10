@@ -4,6 +4,7 @@ import getToken from '../../../../utils/getToken';
 import { API } from '../../../../config/config';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import postFetch from '../../../../utils/dataFetch/postFetch';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   postId: string;
@@ -13,6 +14,7 @@ const CommentEditor = ({ postId }: Props) => {
   const token = getToken('TOKEN') || '';
   const [inputValue, setInputValue] = useState('');
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const postMutation = useMutation(
     () => {
@@ -43,6 +45,10 @@ const CommentEditor = ({ postId }: Props) => {
         <CommentInput
           value={inputValue}
           onChange={e => {
+            if (!token) {
+              alert('로그인이 필요한 서비스입니다');
+              navigate('/signin');
+            }
             setInputValue(e.target.value);
           }}
         />

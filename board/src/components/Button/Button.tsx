@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 type ButtonProps = {
   name: string;
-  fontsize?: number;
+  fontSize?: number;
   onClick: () => void;
 };
 
-const Button = ({ name, onClick, fontsize }: ButtonProps) => {
+const Button = ({ name, onClick, fontSize }: ButtonProps) => {
   return (
-    <Btn onClick={onClick} fontsize={fontsize}>
+    <Btn onClick={onClick} fontSize={fontSize}>
       {name}
     </Btn>
   );
@@ -17,9 +17,9 @@ const Button = ({ name, onClick, fontsize }: ButtonProps) => {
 
 export default Button;
 
-const Btn = styled.button<{ fontsize?: number }>`
+const Btn = styled.button<{ fontSize?: number }>`
   padding: 5px 10px;
-  font-size: ${props => (props.fontsize ? props.fontsize : 12)}px;
+  font-size: ${props => (props.fontSize ? props.fontSize : 12)}px;
   width: max-content;
   height: max-content;
   background-color: #fff;

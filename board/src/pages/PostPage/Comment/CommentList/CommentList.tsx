@@ -69,18 +69,7 @@ const CommentList = ({
 }: Props) => {
   const commentTime = useCreatedAt(createdAt);
   const [isOpen, setIsOpen] = useState(false);
-  const [replyData, setReplyData] = useState<ReplyData>([]);
   const token = getToken('TOKEN') || '';
-
-  // const replyHandler = () => {
-  //   setIsOpen(prev => !prev);
-  //   if (replyCount === 0) return;
-  //   fetch(`${API.comment}/reply?commentId=${commentId}`, {
-  //     headers: { Authorization: token },
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => setReplyData(data));
-  // };
 
   const { data, isLoading } = useQuery<ReplyData>(['reply', commentId], () => {
     return fetch(`${API.comment}/reply?commentId=${commentId}`, {
@@ -135,6 +124,8 @@ const CommentList = ({
               author={data.author}
               comment={data.comment}
               user={data.user}
+              postId={postId}
+              commentId={commentId}
             />
           );
         })}
@@ -160,7 +151,6 @@ const Section = styled.div<{ width: string; fontSize: number }>`
 `;
 
 const ContentSection = styled.div`
-  /* padding-top: 12px; */
   font-size: 16px;
 `;
 
