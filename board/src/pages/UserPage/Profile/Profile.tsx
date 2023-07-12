@@ -5,8 +5,6 @@ import ProfileInForm from './ProfileInForm/ProfileInForm';
 import EditProfile from './EditProfile/EditProfileModal';
 
 const Profile = ({ userdata, modifyAllow }: any) => {
-  console.log(modifyAllow);
-
   return (
     <Container>
       <ProfileImage img={userdata.profileImage} />

@@ -25,6 +25,7 @@ interface Props {
   profileImg: string;
   commentId: string;
   accountId: string;
+  modifyAllowed: boolean;
 }
 
 export type ReplyData = Reply[];
@@ -67,6 +68,7 @@ const CommentList = ({
   profileImg,
   commentId,
   accountId,
+  modifyAllowed,
 }: Props) => {
   const commentTime = useCreatedAt(createdAt);
   const [isOpen, setIsOpen] = useState(false);
@@ -126,20 +128,24 @@ const CommentList = ({
           accountId={accountId}
         />
         <Section width="max-content">
-          <Button
-            name={!commentEdit ? '댓글 수정' : '수정 취소'}
-            onClick={() => {
-              setCommentEdit(prev => !prev);
-            }}
-            fontSize={4}
-          />
-          <Button
-            name="댓글 삭제"
-            onClick={() => {
-              deleteMutation.mutate();
-            }}
-            fontSize={4}
-          />
+          {modifyAllowed && (
+            <Button
+              name={!commentEdit ? '댓글 수정' : '수정 취소'}
+              onClick={() => {
+                setCommentEdit(prev => !prev);
+              }}
+              fontSize={4}
+            />
+          )}
+          {modifyAllowed && (
+            <Button
+              name="댓글 삭제"
+              onClick={() => {
+                deleteMutation.mutate();
+              }}
+              fontSize={4}
+            />
+          )}
           <Text color="#666" fontSize={12}>
             {commentTime}
           </Text>

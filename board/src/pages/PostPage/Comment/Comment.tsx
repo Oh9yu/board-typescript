@@ -8,6 +8,7 @@ import CommentEditor from './CommentEditor/CommentEditor';
 
 import getFetch from '../../../utils/dataFetch/getFetch';
 import Spinner from '../../../components/Spinner/Spinner';
+import getToken from '../../../utils/getToken';
 
 interface DataType {
   comment: CommentType;
@@ -40,22 +41,18 @@ interface UserType {
 
 const Comment = () => {
   const { id } = useParams();
+  const token = getToken('TOKEN') || '';
   const commentRef = useRef<HTMLDivElement>(null);
 
-  const { data, fetchNextPage, isFetching, isLoading } = useInfiniteQuery(
+  const { data, fetchNextPage, isLoading } = useInfiniteQuery(
     ['comments', id],
     ({ pageParam = 1 }) => {
-      return getFetch(`${API.comment}?postId=${id}&page=${pageParam}`);
+      return fetch(`${API.comment}?postId=${id}&page=${pageParam}`, {
+        headers: { Authorization: token },
+      }).then(res => res.json());
     },
     {
       staleTime: 30000,
-      getNextPageParam: (lastPage, allPages) => {
-        const pageLength = Math.ceil(lastPage.totalCount / 10);
-        if (allPages.length < pageLength) {
-          return allPages.length + 1;
-        }
-        return undefined;
-      },
     }
   );
 
@@ -79,7 +76,7 @@ const Comment = () => {
       <CommentHeader>댓글</CommentHeader>
       <CommentEditor postId={id || ''} />
       {data?.pages.map((pages: any, pageIdx: any) => {
-        return pages.data.map(({ comment, author }: DataType) => {
+        return pages.data.map(({ comment, author, user }: DataType) => {
           return (
             <CommentList
               key={comment?.commentId}
@@ -93,6 +90,7 @@ const Comment = () => {
               likes={comment?.likes}
               commentId={comment?.commentId}
               replyCount={comment?.replyCount}
+              modifyAllowed={user?.modifyAllowed}
             />
           );
         });

@@ -6,10 +6,6 @@ const ResultPage = () => {
   const [data, setData] = useState([]);
   const { searchValue } = useParams();
 
-  console.log(searchValue);
-
-  console.log(`검색어 ${searchValue} : `, data);
-
   useEffect(() => {
     fetch(`${API.search}?keyword=${searchValue}`)
       .then(res => res.json())

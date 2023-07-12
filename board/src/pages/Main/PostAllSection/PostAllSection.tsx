@@ -42,12 +42,14 @@ const PostAllSection = () => {
   );
   const pageLength = data ? Math.ceil(data.totalCount / 5) : 0;
 
+  console.log(data);
+
   if (!data) return <Spinner />;
 
   return (
     <Container>
       <ListHeader>전체글 보기</ListHeader>
-      {data.data.map(data => {
+      {data.data?.map(data => {
         return <MainPostList key={data.postId} data={data} />;
       })}
       <Pagenation
