@@ -10,9 +10,16 @@ type InputValue = {
 type Props = {
   inputValue: InputValue;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  signHandler: () => void;
 };
 
-const SignUpForm = ({ inputValue, onChangeInput }: Props) => {
+const SignUpForm = ({ inputValue, onChangeInput, signHandler }: Props) => {
+  const keypress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      signHandler();
+    }
+  };
+
   return (
     <Form>
       <Input
@@ -35,6 +42,7 @@ const SignUpForm = ({ inputValue, onChangeInput }: Props) => {
         value={inputValue.password}
         name="password"
         onChange={onChangeInput}
+        onKeyDown={keypress}
       />
     </Form>
   );
@@ -49,15 +57,15 @@ const Form = styled.form`
   align-items: center;
 `;
 
-const Input = styled.input`
+const Input = styled.input<{ theme: any }>`
   margin-top: 3px;
   padding: 5px;
   width: 200px;
   height: 30px;
-  border: 2px solid #c9d9f9;
+  border: 2px solid ${props => props.theme.color1};
   border-radius: 5px;
   &:focus {
     outline: none;
-    border-color: #7594dd;
+    border-color: ${props => props.theme.color3};
   }
 `;

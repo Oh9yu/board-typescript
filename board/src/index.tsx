@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom/client';
 import GlobalStyle from './styles/GlobalStyle';
 import Router from './Router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+import { ThemeProvider } from 'styled-components';
+import theme from './theme';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,10 +14,20 @@ const queryClient = new QueryClient({
   },
 });
 
-root.render(
-  <QueryClientProvider client={queryClient}>
-    <GlobalStyle />
-    <Router />
-    {/* <ReactQueryDevtools /> */}
-  </QueryClientProvider>
+const Index = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme.lightMode}>
+        <GlobalStyle />
+        <Router />
+      </ThemeProvider>
+      {/* <ReactQueryDevtools /> */}
+    </QueryClientProvider>
+  );
+};
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
 );
+
+root.render(<Index />);

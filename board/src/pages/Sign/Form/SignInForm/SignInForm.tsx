@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent } from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 type InputValue = {
   email: string;
@@ -49,15 +49,15 @@ const Form = styled.form`
   align-items: center;
 `;
 
-const Input = styled.input`
+const Input = styled.input<{ theme: any }>`
   margin-top: 3px;
   padding: 5px;
   width: 200px;
   height: 30px;
-  border: 2px solid #c9d9f9;
+  border: 2px solid ${props => props.theme.color1};
   border-radius: 5px;
   &:focus {
     outline: none;
-    border-color: #7594dd;
+    border-color: ${props => props.theme.color3};
   }
 `;

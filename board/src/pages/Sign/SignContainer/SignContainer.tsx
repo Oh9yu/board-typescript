@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import SignInForm from '../Form/SignInForm/SignInForm';
 import SignUpForm from '../Form/SignUpForm/SignUpForm';
 
@@ -19,10 +19,11 @@ const SignContainer = ({
 }: SignContainerProps) => {
   const location = useLocation();
   const pathname = location.pathname;
+  const theme = useTheme();
 
   return (
     <Container>
-      <SignSection>
+      <SignSection theme={theme}>
         <Title>{type}</Title>
         {pathname === '/signin' ? (
           <SignInForm
@@ -31,7 +32,11 @@ const SignContainer = ({
             signHandler={signHandler}
           />
         ) : pathname === '/signup' ? (
-          <SignUpForm inputValue={inputValue} onChangeInput={onChangeInput} />
+          <SignUpForm
+            inputValue={inputValue}
+            onChangeInput={onChangeInput}
+            signHandler={signHandler}
+          />
         ) : null}
         <Button onClick={signHandler}>{type}</Button>
       </SignSection>
@@ -49,16 +54,16 @@ const Container = styled.div`
   background-color: #f9fbff;
 `;
 
-const SignSection = styled.div`
+const SignSection = styled.div<{ theme: any }>`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   padding: 10px 0;
   width: 400px;
-  border: 2px solid #7594dd;
+  border: 2px solid ${props => props.theme.color4};
   border-radius: 8px;
-  box-shadow: 0 0 5px #7594dd;
+  box-shadow: 0 0 5px ${props => props.theme.color4};
 `;
 
 const Title = styled.section`
@@ -66,16 +71,16 @@ const Title = styled.section`
   margin: 10px 0;
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ theme: any }>`
   width: 200px;
   height: 30px;
   margin: 10px 0;
-  border: 2px solid #7594dd;
+  border: 2px solid ${props => props.theme.color4};
   border-radius: 5px;
   background-color: transparent;
   &:hover {
-    border: 2px solid #7594dd;
-    background-color: #7594dd;
+    border: 2px solid ${props => props.theme.color4};
+    background-color: ${props => props.theme.color4};
     transition: 0.2s;
   }
 `;
