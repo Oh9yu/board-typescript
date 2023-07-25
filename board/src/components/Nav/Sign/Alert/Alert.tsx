@@ -21,7 +21,6 @@ interface Post {
 }
 
 const Alert = () => {
-  //fetch headerr type 이 string
   const token = getToken('TOKEN') || 'null';
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const ref = useRef<HTMLElement>(null);
@@ -32,12 +31,16 @@ const Alert = () => {
     setIsVisible(false);
   });
 
-  useEffect(() => {
+  const getAlertData = () => {
     fetch(`${API.alert}`, {
       headers: { Authorization: token },
     })
       .then(res => res.json())
       .then(data => setData(data));
+  };
+
+  useEffect(() => {
+    getAlertData();
   }, []);
 
   return (
@@ -57,7 +60,13 @@ const Alert = () => {
             <AlertText>알림이 없습니다</AlertText>
           ) : (
             data?.map(data => {
-              return <AlertList data={data} key={data._id.postId} />;
+              return (
+                <AlertList
+                  data={data}
+                  key={data._id.postId}
+                  getData={getAlertData}
+                />
+              );
             })
           )}
         </AlertSection>

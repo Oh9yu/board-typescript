@@ -130,16 +130,17 @@ const Modal = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  top: -180px;
+  top: -300px;
   left: -40px;
   width: 800px;
   padding: 20px;
-  height: 500px;
+  height: 550px;
   background-color: #fff;
   border: 2px solid #7594dd;
   border-radius: 8px;
   @media screen and (max-width: 800px) {
     width: 100%;
+    height: 500px;
     left: 0;
   }
 `;
@@ -159,7 +160,7 @@ const PreviewSection = styled.section`
   height: 160px;
   border-radius: 80px;
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 800px) {
     width: 120px;
     height: 120px;
   }
@@ -186,7 +187,7 @@ const ProfileBtn = styled.label`
   &:hover {
     background-color: #ddd;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 800px) {
     width: 30px;
     height: 30px;
     top: 80px;
@@ -208,7 +209,7 @@ const Desc = styled.input`
   &:focus {
     outline: none;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 800px) {
     width: 200px;
   }
 `;

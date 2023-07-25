@@ -110,7 +110,7 @@ const VisibleBtn = styled.div`
 const Wrap = styled.div`
   margin-top: 4px;
   width: 240px;
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 800px) {
     width: 200px;
   }
 `;
@@ -125,7 +125,7 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 800px) {
     height: 30px;
   }
 `;

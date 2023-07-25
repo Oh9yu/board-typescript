@@ -6,14 +6,14 @@ import SignUpForm from '../Form/SignUpForm/SignUpForm';
 
 type SignContainerProps = {
   type: string;
-  onClick: () => void;
+  signHandler: () => void;
   inputValue: any;
   onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const SignContainer = ({
   type,
-  onClick,
+  signHandler,
   inputValue,
   onChangeInput,
 }: SignContainerProps) => {
@@ -25,11 +25,15 @@ const SignContainer = ({
       <SignSection>
         <Title>{type}</Title>
         {pathname === '/signin' ? (
-          <SignInForm inputValue={inputValue} onChangeInput={onChangeInput} />
+          <SignInForm
+            inputValue={inputValue}
+            onChangeInput={onChangeInput}
+            signHandler={signHandler}
+          />
         ) : pathname === '/signup' ? (
           <SignUpForm inputValue={inputValue} onChangeInput={onChangeInput} />
         ) : null}
-        <Button onClick={onClick}>{type}</Button>
+        <Button onClick={signHandler}>{type}</Button>
       </SignSection>
     </Container>
   );

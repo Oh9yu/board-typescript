@@ -40,7 +40,12 @@ const DeleteAccount = () => {
     <Container>
       회원탈퇴
       <Wrap>
-        <Input type="password" value={inputValue} onChange={changeHandler} />
+        <Input
+          type="password"
+          value={inputValue}
+          onChange={changeHandler}
+          placeholder="비밀번호를 입력해주세요"
+        />
         <DeleteAccountBtn onClick={deleteHandler}>회원 탈퇴</DeleteAccountBtn>
       </Wrap>
     </Container>
@@ -74,7 +79,7 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 800px) {
     height: 30px;
   }
 `;

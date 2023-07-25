@@ -6,7 +6,7 @@ import getAlertBodyData from '../../../../utils/getAlertBodyData';
 import { API } from '../../../../config/config';
 import getToken from '../../../../utils/getToken';
 
-const AlertList = ({ data }: any) => {
+const AlertList = ({ data, getData }: any) => {
   const navigate = useNavigate();
   const status: boolean = data._id.readStatus ? false : true;
   const text = getAlertText(data);
@@ -23,7 +23,13 @@ const AlertList = ({ data }: any) => {
         accountIds: getAlertBodyData(data),
         postId: data._id.postId,
       }),
-    });
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'Successfully changed the read status') {
+          getData();
+        }
+      });
     navigate(`/postpage/${data._id.postId}`);
   };
 

@@ -41,7 +41,7 @@ const Signup = () => {
   return (
     <SignContainer
       type="Sign Up"
-      onClick={signUpHandler}
+      signHandler={signUpHandler}
       inputValue={inputValue}
       onChangeInput={onChangeInput}
     />

@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import styled from 'styled-components';
 
 type InputValue = {
@@ -9,9 +9,16 @@ type InputValue = {
 type Props = {
   inputValue: InputValue;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  signHandler: () => void;
 };
 
-const SignInForm = ({ inputValue, onChangeInput }: Props) => {
+const SignInForm = ({ inputValue, onChangeInput, signHandler }: Props) => {
+  const keypress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      signHandler();
+    }
+  };
+
   return (
     <Form>
       <Input
@@ -27,6 +34,7 @@ const SignInForm = ({ inputValue, onChangeInput }: Props) => {
         value={inputValue.password}
         name="password"
         onChange={onChangeInput}
+        onKeyDown={keypress}
       />
     </Form>
   );

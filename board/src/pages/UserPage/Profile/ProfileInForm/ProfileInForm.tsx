@@ -16,7 +16,7 @@ export default ProfileInForm;
 const UserInform = styled.div`
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 80%;
   margin-top: 10px;
 `;
 
@@ -29,7 +29,7 @@ const Text = styled.p<{ fontSize: number }>`
 const Desc = styled.p`
   width: 100%;
   padding: 5px;
-  word-break: break-all;
+  word-break: keep-all;
   margin: 10px 0px;
   border: 1px solid #738cd3;
   border-radius: 5px;
