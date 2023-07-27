@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import Main from './pages/Main/Main';
 import Nav from './components/Nav/Nav';
 import Signin from './pages/Sign/Signin';
@@ -12,10 +11,15 @@ import PostPage from './pages/PostPage/PostPage';
 import Editor from './pages/Editor/Editor';
 import ResultPage from './pages/ResultPage/ResultPage';
 
-const Router = () => {
+interface Props {
+  darkMode: boolean;
+  changeMode: () => void;
+}
+
+const Router = ({ darkMode, changeMode }: Props) => {
   return (
     <BrowserRouter>
-      <Nav />
+      <Nav darkMode={darkMode} changeMode={changeMode} />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/signin" element={<Signin />} />
@@ -23,7 +27,7 @@ const Router = () => {
         <Route path="/userpage" element={<UserPage />} />
         <Route path="/adminpage" element={<AdminPage />} />
         <Route path="/postlist" element={<PostListPage />} />
-        {/* <Route path="/postpage" element={<PostPage />} /> */}
+
         <Route path="/result/:searchValue" element={<ResultPage />} />
         <Route path="/postpage/:id" element={<PostPage />} />
         <Route path="/editor" element={<Editor />} />

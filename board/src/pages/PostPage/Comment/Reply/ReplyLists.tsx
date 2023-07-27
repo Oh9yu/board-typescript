@@ -194,13 +194,13 @@ const Section = styled.section`
   display: flex;
 `;
 
-const ReplyInput = styled.input`
+const ReplyInput = styled.input<{ theme: any }>`
   width: 100%;
-  border: 2px solid #c9d9f9;
+  border: 2px solid ${props => props.theme.color1};
   border-radius: 4px;
   &:focus {
     outline: none;
-    border-color: #7594dd;
+    border-color: ${props => props.theme.color3};
   }
 `;
 
@@ -208,9 +208,9 @@ const ReplyButton = styled.button`
   background-color: #fff;
   width: 80px;
   height: 30px;
-  border: 2px solid #b0cbff;
+  border: 2px solid ${props => props.theme.color3};
   border-radius: 4px;
   &:hover {
-    background-color: #c9d9f9;
+    background-color: ${props => props.theme.color2};
   }
 `;

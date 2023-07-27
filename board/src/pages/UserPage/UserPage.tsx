@@ -118,9 +118,9 @@ const Section = styled.section<{ width: number }>`
   width: ${props => props.width}px;
   min-height: 300px;
   background-color: #fff;
-  border: 2px solid #7594dd;
+  border: 2px solid ${props => props.theme.color3};
   border-radius: 6px;
-  box-shadow: 0 0 2px #7594dd;
+  box-shadow: 0 0 2px ${props => props.theme.color3};
   @media screen and (max-width: 800px) {
     display: flex;
     flex-direction: column;

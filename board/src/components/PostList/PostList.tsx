@@ -51,7 +51,7 @@ const List = styled.div`
   align-items: center;
   width: 100%;
   padding: 10px 0;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid ${props => props.theme.borderColor2};
 `;
 
 const Section = styled.section`
@@ -67,6 +67,7 @@ const Text = styled.div<{ width: number }>`
   align-items: center;
   max-width: ${props => props.width}px;
   font-size: 14px;
+  color: ${props => props.theme.fontColor};
   cursor: pointer;
   @media screen and (max-width: 600px) {
     font-size: 12px;

@@ -22,7 +22,7 @@ const UserModal = ({ accountId }: Props) => {
 
 export default UserModal;
 
-const Container = styled.div`
+const Container = styled.div<{ theme: any }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +34,7 @@ const Container = styled.div`
   padding: 2px 10px;
   font-size: 12px;
   background-color: #fff;
-  border: 1px solid #c9d9f9;
+  border: 1px solid ${props => props.theme.color2};
   border-radius: 3px;
   cursor: pointer;
 `;

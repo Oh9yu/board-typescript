@@ -21,16 +21,17 @@ const CategoryList = ({ mainCatId, name }: Props) => {
 
 export default CategoryList;
 
-const List = styled.div`
+const List = styled.div<{ theme: any }>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: max-content;
   padding: 5px;
   border-radius: 5px;
+  color: ${props => props.theme.fontColor};
   cursor: pointer;
   &:hover {
-    background-color: #738cd3;
+    background-color: ${props => props.theme.color4};
     transition: 0.2s;
   }
   @media screen and (max-width: 600px) {

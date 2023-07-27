@@ -115,12 +115,12 @@ const Wrap = styled.div`
   }
 `;
 
-const Input = styled.input`
+const Input = styled.input<{ theme: any }>`
   padding-left: 5px;
   width: 100%;
   height: 36px;
   font-size: 12px;
-  border: 2px solid #7594dd;
+  border: 2px solid ${props => props.theme.color3};
   border-radius: 5px;
   &:focus {
     outline: none;
@@ -130,14 +130,14 @@ const Input = styled.input`
   }
 `;
 
-const SubmitBtn = styled.button`
+const SubmitBtn = styled.button<{ theme: any }>`
   margin-top: 8px;
   padding: 4px 5px;
   border-radius: 5px;
   border: none;
-  border: 1px solid #7594dd;
-  background-color: #c9d9f9;
+  border: 1px solid ${props => props.theme.color3};
+  background-color: ${props => props.theme.color1};
   &:hover {
-    background-color: #7594dd;
+    background-color: ${props => props.theme.color3};
   }
 `;

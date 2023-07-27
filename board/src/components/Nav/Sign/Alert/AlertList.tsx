@@ -49,11 +49,11 @@ const Container = styled.div`
   margin: 5px 0;
   color: #555;
   padding: 3px 2px;
-  border-bottom: 1px solid #afc9ff;
+  border-bottom: 1px solid ${props => props.theme.color2};
   cursor: pointer;
   &:hover {
     transition: 0.3s;
-    background-color: #afc9ff;
+    background-color: ${props => props.theme.color2};
     border-radius: 3px;
   }
 `;

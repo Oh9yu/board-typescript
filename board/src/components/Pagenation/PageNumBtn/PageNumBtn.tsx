@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 interface PageNumType {
   value: number;
@@ -8,7 +8,9 @@ interface PageNumType {
 }
 
 const PageNumBtn = ({ value, setPage, page }: PageNumType) => {
-  const isSelected = page === value ? '#9ab2eb' : 'transparent';
+  const theme = useTheme();
+  const isSelected =
+    page === value ? `${theme?.backGroundColor2}` : 'transparent';
 
   return (
     <Button
@@ -29,8 +31,9 @@ const Button = styled.button<{ bgc: string }>`
   width: 30px;
   height: 30px;
   border-radius: 15px;
+  color: ${props => props.theme.fontColor};
   background-color: ${props => props.bgc};
   &:hover {
-    background-color: #eee;
+    background-color: ${props => props.theme.hoverColor1};
   }
 `;

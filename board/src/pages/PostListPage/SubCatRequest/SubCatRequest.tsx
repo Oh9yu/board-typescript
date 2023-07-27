@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { styled } from 'styled-components';
+import { styled, useTheme } from 'styled-components';
 import { HiOutlineXCircle } from 'react-icons/hi';
 import { API } from '../../../config/config';
 import getToken from '../../../utils/getToken';
@@ -12,6 +12,7 @@ interface Props {
 const SubCatRequest = ({ openHandler, mainCatId }: Props) => {
   const [inputValue, setInputValue] = useState('');
   const token = getToken('TOKEN') || '';
+  const theme = useTheme();
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -42,7 +43,11 @@ const SubCatRequest = ({ openHandler, mainCatId }: Props) => {
       <TitleSection>
         <Title>카테고리 이름을 입력해주세요</Title>
         <Exit>
-          <HiOutlineXCircle size={18} onClick={openHandler} />
+          <HiOutlineXCircle
+            size={18}
+            onClick={openHandler}
+            color={theme?.borderColer1}
+          />
         </Exit>
       </TitleSection>
       <FormSection>
@@ -55,7 +60,7 @@ const SubCatRequest = ({ openHandler, mainCatId }: Props) => {
 
 export default SubCatRequest;
 
-const Container = styled.div`
+const Container = styled.div<{ theme: any }>`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -64,8 +69,8 @@ const Container = styled.div`
   width: 180px;
   height: max-content;
   padding: 8px 0;
-  background-color: #fff;
-  border: 1px solid #7594dd;
+  background-color: ${props => props.theme.backGroundColor1};
+  border: 2px solid ${props => props.theme.borderColor2};
   border-radius: 5px;
   @media screen and (max-width: 600px) {
     left: 0px;
@@ -78,6 +83,7 @@ const TitleSection = styled.div`
 `;
 
 const Title = styled.div`
+  color: ${props => props.theme.fontColor};
   font-size: 12px;
   @media screen and (max-width: 600px) {
   }
@@ -103,20 +109,21 @@ const Input = styled.input`
   width: 130px;
   height: 30px;
   padding: 5px;
-  border: 2px solid #c9d9f9;
+  border: 2px solid ${props => props.theme.borderColor2};
   border-radius: 5px;
   &:focus {
     outline: none;
-    border-color: #7594dd;
+    border-color: ${props => props.theme.borderColor3};
   }
 `;
 
 const Button = styled.button`
   width: 40px;
-  background-color: #fff;
-  border: 2px solid #7594dd;
+  background-color: ${props => props.theme.backGroundColor1};
+  color: ${props => props.theme.fontColor};
+  border: 2px solid ${props => props.theme.borderColor1};
   border-radius: 5px;
   &:hover {
-    background-color: #c9d9f9;
+    background-color: ${props => props.theme.hoverColor1};
   }
 `;

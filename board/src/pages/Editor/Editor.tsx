@@ -161,21 +161,21 @@ const Section = styled.section`
   height: 50px;
 `;
 
-const Input = styled.input`
+const Input = styled.input<{ theme: any }>`
   width: 200px;
-  border: 2px solid #738cd3;
+  border: 2px solid ${props => props.theme.color3};
   margin-bottom: 10px;
   padding: 5px 10px;
   font-size: 16px;
 `;
 
-const StyledQuill = styled(ReactQuill)`
+const StyledQuill = styled(ReactQuill)<{ theme: any }>`
   margin: auto;
   max-width: 1024px;
   height: 500px;
 
   .ql-toolbar {
-    border: 1px solid #738cd3;
+    border: 1px solid ${props => props.theme.color3};
     padding: 10px;
   }
   .ql-editor {

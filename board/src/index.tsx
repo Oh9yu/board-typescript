@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import GlobalStyle from './styles/GlobalStyle';
 import Router from './Router';
@@ -15,11 +15,17 @@ const queryClient = new QueryClient({
 });
 
 const Index = () => {
+  const [darkMode, setDarkMode] = useState(true);
+  const mode = darkMode ? theme.darkMode : theme.lightMode;
+  const changeMode = () => {
+    setDarkMode(prev => !prev);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme.lightMode}>
+      <ThemeProvider theme={mode}>
         <GlobalStyle />
-        <Router />
+        <Router darkMode={darkMode} changeMode={changeMode} />
       </ThemeProvider>
       {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>

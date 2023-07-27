@@ -23,16 +23,19 @@ export default Main;
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  max-width: 1024px;
   margin: 0 auto;
   padding: 0 10px;
-  background-color: #f9fbff;
+  background-color: ${props => props.theme.backGroundTheme};
+  transition: 0.2s;
 `;
 
 const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  min-height: 100vh;
+  width: 1024px;
   padding-top: 30px;
+  color: ${props => props.theme.fontColor};
+  transition: 0.2s;
 `;

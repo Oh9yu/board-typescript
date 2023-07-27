@@ -37,13 +37,13 @@ const PostHeader = ({ title, name, views, likes, createdAt }: Props) => {
 
 export default PostHeader;
 
-const List = styled.div`
+const List = styled.div<{ theme: any }>`
   display: flex;
   align-items: center;
   width: 100%;
   padding: 10px 0;
-  border-top: 2px solid #7594dd;
-  border-bottom: 2px solid #7594dd;
+  border-top: 2px solid ${props => props.theme.borderColor1};
+  border-bottom: 2px solid ${props => props.theme.color3};
 `;
 
 const Section = styled.section`
@@ -59,6 +59,7 @@ const Text = styled.p<{ width: number; mobile: number }>`
   align-items: center;
   width: ${props => props.width}%;
   font-size: 14px;
+  color: ${props => props.theme.fontColor};
   @media screen and (max-width: 750px) {
     width: ${props => props.mobile}%;
     font-size: 12px;

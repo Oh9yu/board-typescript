@@ -3,8 +3,14 @@ import styled from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SignStatus from './Sign/SignStatus';
 import Search from '../Search/Search';
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
-const Nav = () => {
+interface Props {
+  darkMode: boolean;
+  changeMode: () => void;
+}
+
+const Nav = ({ darkMode, changeMode }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,10 +23,27 @@ const Nav = () => {
       <Section>
         <Logo>
           <MainLogo src="images/home-button.png" onClick={gotoMain} />
-          <Search />
+          {/* <Search /> */}
         </Logo>
         <SignStatus />
       </Section>
+      <DarkModeSwitch
+        style={{
+          position: 'absolute',
+          top: 60,
+          right: 30,
+          padding: 5,
+          borderRadius: 20,
+          backgroundColor: '#f1f1f1',
+          zIndex: 1,
+        }}
+        checked={darkMode}
+        onChange={() => {
+          changeMode();
+        }}
+        moonColor="#111"
+        size={36}
+      />
     </Container>
   );
 };
@@ -33,8 +56,9 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   justify-content: center;
-  background-color: #c9d9f9;
-  border-bottom: 1px solid #7594dd;
+  background-color: ${props => props.theme.color1};
+  border-bottom: 1px solid ${props => props.theme.color2};
+  transition: 0.2s;
 `;
 
 const Section = styled.section`

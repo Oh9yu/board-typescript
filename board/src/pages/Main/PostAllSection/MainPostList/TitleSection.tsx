@@ -95,7 +95,7 @@ const Text = styled.p<{ fontSize: number }>`
   border-radius: 3px;
   cursor: pointer;
   &:hover {
-    background-color: #ddd;
+    background-color: ${props => props.theme.hoverColor1};
   }
   @media screen and (max-width: 600px) {
     font-size: 12px;

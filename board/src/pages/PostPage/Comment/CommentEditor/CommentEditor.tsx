@@ -85,18 +85,18 @@ const Text = styled.p<{ fontSize: number }>`
   color: ${props => props.color};
 `;
 
-const CommentInput = styled.textarea`
+const CommentInput = styled.textarea<{ theme: any }>`
   margin-top: 3px;
   padding: 5px;
   width: 900px;
   height: 60px;
-  border: 2px solid #c9d9f9;
+  border: 2px solid ${props => props.theme.color1};
   border-radius: 5px;
   resize: none;
   overflow: scroll;
   &:focus {
     outline: none;
-    border-color: #7594dd;
+    border-color: ${props => props.theme.color3};
   }
   @media screen and (max-width: 600px) {
     width: 600px;
@@ -110,14 +110,18 @@ const Section = styled.section`
   align-items: center;
 `;
 
-const Btn = styled.button`
+const Btn = styled.button<{ theme: any }>`
   width: 80px;
   height: 58px;
   border: none;
   border-radius: 5px;
-  background-color: #c9d9f9;
-  border: 2px solid #7594dd;
+  background-color: ${props => props.theme.color1};
+  border: 2px solid ${props => props.theme.color2};
   cursor: pointer;
+  &:hover {
+    border: 2px solid ${props => props.theme.color3};
+    background-color: ${props => props.theme.color3};
+  }
   @media screen and (max-width: 600px) {
     font-size: 12px;
     width: 60px;

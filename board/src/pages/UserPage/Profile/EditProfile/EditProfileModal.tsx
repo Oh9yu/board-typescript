@@ -120,7 +120,7 @@ const Container = styled.div`
 const ModalBtn = styled.button`
   padding: 2px 5px;
   background-color: #fff;
-  border: 2px solid #7594dd;
+  border: 2px solid ${props => props.theme.color3};
   border-radius: 3px;
 `;
 
@@ -136,7 +136,7 @@ const Modal = styled.div`
   padding: 20px;
   height: 550px;
   background-color: #fff;
-  border: 2px solid #7594dd;
+  border: 2px solid ${props => props.theme.color3};
   border-radius: 8px;
   @media screen and (max-width: 800px) {
     width: 100%;
@@ -203,7 +203,7 @@ const Desc = styled.input`
   padding-left: 5px;
   height: 36px;
   font-size: 12px;
-  border: 2px solid #7594dd;
+  border: 2px solid ${props => props.theme.color3};
   border-radius: 5px;
   width: 300px;
   &:focus {
@@ -222,9 +222,9 @@ const SubmitBtn = styled.button`
   padding: 4px 5px;
   border-radius: 5px;
   border: none;
-  border: 1px solid #7594dd;
-  background-color: #c9d9f9;
+  border: 1px solid ${props => props.theme.color2};
+  background-color: ${props => props.theme.color1};
   &:hover {
-    background-color: #7594dd;
+    background-color: ${props => props.theme.color2};
   }
 `;

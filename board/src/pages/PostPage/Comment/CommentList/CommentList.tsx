@@ -214,9 +214,9 @@ const CommentList = ({
 
 export default CommentList;
 
-const List = styled.div`
+const List = styled.div<{ theme: any }>`
   padding: 10px;
-  border-bottom: 1px solid #c9d9f9;
+  border-bottom: 1px solid ${props => props.theme.color1};
 `;
 
 const Section = styled.div<{ width: string; fontSize?: number }>`
@@ -254,23 +254,23 @@ const Wrapper = styled.section`
   display: flex;
 `;
 
-const ReplyInput = styled.input`
+const ReplyInput = styled.input<{ theme: any }>`
   width: 100%;
-  border: 2px solid #c9d9f9;
+  border: 2px solid ${props => props.theme.color2};
   border-radius: 4px;
   &:focus {
     outline: none;
-    border-color: #7594dd;
+    border-color: ${props => props.theme.color2};
   }
 `;
 
-const ReplyButton = styled.button`
+const ReplyButton = styled.button<{ theme: any }>`
   background-color: #fff;
   width: 80px;
   height: 30px;
-  border: 2px solid #b0cbff;
+  border: 2px solid ${props => props.theme.color2};
   border-radius: 4px;
   &:hover {
-    background-color: #c9d9f9;
+    background-color: ${props => props.theme.color3};
   }
 `;

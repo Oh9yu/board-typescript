@@ -30,11 +30,12 @@ const Container = styled.button<Omit<ButtonProps, 'btnName'>>`
   margin: 5px;
   font-size: ${props => props.fontSize}px;
   background-color: transparent;
-  border: 2px solid #7594dd;
+  border: 2px solid ${props => props.theme.color3};
   border-radius: 5px;
+  color: ${props => props.theme.fontColor};
   transition: 0.2s;
   &:hover {
-    background-color: #5173c2;
+    background-color: ${props => props.theme.color5};
     transition: 0.2s;
   }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import useCreatedAt from '../../../../utils/hook/useCreatedAt';
 import TitleSection from './TitleSection';
 
@@ -22,6 +22,7 @@ interface Props {
 
 const MainPostList = ({ data }: { data: Props }) => {
   const createdAt = useCreatedAt(data.createdAt);
+  const theme = useTheme();
 
   return (
     <Container>
@@ -32,7 +33,7 @@ const MainPostList = ({ data }: { data: Props }) => {
         </ColumnSection>
         <TitleSection data={data} />
       </Wrapper>
-      <ColumnSection color="#666">{createdAt}</ColumnSection>
+      <ColumnSection color={theme?.fontColor}>{createdAt}</ColumnSection>
     </Container>
   );
 };
@@ -42,9 +43,9 @@ export default MainPostList;
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  /* width: 1024px; */
+
   margin-top: 8px;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid ${props => props.theme.borderColor2};
   @media screen and (max-width: 600px) {
     margin-top: 5px;
   }

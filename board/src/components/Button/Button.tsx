@@ -23,15 +23,16 @@ const Btn = styled.button<{ fontSize?: number }>`
   margin: 2px;
   width: max-content;
   height: max-content;
-  background-color: #fff;
-  border: 2px solid #9ab2eb;
+  background-color: ${props => props.theme.backGroundColor1};
+  color: ${props => props.theme.fontColor};
+  border: 2px solid ${props => props.theme.borderColor1};
   border-radius: 3px;
   &:hover {
-    background-color: #9ab2eb;
+    background-color: ${props => props.theme.hoverColor1};
   }
   &:active {
     transition: 0.1s;
-    border: 2px solid #738cd3;
-    background-color: #738cd3;
+    border: 2px solid ${props => props.theme.color3};
+    background-color: ${props => props.theme.color3};
   }
 `;

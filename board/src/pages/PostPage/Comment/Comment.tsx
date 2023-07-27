@@ -107,13 +107,13 @@ const Container = styled.div`
   padding-top: 30px;
 `;
 
-const CommentHeader = styled.div`
+const CommentHeader = styled.div<{ theme: any }>`
   display: flex;
   align-items: center;
   width: 100%;
   padding: 15px 20px;
   font-size: 12px;
-  border: 2px solid #c9d9f9;
+  border: 2px solid ${props => props.theme.color2};
   border-radius: 5px;
   @media screen and (max-width: 600px) {
     padding: 10px 15px;

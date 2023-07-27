@@ -109,14 +109,17 @@ const Container = styled.div`
   justify-content: space-between;
   margin: auto;
   flex-wrap: wrap;
-  max-width: 1024px;
+  min-height: 95vh;
+  background-color: ${props => props.theme.backGroundTheme};
+  transition: 0.2s;
 `;
 
 const Section = styled.section`
   margin: auto;
-  width: 100%;
+  width: 1024px;
   display: flex;
   justify-content: space-between;
+  background-color: ${props => props.theme.backGroundTheme};
   @media screen and (max-width: 700px) {
     flex-direction: column;
   }
@@ -128,7 +131,7 @@ const TitleSection = styled.div`
   justify-content: center;
   width: 100%;
   height: 100px;
-  color: #333;
+  color: ${props => props.theme.fontColor};
   @media screen and (max-width: 600px) {
     height: 50px;
   }
@@ -140,11 +143,6 @@ const Title = styled.p`
   @media screen and (max-width: 600px) {
     font-size: 18px;
   }
-`;
-
-const RefWrapper = styled.div`
-  position: absolute;
-  background-color: #111;
 `;
 
 const SubCat = styled.div`

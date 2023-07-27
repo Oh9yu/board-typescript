@@ -76,7 +76,7 @@ const ListHeader = styled.div`
   padding: 15px;
   margin-top: 40px;
   font-size: 16px;
-  border: 2px solid #ccc;
+  border: 2px solid ${props => props.theme.borderColor2};
   border-radius: 5px;
   @media screen and (max-width: 600px) {
     font-size: 12px;

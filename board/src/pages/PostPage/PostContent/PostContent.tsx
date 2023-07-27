@@ -18,4 +18,6 @@ const Container = styled.div`
   min-height: 300px;
 `;
 
-const Content = styled.div``;
+const Content = styled.div<{ theme: any }>`
+  color: #333;
+`;

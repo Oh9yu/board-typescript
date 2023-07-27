@@ -91,7 +91,7 @@ const Img = styled.img`
   cursor: pointer;
   &:hover {
     transition: 0.3s;
-    background-color: #afc9ff;
+    background-color: ${props => props.theme.color2};
   }
   @media screen and (max-width: 600px) {
     width: 30px;
@@ -125,7 +125,7 @@ const AlertSection = styled.section`
   top: 55px;
   right: -150px;
   z-index: 1;
-  border: 2px solid #afc9ff;
+  border: 2px solid ${props => props.theme.color2};
   border-radius: 5px;
   background-color: #f9fbff;
   @media screen and (max-width: 600px) {

@@ -45,13 +45,13 @@ const PostCategory = ({ mainCatId, name, statusHandler }: Props) => {
 
 export default PostCategory;
 
-const ListSection = styled.div`
+const ListSection = styled.div<{ theme: any }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 180px;
   height: 600px;
-  background-color: #c9d9f9;
+  background-color: ${props => props.theme.color1};
   @media screen and (max-width: 700px) {
     flex-direction: row;
     padding: 5px;

@@ -96,6 +96,7 @@ const Container = styled.div`
   height: 100vh;
   margin: auto;
   padding-top: 30px;
+  background-color: ${props => props.theme.backGroundTheme};
   @media screen and (max-width: 600px) {
     padding-top: 20px;
   }

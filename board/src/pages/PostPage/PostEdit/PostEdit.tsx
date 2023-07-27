@@ -51,17 +51,17 @@ const Container = styled.div`
   right: 0;
 `;
 
-const Btn = styled.button`
+const Btn = styled.button<{ theme: any }>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: max-content;
   margin: 10px;
   padding: 5px;
-  border: 2px solid #afc9ff;
+  border: 2px solid ${props => props.theme.color1};
   background-color: #fff;
   border-radius: 3px;
   &:hover {
-    background-color: #afc9ff;
+    background-color: ${props => props.theme.color1};
   }
 `;

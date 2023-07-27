@@ -41,15 +41,14 @@ const Category = () => {
 
 export default Category;
 
-const Container = styled.div`
+const Container = styled.div<{ theme: any }>`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   padding: 8px 10px;
   width: 100%;
   height: max-content;
-  background-color: #9ab2eb;
-  border-bottom: 2px solid #7594dd;
+  background-color: ${props => props.theme.color3};
   @media screen and (max-width: 600px) {
     padding: 4px 5px;
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 interface Props {
   categoryName: string;
@@ -14,13 +14,12 @@ const CategoryList = ({
   subCatId,
   statusHandler,
 }: Props) => {
-  const bgc = name === categoryName ? '#5173c2' : 'transparent';
-  const color = name === categoryName ? '#eee' : '#111';
+  const theme = useTheme();
+  const bgc = name === categoryName ? `${theme?.color5}` : 'transparent';
 
   return (
     <List
       bgc={bgc}
-      color={color}
       onClick={() => {
         statusHandler(categoryName, subCatId);
       }}
@@ -32,17 +31,17 @@ const CategoryList = ({
 
 export default CategoryList;
 
-const List = styled.div<{ bgc: string }>`
+const List = styled.div<{ bgc: string; theme: any }>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   padding: 5px;
   background-color: ${props => props.bgc};
-  color: ${props => props.color};
+  color: ${props => props.theme.fontColor};
   cursor: pointer;
   &:hover {
-    background-color: #7594dd;
+    background-color: ${props => props.theme.color4};
     transition: 0.1s;
   }
   @media screen and (max-width: 700px) {

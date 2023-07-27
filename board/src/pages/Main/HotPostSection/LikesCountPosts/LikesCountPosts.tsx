@@ -52,13 +52,13 @@ const LikesCountPosts = ({ data }: Props) => {
 
 export default LikesCountPosts;
 
-const Container = styled.div`
+const Container = styled.div<{ theme: any }>`
   width: 100%;
   min-width: 100px;
   padding: 10px;
-  border: 2px solid #7594dd;
+  border: 2px solid ${props => props.theme.borderColor1};
   border-radius: 5px;
-  background-color: #fff;
+  background-color: ${props => props.theme.backGroundColor1};
 `;
 
 const Title = styled.div`
@@ -82,7 +82,7 @@ const Section = styled.section`
 
   cursor: pointer;
   &:hover {
-    background-color: #f0f0f0;
+    background-color: ${props => props.theme.hoverColor1};
   }
 `;
 
@@ -108,7 +108,7 @@ const LikeBox = styled.div`
   width: max-content;
   padding-top: 2px;
   border-radius: 2px;
-  color: #333;
+  color: ${props => props.theme.fontColor};
   margin-right: 5px;
   font-size: 10;
 `;

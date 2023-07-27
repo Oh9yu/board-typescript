@@ -31,7 +31,7 @@ const CommentLike = ({ id, postId, likes }: Props) => {
         }
       });
   };
-  //on Click data fetch - >
+
   return (
     <Container>
       <LikeBtn src="images/unlike.png" onClick={likeHandler} />

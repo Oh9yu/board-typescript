@@ -31,7 +31,7 @@ const Desc = styled.p`
   padding: 5px;
   word-break: keep-all;
   margin: 10px 0px;
-  border: 1px solid #738cd3;
+  border: 1px solid ${props => props.theme.color3};
   border-radius: 5px;
   @media screen and (max-width: 800px) {
     min-width: 280px;

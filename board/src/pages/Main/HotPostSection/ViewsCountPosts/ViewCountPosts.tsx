@@ -55,12 +55,12 @@ const ViewCountPosts = ({ data }: Props) => {
 
 export default ViewCountPosts;
 
-const Container = styled.div`
+const Container = styled.div<{ theme: any }>`
   width: 100%;
   padding: 10px;
-  border: 2px solid #7594dd;
+  border: 2px solid ${props => props.theme.borderColor1};
   border-radius: 5px;
-  background-color: #fff;
+  background-color: ${props => props.theme.backGroundColor1};
   @media screen and (max-width: 600px) {
     font-size: 12px;
   }
@@ -87,7 +87,7 @@ const Section = styled.section`
 
   cursor: pointer;
   &:hover {
-    background-color: #f0f0f0;
+    background-color: ${props => props.theme.hoverColor1};
   }
 `;
 
@@ -108,7 +108,7 @@ const ViewBox = styled.div`
   width: max-content;
   padding-top: 2px;
   border-radius: 2px;
-  color: #333;
+  color: ${props => props.theme.fontColor};
   margin-right: 5px;
 `;
 
